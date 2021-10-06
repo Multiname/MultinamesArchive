@@ -1,0 +1,216 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Interface">
+      <UniqueIdentifier>{09eefe56-7b7a-42ed-a736-3676d5cf8c24}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CPP">
+      <UniqueIdentifier>{56eb97ea-4322-4338-b0ff-a79b2c31582e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HPP">
+      <UniqueIdentifier>{3e8add9d-033e-484b-a3b5-5f096266e8ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HPP\Entities">
+      <UniqueIdentifier>{a0b458d8-ec97-49ce-b56c-63a345076b9a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HPP\Storages">
+      <UniqueIdentifier>{f9971925-57f6-4874-ad06-9f16e3bf3ca5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HPP\Functions">
+      <UniqueIdentifier>{187561bd-25bf-4676-b478-7e3791cdb6e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CPP\Storages">
+      <UniqueIdentifier>{ec419109-9004-4619-a630-ab66d056680d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CPP\Functions">
+      <UniqueIdentifier>{20e749e7-f7a6-4ec6-9363-57dc8e98dc63}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interface\NumbersMenu">
+      <UniqueIdentifier>{35d9e27c-d1ed-454f-9bb7-0682b84c1a8a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interface\LogIn">
+      <UniqueIdentifier>{341ea72d-ea09-473f-b8d6-09d024f7c8aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interface\CreateNewNumber">
+      <UniqueIdentifier>{04877476-75fb-44a8-a4f4-ed270885f3a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interface\ShowNumber">
+      <UniqueIdentifier>{1fa99881-adfe-4fa3-b771-caf24e62236e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interface\OrderMenu">
+      <UniqueIdentifier>{63f808a1-68e6-4402-a5a7-6ecadfefebc9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interface\ShowUsers">
+      <UniqueIdentifier>{cc2d848a-419c-466b-9f3c-64f85d034c0d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interface\Profile">
+      <UniqueIdentifier>{048150a9-b815-4174-b4ef-1acb1ffaf538}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HPP\InputHandler">
+      <UniqueIdentifier>{34dd9d5a-9022-461e-a951-0ee897de2247}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CPP\InputHandler">
+      <UniqueIdentifier>{ea1cbc5b-04d9-4cf6-ae4b-006b2f05330a}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="RoomStorage.cpp">
+      <Filter>CPP\Storages</Filter>
+    </ClCompile>
+    <ClCompile Include="UserStorage.cpp">
+      <Filter>CPP\Storages</Filter>
+    </ClCompile>
+    <ClCompile Include="OrderStorage.cpp">
+      <Filter>CPP\Storages</Filter>
+    </ClCompile>
+    <ClCompile Include="ShowUserList.cpp">
+      <Filter>CPP\Functions</Filter>
+    </ClCompile>
+    <ClCompile Include="ChooseRoom.cpp">
+      <Filter>CPP\Functions</Filter>
+    </ClCompile>
+    <ClCompile Include="ChooseUser.cpp">
+      <Filter>CPP\Functions</Filter>
+    </ClCompile>
+    <ClCompile Include="EditRoomList.cpp">
+      <Filter>CPP\Functions</Filter>
+    </ClCompile>
+    <ClCompile Include="FilterRoomList.cpp">
+      <Filter>CPP\Functions</Filter>
+    </ClCompile>
+    <ClCompile Include="LogIn.cpp">
+      <Filter>CPP\Functions</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenProfile.cpp">
+      <Filter>CPP\Functions</Filter>
+    </ClCompile>
+    <ClCompile Include="ShowRoomList.cpp">
+      <Filter>CPP\Functions</Filter>
+    </ClCompile>
+    <ClCompile Include="NumbersMenu.cpp">
+      <Filter>Interface\NumbersMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="LogInForm.cpp">
+      <Filter>Interface\LogIn</Filter>
+    </ClCompile>
+    <ClCompile Include="CreateNewNumber.cpp">
+      <Filter>Interface\CreateNewNumber</Filter>
+    </ClCompile>
+    <ClCompile Include="ShowNumber.cpp">
+      <Filter>Interface\ShowNumber</Filter>
+    </ClCompile>
+    <ClCompile Include="OrderMenuForm.cpp">
+      <Filter>Interface\OrderMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="ShowUsersForm.cpp">
+      <Filter>Interface\ShowUsers</Filter>
+    </ClCompile>
+    <ClCompile Include="ProfileForm.cpp">
+      <Filter>Interface\Profile</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="IsFirstLaterThanSecond.cpp">
+      <Filter>CPP\Functions</Filter>
+    </ClCompile>
+    <ClCompile Include="RemoveOrders.cpp">
+      <Filter>CPP\Functions</Filter>
+    </ClCompile>
+    <ClCompile Include="InputHandler.cpp">
+      <Filter>CPP\InputHandler</Filter>
+    </ClCompile>
+    <ClCompile Include="InputException.cpp">
+      <Filter>CPP\InputHandler</Filter>
+    </ClCompile>
+    <ClCompile Include="IdCounter.cpp">
+      <Filter>CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="NumberImageStorage.cpp">
+      <Filter>CPP\Storages</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="User.h">
+      <Filter>HPP\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Room.h">
+      <Filter>HPP\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Order.h">
+      <Filter>HPP\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="UserStorage.h">
+      <Filter>HPP\Storages</Filter>
+    </ClInclude>
+    <ClInclude Include="RoomStorage.h">
+      <Filter>HPP\Storages</Filter>
+    </ClInclude>
+    <ClInclude Include="OrderStorage.h">
+      <Filter>HPP\Storages</Filter>
+    </ClInclude>
+    <ClInclude Include="ChooseRoom.h">
+      <Filter>HPP\Functions</Filter>
+    </ClInclude>
+    <ClInclude Include="ChooseUser.h">
+      <Filter>HPP\Functions</Filter>
+    </ClInclude>
+    <ClInclude Include="EditRoomList.h">
+      <Filter>HPP\Functions</Filter>
+    </ClInclude>
+    <ClInclude Include="FilterRoomList.h">
+      <Filter>HPP\Functions</Filter>
+    </ClInclude>
+    <ClInclude Include="LogIn.h">
+      <Filter>HPP\Functions</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenProfile.h">
+      <Filter>HPP\Functions</Filter>
+    </ClInclude>
+    <ClInclude Include="ShowRoomList.h">
+      <Filter>HPP\Functions</Filter>
+    </ClInclude>
+    <ClInclude Include="ShowUserList.h">
+      <Filter>HPP\Functions</Filter>
+    </ClInclude>
+    <ClInclude Include="NumbersMenu.h">
+      <Filter>Interface\NumbersMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="LogInForm.h">
+      <Filter>Interface\LogIn</Filter>
+    </ClInclude>
+    <ClInclude Include="CreateNewNumber.h">
+      <Filter>Interface\CreateNewNumber</Filter>
+    </ClInclude>
+    <ClInclude Include="ShowNumber.h">
+      <Filter>Interface\ShowNumber</Filter>
+    </ClInclude>
+    <ClInclude Include="OrderMenuForm.h">
+      <Filter>Interface\OrderMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="ShowUsersForm.h">
+      <Filter>Interface\ShowUsers</Filter>
+    </ClInclude>
+    <ClInclude Include="ProfileForm.h">
+      <Filter>Interface\Profile</Filter>
+    </ClInclude>
+    <ClInclude Include="IsFirstLaterThanSecond.h">
+      <Filter>HPP\Functions</Filter>
+    </ClInclude>
+    <ClInclude Include="RemoveOrders.h">
+      <Filter>HPP\Functions</Filter>
+    </ClInclude>
+    <ClInclude Include="InputHandler.h">
+      <Filter>HPP\InputHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="InputException.h">
+      <Filter>HPP\InputHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="IdCounter.h">
+      <Filter>HPP</Filter>
+    </ClInclude>
+    <ClInclude Include="NumberImageStorage.h">
+      <Filter>HPP\Storages</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

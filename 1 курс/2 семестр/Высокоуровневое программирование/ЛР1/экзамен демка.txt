@@ -1,0 +1,68 @@
+#include "Exam.h"
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+	setlocale(LC_ALL, "Russian");
+
+	cout << "\tПример создания и удаления объектов\n\n";
+
+	Exam* defaultIsaac = new Exam();
+	Exam michaelGeometry = Exam("Michael", 130121, 5);
+	Exam michaelMath = Exam(michaelGeometry);
+	michaelMath.SetDate(190121);
+	michaelMath.Print();
+	delete defaultIsaac;
+
+	cout << "\n\tОпределение указателя на объект\n\n";
+
+	Exam* ivanMath = new Exam("Ivan", 190121, 3);
+
+
+	cout << "\nОпределение указателя на метод класса...\n\n";
+
+	void (Exam::*printPointer) ();
+	printPointer = &Exam::Print;
+
+
+	cout << "\n\tИспользование указателя на объект для создания копии\n";
+	cout << "\tИспользование указателя на метод для вызова этого метода\n\n";
+
+	Exam *ivanGeometry = new Exam(*ivanMath);
+	ivanGeometry->SetDate(130121);
+	ivanGeometry->SetMark(4);
+	(ivanGeometry->*printPointer)();
+
+
+	cout << "\n\tСоздание статического массива экзаменов Михаила\n";
+	cout << "\tСоздание динамического массива экзаменов Ивана\n\n";
+
+	Exam michaelExams[2]{michaelGeometry, michaelMath};
+	Exam* ivanExams = new Exam[2]{*ivanGeometry, *ivanMath};
+
+	
+	cout << "\n\tВывод массивов\n\n";
+
+	for (int i = 0; i < 2; i++)
+	{
+		michaelExams[i].Print();
+	}
+	for (int i = 0; i < 2; i++)
+	{
+		ivanExams[i].Print();
+	}
+
+
+	cout << "\n\tОчистка кучи\n\n";
+
+	delete ivanMath;
+	delete ivanGeometry;
+	delete[] ivanExams;
+
+
+	cout << "\n\tОчистка стека\n\n";
+
+	return 0;
+}

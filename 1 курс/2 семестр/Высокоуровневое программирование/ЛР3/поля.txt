@@ -1,0 +1,47 @@
+Dialogue
+	Id
+	Date
+
+	message
+	senderId
+
+	adresseeId
+
+Interest
+	Id
+	Date
+
+	interest
+	ownerId
+
+Reminder
+	Id
+	Date
+
+	reminder
+	ownerId
+
+	reminderTime
+
+Theme
+	Id
+	Date
+
+	theme
+	ownerId
+
+User
+	Id
+	Date
+
+	name
+	login
+	password
+
+1234
+
+4 294 967 295
+
+qwerty
+zxc
+wasd

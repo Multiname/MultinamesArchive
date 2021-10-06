@@ -1,0 +1,146 @@
+			Lab5.cpp
+
+#include <iostream>
+#include "Menu.h"
+#include "Problem1.h"
+using namespace std;
+
+void main()
+{
+	setlocale(LC_ALL, "Russian");
+
+	char name[]{ "Обработка структур и файлов последовательного доступа" };
+	char one[]{ "СЛЕД_СЕК" };
+	char two[]{ "Two" };
+	char three[]{ "Three" };
+	char* ptr1 = one;
+	char* ptr2 = two;
+	char* ptr3 = three;
+	char* ptrs[]{ ptr1, ptr2, ptr3 };
+
+	void (*fcnptr[])() { problem1 };
+	menu(name, 3, ptrs, fcnptr);
+}
+
+
+			Menu.cpp
+
+#include <iostream>
+using namespace std;
+
+void menu(char progname[], int probs, char* probname[], void (*prog[])())
+{
+	setlocale(LC_ALL, "Russian");
+
+	cout << "\t" << progname << endl;
+	cout << endl;
+	cout << "Задания:" << endl;
+	for (int i = 0; i < probs; i++)
+	{
+		cout << "   " << i << ". " << probname[i] << endl;
+	}
+
+	cout << endl;
+	int num{};
+	cout << "Введите номер задания: ";
+	do
+	{
+		cin >> num;
+		if (num >= probs || num < 0)
+		{
+			cout << "Данный номер отсутствует, попробуйте еще раз: ";
+		}
+	} while (num >= probs || num < 0);
+	prog[num]();
+}
+
+
+			Menu.h
+
+#pragma once
+#ifndef MENU_H
+#define MENU_H
+
+void menu(char progname[], int probs, char* probname[], void (*prog[])());
+
+#endif // !MENU_H
+
+
+			Problem1.cpp
+
+#include <iostream>
+using namespace std;
+
+struct time
+{
+	int hours;
+	int minutes;
+	int seconds;
+};
+
+void next_sec(time t, time& t1, int d);
+
+void problem1()
+{
+	setlocale(LC_ALL, "Russian");
+
+	struct time t;
+	cout << "Введите час: ";
+	cin >> t.hours;
+	cout << "Введите минуту: ";
+	cin >> t.minutes;
+	cout << "Введите секунду: ";
+	cin >> t.seconds;
+	cout << "Введите, на сколько секунд нужно перевести время: ";
+	int offset{};
+	cin >> offset;
+	next_sec(t, t, offset);
+	cout << t.hours << ":" << t.minutes << ":" << t.seconds << endl;
+}
+
+void next_sec(time t, time& t1, int d)
+{
+	t1.seconds = t.seconds + d;
+
+	while (t1.seconds > 59)
+	{
+		t1.seconds -= 60;
+		t1.minutes++;
+	}
+	while (t1.seconds < 0)
+	{
+		t1.seconds += 60;
+		t1.minutes--;
+	}
+
+	while (t1.minutes > 59)
+	{
+		t1.minutes -= 60;
+		t1.hours++;
+	}
+	while (t1.minutes < 0)
+	{
+		t1.minutes += 60;
+		t1.hours--;
+	}
+
+	while (t1.hours > 23)
+	{
+		t1.hours -= 24;
+	}
+	while (t1.minutes < 0)
+	{
+		t1.hours += 24;
+	}
+}
+
+
+			Problem1.h
+
+#pragma once
+#ifndef PROBLEM1_H
+#define PROBLEM1_H
+
+void problem1();
+
+#endif // !PROBLEM1_H

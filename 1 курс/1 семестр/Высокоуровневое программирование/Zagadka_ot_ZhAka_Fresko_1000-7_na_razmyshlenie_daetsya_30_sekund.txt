@@ -1,0 +1,118 @@
+#include <iostream>
+#include <fstream>
+#include <ctime>
+using namespace std;
+
+const char PATHBIN[] = "051220_0.dat";
+const char PATHTXT[] = "051220_0.txt";
+const int MAXLEN = 255;
+
+void minusone(fstream& in);
+
+int main()
+{
+	srand(time(0));
+	setlocale(LC_ALL, "Russian");
+
+	cout << "Заданные числа: ";
+	fstream binfile(PATHBIN, ios::binary | ios::out);
+	for (int i = 0; i < 10; i++)
+	{
+		int r = rand() % (10 - 0 + 1) + 0;
+		cout << r << " ";
+		binfile.write((char*)&r, sizeof(r));
+	}
+	cout << endl;
+	binfile.close();
+
+	int* nums = new int[MAXLEN] {};
+	int n = 0;
+	int* withpair = new int[MAXLEN] {};
+	int w = 0;
+	binfile.open(PATHBIN, ios::binary | ios::in);
+	while (binfile.tellg() != -1)
+	{
+		int curnum{};
+		binfile.read((char*)curnum, sizeof(curnum));
+		bool found = false;
+		for (int i = 0; i < n; i++)
+		{
+			if (nums[i] == curnum)
+			{
+				found = true;
+			}
+		}
+		if (found == false)
+		{
+			nums[n] = curnum;
+			n++;
+		}
+		else
+		{
+			found = false;
+			for (int i = 0; i < w; i++)
+			{
+				if (withpair[i] = curnum)
+				{
+					found = true;
+				}
+			}
+			if (found == false)
+			{
+				withpair[w] = curnum;
+				w++;
+			}
+		}
+		minusone(binfile);
+	}
+
+	cout << "Список чисел:   ";
+	for (int i = 0; i < n; i++)
+	{
+		cout << nums[i] << " ";
+	}
+	cout << endl;
+	cout << "Числа с парой:  ";
+	for (int i = 0; i < w; i++)
+	{
+		cout << withpair[i] << " ";
+	}
+	cout << endl;
+
+	cout << "Числа без пар:  ";
+	ofstream txtfile(PATHTXT, ios::out);
+	for (int i = 0; i < n; i++)
+	{
+		bool found = false;
+		for (int j = 0; j < w; j++)
+		{
+			if (nums[i] == withpair[j])
+			{
+				found = true;
+			}
+		}
+		if (found == false)
+		{
+			cout << nums[i] << " ";
+			txtfile << nums[i] << endl;
+		}
+	}
+	cout << endl;
+
+	txtfile.close();
+	binfile.close();
+	delete[] nums;
+	delete[] withpair;
+	return 0;
+}
+
+void minusone(fstream& in)
+{
+	int n;
+	in.read((char*)&n, sizeof(n));
+	if (in.tellg() != -1)
+	{
+		int x = sizeof(n);
+		in.seekg(-x, ios::cur);
+	}
+}

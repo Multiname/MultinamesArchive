@@ -1,0 +1,25 @@
+void(int arr[BORDER][BORDER]){
+
+int number{};
+
+cin>> number;
+
+bool first=false;
+bool second=true;
+
+ for(int j=0; j<BORDER,j++){
+    if(array[number][j]>0){
+        first = true;
+    {
+    else{
+        second = false;
+        }
+    
+ }
+}
+
+if(first!=false && second!=treu){
+cout<< "Произошло чередование знаков";
+}
+
+}

@@ -1,0 +1,237 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Not used">
+      <UniqueIdentifier>{1891a8ed-b67a-4a95-bc2c-adb89d024d70}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="In use">
+      <UniqueIdentifier>{f8a5821b-4ce9-453d-89d5-cdbfb5a7e019}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="In use\Headers">
+      <UniqueIdentifier>{08fedeb4-aee2-4692-856a-f6d90c984028}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="In use\Headers\Entities">
+      <UniqueIdentifier>{d73bbb10-d018-4e0e-bca6-6692f997d144}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="In use\Headers\Items">
+      <UniqueIdentifier>{1e700627-306f-45bd-a666-c2bff8e7213c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="In use\Headers\Apps">
+      <UniqueIdentifier>{f84f5d7a-6e21-49dd-bab4-f490cb72e08a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="In use\CPPs">
+      <UniqueIdentifier>{fc06179e-50fa-42a9-a082-f6d1b2fc8f84}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="In use\CPPs\Entities">
+      <UniqueIdentifier>{a43e694b-5642-4aca-87db-c95dd97d99c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="In use\CPPs\Items">
+      <UniqueIdentifier>{91eb0f3d-3863-4a81-92ec-85077764149b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="In use\CPPs\Apps">
+      <UniqueIdentifier>{e4817bf7-99d7-496b-a205-2a50a0173758}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Entity.h">
+      <Filter>In use\Headers\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="User.h">
+      <Filter>In use\Headers\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialogue.h">
+      <Filter>In use\Headers\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Theme.h">
+      <Filter>In use\Headers\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Constants.h">
+      <Filter>In use\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Interest.h">
+      <Filter>In use\Headers\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Reminder.h">
+      <Filter>In use\Headers\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="AbstractMenuItem.h">
+      <Filter>In use\Headers\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="UserListItem.h">
+      <Filter>In use\Headers\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="TextEntity.h">
+      <Filter>In use\Headers\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Sort.h">
+      <Filter>In use\Headers\Apps</Filter>
+    </ClInclude>
+    <ClInclude Include="Filter.h">
+      <Filter>In use\Headers\Apps</Filter>
+    </ClInclude>
+    <ClInclude Include="TypeDefinitions.h">
+      <Filter>In use\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Edit.h">
+      <Filter>In use\Headers\Apps</Filter>
+    </ClInclude>
+    <ClInclude Include="Add.h">
+      <Filter>In use\Headers\Apps</Filter>
+    </ClInclude>
+    <ClInclude Include="Remove.h">
+      <Filter>In use\Headers\Apps</Filter>
+    </ClInclude>
+    <ClInclude Include="IdCounter.h">
+      <Filter>In use\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="DialogueListItem.h">
+      <Filter>In use\Headers\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="InterestListItem.h">
+      <Filter>In use\Headers\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="ReminderListItem.h">
+      <Filter>In use\Headers\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="ThemeListItem.h">
+      <Filter>In use\Headers\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="UserItem.h">
+      <Filter>Not used</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemWIthMenu.h">
+      <Filter>Not used</Filter>
+    </ClInclude>
+    <ClInclude Include="Human.h">
+      <Filter>Not used</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu.h">
+      <Filter>In use\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="GetField.h">
+      <Filter>In use\Headers\Apps</Filter>
+    </ClInclude>
+    <ClInclude Include="CopyList.h">
+      <Filter>Not used</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityListItem.h">
+      <Filter>Not used</Filter>
+    </ClInclude>
+    <ClInclude Include="Storage.h">
+      <Filter>In use\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="LogInItem.h">
+      <Filter>Not used</Filter>
+    </ClInclude>
+    <ClInclude Include="AuthorizationItem.h">
+      <Filter>In use\Headers\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="UserInput.h">
+      <Filter>In use\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="InputException.h">
+      <Filter>In use\Headers</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Entity.cpp">
+      <Filter>In use\CPPs\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="User.cpp">
+      <Filter>In use\CPPs\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialogue.cpp">
+      <Filter>In use\CPPs\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Constants.cpp">
+      <Filter>In use\CPPs</Filter>
+    </ClCompile>
+    <ClCompile Include="Theme.cpp">
+      <Filter>In use\CPPs\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Interest.cpp">
+      <Filter>In use\CPPs\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Reminder.cpp">
+      <Filter>In use\CPPs\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="UserListItem.cpp">
+      <Filter>In use\CPPs\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="AbstractMenuItem.cpp">
+      <Filter>In use\CPPs\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="TextEntity.cpp">
+      <Filter>In use\CPPs\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Sort.cpp">
+      <Filter>In use\CPPs\Apps</Filter>
+    </ClCompile>
+    <ClCompile Include="Filter.cpp">
+      <Filter>In use\CPPs\Apps</Filter>
+    </ClCompile>
+    <ClCompile Include="Edit.cpp">
+      <Filter>In use\CPPs\Apps</Filter>
+    </ClCompile>
+    <ClCompile Include="Remove.cpp">
+      <Filter>In use\CPPs\Apps</Filter>
+    </ClCompile>
+    <ClCompile Include="IdCounter.cpp">
+      <Filter>In use\CPPs</Filter>
+    </ClCompile>
+    <ClCompile Include="InterestListItem.cpp">
+      <Filter>In use\CPPs\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="DialogueListItem.cpp">
+      <Filter>In use\CPPs\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="ReminderListItem.cpp">
+      <Filter>In use\CPPs\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="ThemeListItem.cpp">
+      <Filter>In use\CPPs\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemWithMenu.cpp">
+      <Filter>Not used</Filter>
+    </ClCompile>
+    <ClCompile Include="UserItem.cpp">
+      <Filter>Not used</Filter>
+    </ClCompile>
+    <ClCompile Include="Human.cpp">
+      <Filter>Not used</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>In use\CPPs</Filter>
+    </ClCompile>
+    <ClCompile Include="Menu.cpp">
+      <Filter>In use\CPPs</Filter>
+    </ClCompile>
+    <ClCompile Include="GetField.cpp">
+      <Filter>In use\CPPs\Apps</Filter>
+    </ClCompile>
+    <ClCompile Include="CopyList.cpp">
+      <Filter>Not used</Filter>
+    </ClCompile>
+    <ClCompile Include="EntityListItem.cpp">
+      <Filter>Not used</Filter>
+    </ClCompile>
+    <ClCompile Include="Storage.cpp">
+      <Filter>In use\CPPs</Filter>
+    </ClCompile>
+    <ClCompile Include="LogInItem.cpp">
+      <Filter>Not used</Filter>
+    </ClCompile>
+    <ClCompile Include="Add.cpp">
+      <Filter>Not used</Filter>
+    </ClCompile>
+    <ClCompile Include="AuthorizationItem.cpp">
+      <Filter>In use\CPPs\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="UserInput.cpp">
+      <Filter>In use\CPPs</Filter>
+    </ClCompile>
+    <ClCompile Include="InputException.cpp">
+      <Filter>In use\CPPs</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

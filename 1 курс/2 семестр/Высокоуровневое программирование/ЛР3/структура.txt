@@ -1,0 +1,20 @@
+Menu
+	Users
+		Add
+		Remove
+		Edit
+		Sort
+		Filter
+		[User with fields]
+			Related entities
+	Dialogs
+		...
+	Interests
+		...
+	Themes
+		...
+	Reminders
+		...
+	Log in
+		Log in / password
+			Related entities

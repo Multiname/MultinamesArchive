@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="MyConMenu">
+      <UniqueIdentifier>{91273894-d792-43fa-911c-89636b7a3314}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="AbstractItemMenu.cpp">
+      <Filter>MyConMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="CMenu.cpp" />
+    <ClCompile Include="Run.cpp" />
+    <ClCompile Include="Users.cpp">
+      <Filter>MyConMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="NewUser.cpp">
+      <Filter>MyConMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="Format.cpp">
+      <Filter>MyConMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="User.cpp">
+      <Filter>MyConMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="LogIn.cpp">
+      <Filter>MyConMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemWithMenu.cpp">
+      <Filter>MyConMenu</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AbstractItemMenu.h">
+      <Filter>MyConMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="CMenu.h" />
+    <ClInclude Include="Users.h">
+      <Filter>MyConMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="NewUser.h">
+      <Filter>MyConMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="Format.h">
+      <Filter>MyConMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="User.h">
+      <Filter>MyConMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="LogIn.h">
+      <Filter>MyConMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemWithMenu.h">
+      <Filter>MyConMenu</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

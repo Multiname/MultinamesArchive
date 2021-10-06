@@ -1,0 +1,95 @@
+#include <iostream>
+#include <fstream>
+using namespace std;
+
+const int MAXLENOFFIELD = 100;
+const int MAXLENOFLINE = 255;
+const int CIPHER = 4;
+const int AUTHOR = 15;
+const int NAME = 30;
+const int YEAR = 5;
+const int LOCATION = 6;
+
+struct book
+{
+	char* cipher = new char[CIPHER];
+	char* author = new char[AUTHOR];
+	char* name = new char[NAME];
+	char* year = new char[YEAR];
+	char* location = new char[LOCATION] {"00:00"};
+};
+
+void add();
+void write(bool end);
+void erase();
+
+void problem4()
+{
+	erase();
+}
+
+void add()
+{
+	cout << "Введите шифр (напр., 001): ";
+	write(false);
+	cout << "Введите имя автора: ";
+	write(false);
+	cout << "Введите название: ";
+	write(false);
+	cout << "Введите год издания: ";
+	write(false);
+	cout << "Введите стелаж:полку (напр., 12:34): ";
+	write(true);
+}
+
+void erase()
+{
+	cout << "Введите шифр книги, которую нужно удалить: ";
+	char* cipher = new char[CIPHER] {};
+	cin >> cipher;
+	char* line = new char[MAXLENOFLINE] {};
+	fstream file;
+	file.open("books.txt");
+	fstream temp;
+	temp.open("temp.txt", ios::trunc);
+	cout << temp.is_open() << endl;
+	while (!file.eof())
+	{
+		file.getline(line, MAXLENOFLINE, '/');
+		if (strcmp(line, cipher))
+		{
+			cout << line << endl;
+			temp << line;
+			temp << '\n';
+			
+		}
+		file.getline(line, MAXLENOFLINE, '\n');
+	}
+	file.close();
+	temp.close();
+	cout << "OK" << endl;
+	//file.open("books.txt", ios::trunc);
+	//file.open("temp.txt");
+	//while (!temp.eof())
+	//{
+	//	temp.getline(line, MAXLENOFLINE, '\n');
+	//	file << line;
+	//	file << '\n';
+	//}
+	//file.close();
+	//temp.close();
+	delete[] cipher;
+	delete[] line;
+}
+
+void write(bool end)
+{
+	fstream file;
+	char* str = new char[MAXLENOFFIELD] {};
+	cin >> str;
+	file.open("books.txt", ios::app);
+	file << str;
+	end ? file << "\n" : file << "/";
+	file.close();
+	delete[] str;
+}

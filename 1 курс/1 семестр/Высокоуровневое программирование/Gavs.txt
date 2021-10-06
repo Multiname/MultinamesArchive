@@ -1,0 +1,43 @@
+#include <iostream>
+using namespace std;
+
+const int MAXLEN = 255;
+
+void main()
+{
+	char snum1[MAXLEN]{}; //123
+	char snum2[MAXLEN]{}; //45
+	char snum3[MAXLEN]{};
+
+	cin >> snum1;
+	cin >> snum2;
+
+	int len1 = strlen(snum1);
+	int num1 = 0;
+	int len2 = strlen(snum2);
+	int num2 = 0;
+
+	for (int i = 0; i < len1; i++)
+	{
+		num1 += ((int)snum1[len1 - 1 - i] - 48) * pow(10, i);
+	}
+
+	for (int i = 0; i < len2; i++)
+	{
+		num2 += ((int)snum2[len2 - 1 - i] - 48) * pow(10, i);
+	}
+
+	int num3 = num1 + num2;
+
+	int j = 0;
+	while (num3)
+	{
+		int digit = num3 % 10;
+		digit += 48;
+		snum3[j] = (char)digit;
+		num3 /= 10;
+		j++;
+	}
+
+	// прописать реверс и вывод
+}
