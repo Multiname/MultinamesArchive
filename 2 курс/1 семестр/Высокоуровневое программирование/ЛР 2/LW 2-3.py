@@ -1,4 +1,8 @@
-A = bool(int(input("A: ")))
-B = bool(int(input("B: ")))
-C = bool(int(input("C: ")))
-print("F: " + str(((A == B) == C) or not A))
+print(
+    '\n'.join(
+        '\n'.join(
+            '\n'.join(
+                '{} {} {} {}'.format(A, B, C, int(((A == B) == C) or not A))
+                for C in range(2))
+            for B in range(2))
+        for A in range(2)))
