@@ -2,9 +2,9 @@
 .486
 .stack 100h
 .data
-a     db     2
-b     db     3
-x     db     -6
+a     db     100
+b     db     -1
+x     db     100
 yQuo  dw     0
 yRem  dw     0
 temp  dd     0
@@ -26,12 +26,12 @@ imul  a
 movsx cx,    x
 add   ax,    cx
 mov   dx,    2
-imul  dl
+imul  dx
 mov   cx,    ax
 mov   ax,    0
 
 mov   al,    x
-imul   x
+imul  x
 imul  bx
 mov   si,    offset temp
 mov   [si], ax

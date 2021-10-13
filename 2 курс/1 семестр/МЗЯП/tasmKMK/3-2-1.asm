@@ -1,9 +1,9 @@
 .model small
 .stack 100h
 .data
-a     db     1
-b     db     1
-x     db     1
+a     db     0
+b     db     10
+x     db     10
 y     dw     0
 
 .code
@@ -37,7 +37,7 @@ mul   dl
 mov   bx,     ax
 
 mov   ax,     cx
-div   bl
+idiv  bl
 
 mov   y,      ax
 

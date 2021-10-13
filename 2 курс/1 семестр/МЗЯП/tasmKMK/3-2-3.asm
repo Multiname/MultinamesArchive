@@ -2,9 +2,9 @@
 .486
 .stack 100h
 .data
-a     dw        2
-b     dw        3
-x     dw        -6
+a     dw        1000
+b     dw        -1
+x     dw        1000
 yQuo  dd        0
 yRem  dw        0
 temp  dd        0
