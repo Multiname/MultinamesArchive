@@ -54,17 +54,28 @@ if means == '1':
 elif means == '2':
     start = datetime.now()
     for i in range(N - 1):
+        isSorted = True
         for j in range(N - i - 1):
             if A[j] > A[j + 1]:
                 A[j], A[j + 1] = A[j + 1], A[j]
+                isSorted = False
+        if isSorted:
+            break
+                
     end = datetime.now()
 elif means == '3':
     start = datetime.now()
     for i in range(1, N):
-        for j in range(i):
-            if A[i] < A[j]:
-                for k in range(i, j, -1):
-                    A[k], A[k - 1] = A[k -1], A[k]
+        broken = False
+        for j in range(i - 1, -1, -1):
+            if A[i] >= A[j]:
+                for k in range(i, j + 1, -1):
+                    A[k], A[k - 1] = A[k - 1], A[k]
+                broken = True
+                break
+        if not broken:
+            for k in range(i, 0, -1):
+                    A[k], A[k - 1] = A[k - 1], A[k]
     end = datetime.now()
 elif means == '4':
     def MergeSort(A):
@@ -100,6 +111,8 @@ elif means == '4':
 elif means == '5':
     def QuickSort(A):
         if len(A) > 1:
+            randomIndex = random.randint(1, len(A) - 1)
+            A[0], A[randomIndex] = A[randomIndex], A[0]
             pivot = A[0]
             L = []
             R = []
