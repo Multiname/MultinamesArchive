@@ -189,7 +189,6 @@ int               10h
 mPrintString      arrayInput
 
 sub               di,         di
-mov               cx,         10
 
 ARRAY_INPUT:
    mPrintString      numberInput
