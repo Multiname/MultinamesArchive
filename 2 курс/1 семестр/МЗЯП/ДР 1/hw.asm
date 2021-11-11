@@ -1,11 +1,69 @@
 .model small
 .stack 100h
+.386
 .data
 buffer                db          5 dup(0)
 baseMatrix            db          5 dup(5 dup(0))
 ResultMatrix          db          5 dup(5 dup(0))
+rows                  db          0
+columns               db          0
 
-matrixInput           db          'Input matrix:', 10, 13, '$'
+s_rows                db          'Input number of rows (3-5): ', '$'
+s_columns             db          'Input number of columns (3-5): ', '$'
+s_inputMatrix         db          'Input matrix:', 10, 13, '$'
+s_range               db          'a <= x[i] <= b', 10, 13, '$'
+s_input_a             db          'Input a: ', '$'
+s_input_b             db          'Input b: ', '$'
+s_column              db          ' column: ', '$'
+s_mean                db          ' line mean: ', '$'
+s_positive            db          'First positive: ', '$'
+s_menu                db          '1. Transpose matrix', 10, 13
+                      db          '2. Numbers in the range', 10, 13
+                      db          '3. Arithmetic mean', 10, 13
+                      db          '4. Positive number', 10, 13
+                      db          '0. Exit', 10, 13
+                      db          '>>> ', '$'
+s_error               db          'Matrix is not square', '$'
+
+mClearScreen      macro
+   push              ax
+   push              bx
+   push              cx
+   push              dx
+
+   mov               ah,         6
+   sub               al,         al
+   mov               bh,         7
+   sub               cx,         cx
+   mov               dx,         184Fh
+   int               10h
+
+   pop               dx
+   pop               cx
+   pop               bx
+   pop               ax
+endm
+
+mClearPlace       macro       frsRow,   frsCol, lstRow,   lstCol
+   push              ax
+   push              bx
+   push              cx
+   push              dx
+
+   mov               ah,         6
+   sub               al,         al
+   mov               bh,         7
+   mov               ch,         frsRow
+   mov               cl,         frsCol
+   mov               dh,         lstRow
+   mov               dl,         lstCol
+   int               10h
+
+   pop               dx
+   pop               cx
+   pop               bx
+   pop               ax
+endm
 
 mPrintString      macro       string
    push              ax
@@ -31,6 +89,22 @@ mPrintSymbol      macro       symbol
    int               10h
 
    pop               cx
+   pop               bx
+   pop               ax
+endm
+
+mMoveCursor      macro        row,      column
+   push              ax
+   push              bx
+   push              dx
+
+   mov               ah,         2
+   mov               dh,         row
+   mov               dl,         column
+   sub               bh,         bh
+   int               10h
+
+   pop               dx
    pop               bx
    pop               ax
 endm
@@ -255,13 +329,15 @@ mInputMatrix      macro       matrix,   rows,   columns
    push              si
 
    sub               bx,         bx
-   mov               cx,         rows
+   sub               cx,         cx
+   mov               cl,         rows
 
    JUMPS
    ROW:
       push              cx
       sub               si,         si
-      mov               cx,         columns
+      sub               cx,         cx
+      mov               cl,         columns
 
       COLUMN:
          mInput            buffer,     2
@@ -271,7 +347,7 @@ mInputMatrix      macro       matrix,   rows,   columns
 
          loop              COLUMN
 
-      add               bx,         columns
+      add               bl,         columns
       mNextLine
 
       pop               cx
@@ -297,13 +373,15 @@ mOutputMatrix     macro       matrix,   rows,   columns
    push              si
 
    sub               bx,         bx
-   mov               cx,         rows
+   sub               cx,         cx
+   mov               cl,         rows
 
    JUMPS
    ROW:
       push              cx
       sub               si,         si
-      mov               cx,         columns
+      sub               cx,         cx
+      mov               cl,         columns
 
       COLUMN:
          sub               ax,         ax
@@ -328,12 +406,280 @@ mOutputMatrix     macro       matrix,   rows,   columns
          inc               si
          loop              COLUMN
 
-      add               bx,         columns
+      add               bl,         columns
       mNextLine
 
       pop               cx
       loop              ROW
    NOJUMPS
+
+   pop               si
+   pop               cx
+   pop               bx
+   pop               ax
+endm
+
+mTranspose        macro       src,      dst,    rows,     columns
+   LOCAL             ROW
+   LOCAL             COLUMN
+   
+   push              ax
+   push              bx
+   push              cx
+   push              dx
+   push              si
+   push              di
+
+   sub               si,         si
+   sub               dx,         dx
+   sub               cx,         cx
+   mov               cl,         columns
+
+   COLUMN:
+      push              cx
+      sub               bx,         bx
+      sub               di,         di
+      sub               cx,         cx
+      mov               cl,         rows
+
+      ROW:
+         mov               al,         src[bx][si]
+         push              bx
+         mov               bx,         dx
+         mov               dst[bx][di],   al
+         pop               bx
+
+         add               bl,         columns
+         inc               di
+
+         dec               cx
+         cmp               cx,         0
+         jg                ROW
+
+      inc               si
+      add               dl,         columns
+
+      pop               cx
+      dec               cx
+      cmp               cx,         0
+      jg                COLUMN
+
+   pop               di
+   pop               si
+   pop               dx
+   pop               cx
+   pop               bx
+   pop               ax
+endm
+
+mFindQuantity     macro       matrix,   rows,   columns
+   LOCAL             ROW
+   LOCAL             COLUMN
+   LOCAL             CMP_B
+   LOCAL             CMP_END
+   LOCAL             INCREMENT
+   
+   push              ax
+   push              bx
+   push              cx
+   push              dx
+   push              si
+
+   mPrintString      s_range
+   mPrintString      s_input_a
+   mInput            buffer,     2
+   mov               dh,         al
+   mNextLine
+   mPrintString      s_input_b
+   mInput            buffer,     2
+   mov               dl,         al
+   mNextLine
+
+   sub               si,         si
+   sub               cx,         cx
+   mov               cl,         columns
+
+   COLUMN:
+      push              cx
+      sub               bx,         bx
+      sub               ax,         ax
+      sub               cx,         cx
+      mov               cl,         rows
+
+      ROW:
+         cmp               dh,         matrix[bx][si]
+         jle               CMP_B
+         jmp               CMP_END
+
+         CMP_B:
+            cmp               matrix[bx][si], dl
+            jle               INCREMENT
+            jmp               CMP_END
+
+            INCREMENT:
+               inc               ax
+
+         CMP_END:
+
+         add               bl,         columns
+         dec               cx
+         cmp               cx,         0
+         jg                ROW
+
+      push              ax
+      mov               ax,         si
+      mOutput
+      mPrintString      s_column
+      pop               ax
+      mOutput
+      mNextLine
+
+      inc               si
+      pop               cx
+      dec               cx
+      cmp               cx,         0
+      jg                COLUMN
+
+   pop               si
+   pop               dx
+   pop               cx
+   pop               bx
+   pop               ax
+endm
+
+mFindMean         macro       matrix,   rows,   columns
+   LOCAL             ROW
+   LOCAL             COLUMN
+   LOCAL             REMAINDER
+   LOCAL             END_ROW
+   
+   push              ax
+   push              bx
+   push              cx
+   push              dx
+   push              si
+
+   sub               bx,         bx
+   mov               bl,         columns
+   sub               cx,         cx
+   mov               cl,         rows
+   dec               cx
+
+   ROW:
+      push              cx
+      sub               si,         si
+      sub               ax,         ax
+      sub               cx,         cx
+      mov               cl,         columns
+
+      COLUMN:
+         mov               dl,         matrix[bx][si]
+         xchg              ax,         dx
+         cbw
+         xchg              ax,         dx
+         add               ax,         dx
+
+         inc               si
+         dec               cx
+         cmp               cx,         0
+         jg                COLUMN
+
+      pop               cx
+      push              ax
+      sub               ax,         ax
+      mov               al,         rows
+      sub               al,         cl
+      mOutput
+      mPrintString      s_mean
+      pop               ax
+
+      mov               dl,         columns
+      idiv              dl
+      push              ax
+      cbw
+      mOutput
+      pop               ax
+
+      cmp               ah,         0
+      jne               REMAINDER
+      jmp               END_ROW
+
+      REMAINDER:
+         mIncCursor
+         mov               al,         ah
+         cbw
+         mOutput
+         mPrintSymbol      '/'
+         mIncCursor
+         sub               ax,         ax
+         mov               al,         columns
+         mOutput
+
+      END_ROW:
+      mNextLine
+
+      add               bl,         columns
+      dec               cx
+      cmp               cx,         0
+      jg                ROW
+
+   pop               si
+   pop               dx
+   pop               cx
+   pop               bx
+   pop               ax
+endm
+
+mFindPlus         macro       matrix,   dimension
+   LOCAL             ROW
+   LOCAL             COLUMN
+   LOCAL             FOUND
+   LOCAL             END_MAC
+   
+   push              ax
+   push              bx
+   push              cx
+   push              si
+
+   mPrintString      s_positive
+
+   sub               bx,         bx
+   sub               cx,         cx
+   mov               cl,         dimension
+
+   ROW:
+      push              cx
+      sub               si,         si
+      mov               ax,         cx
+      mov               cl,         dimension
+      sub               cx,         ax
+      inc               cx
+
+      COLUMN:
+         cmp               byte ptr matrix[bx][si],   0
+         jg                FOUND
+
+         inc               si
+         dec               cx
+         cmp               cx,         0
+         jg                COLUMN
+
+      add               bl,         dimension
+      pop               cx
+      dec               cx
+      cmp               cx,         0
+      jg                ROW
+
+   mPrintSymbol      '-'
+   jmp               END_MAC
+
+   FOUND:
+      mov               al,         matrix[bx][si]
+      cbw
+      mOutput
+
+   END_MAC:
+   mNextLine
 
    pop               si
    pop               cx
@@ -347,21 +693,84 @@ mov               ax,         @data
 mov               ds,         ax
 sub               ax,         ax
 
-mov               ax,         600h
-mov               bh,         7
-mov               cx,         0
-mov               dx,         184Fh
+mClearScreen
+mMoveCursor       0,          0
+
+mPrintString      s_rows
+mInput            buffer,     1
+mov               rows,       al
+mNextLine
+
+mPrintString      s_columns
+mInput            buffer,     1
+mov               columns,    al
+mNextLine
+
+mPrintString      s_inputMatrix
+mInputMatrix      baseMatrix, rows,      columns
+
+mClearScreen
+mMoveCursor       0,          0
+
+mOutputMatrix     baseMatrix, rows,      columns
+mNextLine
+mPrintString      s_menu
+
+mov               ah,         3
+sub               bh,         bh
 int               10h
 
-mov               ah,         2
-mov               dh,         0
-mov               dl,         0
-mov               bh,         0
-int               10h
+CYCLE:
+   mClearPlace       dh,         dl,       dh,     6
+   mInput            buffer,     1
+   inc               dh
+   mClearPlace       dh,         0,        18h,    4FH
+   dec               dh
+   mNextLine
+   mNextLine
 
-mInputMatrix      baseMatrix,   3,      3
-mOutputMatrix     baseMatrix,   3,      3
+   cmp               al,         1
+   je                TASK_1
+   cmp               al,         2
+   je                TASK_2
+   cmp               al,         3
+   je                TASK_3
+   cmp               al,         4
+   je                TASK_4
+   cmp               al,         0
+   je                END_PROG
+   jmp               CYCLE
 
+   TASK_1:
+      mTranspose        baseMatrix, ResultMatrix, rows, columns
+      mOutputMatrix     ResultMatrix,    rows,    columns
+      mMoveCursor       dh,       dl
+      jmp               CYCLE
+
+   TASK_2:
+      mFindQuantity     baseMatrix, rows, columns
+      mMoveCursor       dh,       dl
+      jmp               CYCLE
+
+   TASK_3:
+      mFindMean         baseMatrix, rows, columns
+      mMoveCursor       dh,       dl
+      jmp               CYCLE
+
+   TASK_4:
+      mov               al,         rows
+      cmp               al,         columns
+      je                SQUARE
+         mPrintString      s_error
+         mMoveCursor       dh,       dl
+         jmp               CYCLE
+
+      SQUARE:
+         mFindPlus         baseMatrix, rows
+         mMoveCursor       dh,       dl
+         jmp               CYCLE
+
+END_PROG:
 mov               ax,         4C00h
 int               21h
 end               start
