@@ -31,20 +31,24 @@ mMoveCursor       macro       row,      column
 endm
 
 mIncCursor       macro
+   ;; получение текущей позиции курсора
    mov               ah,         3
    mov               bh,         0
    int               10h
 
+   ;; сдвиг курсора на 1 вправо
    inc               dl
    mov               ah,         2
    int               10h
 endm
 
 mNextLine        macro
+   ;; получение текущей позиции курсора
    mov               ah,         3
    mov               bh,         0
    int               10h
 
+   ;; сдвиг курсора на 1 вниз
    inc               dh
    mov               ah,         2
    int               10h
@@ -57,12 +61,14 @@ mInput            macro       buffer,   size
    LOCAL             INPUT_FOUR_DIGIT
    LOCAL             END_INPUT
 
+   ;; ввод числа
    mov               buffer,     size
    inc               buffer
    mov               ah,         0Ah
    lea               dx,         buffer
    int               21h
 
+   ;; проверка на длину
    mov               ax,         0
    cmp               buffer+1,   1
    je                INPUT_ONE_DIGIT
@@ -93,26 +99,31 @@ mInput            macro       buffer,   size
 endm
 
 mInputOneDigit    macro       buffer
+   ;; перевод символа в число
    mov               al,         buffer+2
    sub               al,         30h
 endm
 
 mInputTwoDigit    macro       buffer
+   ;; получение дес€тка
    mov               al,         buffer+2
    sub               al,         30h
    mov               bl,         10
    mul               bl
 
+   ;; получениц единиц
    add               al,         buffer+3
    sub               al,         30h
 endm
 
 mInputThreeDigit  macro       buffer
+   ;; получение сотен
    mov               al,         buffer+2
    sub               al,         30h
    mov               bl,         100
    mul               bl
 
+   ;; получение дес€тка
    mov               bl,         buffer+3
    sub               bl,         30h
    xchg              ax,         bx
@@ -120,6 +131,7 @@ mInputThreeDigit  macro       buffer
    mul               cl
    add               bx,         ax
    
+   ;; получениц единиц
    mov               ax,         0
    mov               al,         buffer+4
    sub               al,         30h
@@ -128,11 +140,13 @@ mInputThreeDigit  macro       buffer
 endm
 
 mInputFourDigit   macro       buffer
+   ;; получение тыс€ч
    mov               al,         buffer+2
    sub               al,         30h
    mov               bx,         1000
    mul               bx
 
+   ;; получение сотен
    mov               bl,         buffer+3
    sub               bl,         30h
    xchg              ax,         bx
@@ -140,6 +154,7 @@ mInputFourDigit   macro       buffer
    mul               cl
    add               bx,         ax
    
+   ;; получение дес€тка
    mov               ax,         0
    mov               al,         buffer+4
    sub               al,         30h
@@ -147,6 +162,7 @@ mInputFourDigit   macro       buffer
    mul               cl
    add               bx,         ax
 
+   ;; получениц единиц
    mov               al,         buffer+5
    sub               al,         30h
    add               bx,         ax
@@ -160,6 +176,7 @@ mOutput           macro       number
    LOCAL             OUTPUT_FOUR_DIGIT
    LOCAL             END_OUTPUT
 
+   ;; проверка числа на длину
    cmp               number,     10
    jl                OUTPUT_ONE_DIGIT
    cmp               number,     100
@@ -190,6 +207,7 @@ mOutput           macro       number
 endm
 
 mOutputOneDigit   macro       number
+   ;; перевод числа в символ и вывод
    mov               ax,         number
    mov               ah,         9
    add               al,         30h
@@ -199,23 +217,28 @@ mOutputOneDigit   macro       number
 endm
 
 mOutputTwoDigit   macro       number
+   ;; перевод дес€тка в символ
    mov               ax,         number
    mov               bx,         10
    div               bl
    push              ax
    add               al,         30h
 
+   ;; вывод символа
    mov               ah,         9
    mov               bl,         0Fh
    mov               cx,         1
    int               10h
 
+   ;; смещение курсора
    mIncCursor
 
+   ;; перевод единиц в символ
    pop               ax
    mov               al,         ah
    add               al,         30h
 
+   ;; вывод символа
    mov               ah,         9
    mov               bl,         0Fh
    mov               cx,         1
@@ -223,6 +246,7 @@ mOutputTwoDigit   macro       number
 endm
 
 mOutputThreeDigit macro       number
+   ;; перевод сотен в симол
    mov               ax,         number
    mov               bx,         10
    div               bl
@@ -232,28 +256,35 @@ mOutputThreeDigit macro       number
    push              ax
    add               al,         30h
 
+   ;; вывод символа
    mov               ah,         9
    mov               bl,         0Fh
    mov               cx,         1
    int               10h
 
+   ;; смещение курсора
    mIncCursor
 
+   ;; перевод дес€тка в символ
    pop               ax
    mov               al,         ah
    add               al,         30h
 
+   ;; вывод символа
    mov               ah,         9
    mov               bl,         0Fh
    mov               cx,         1
    int               10h
 
+   ;; смещение курсора
    mIncCursor
 
+   ;; перевод единиц в символ
    pop               ax
    mov               al,         ah
    add               al,         30h
 
+   ;; вывод символа
    mov               ah,         9
    mov               bl,         0Fh
    mov               cx,         1
@@ -261,6 +292,7 @@ mOutputThreeDigit macro       number
 endm
 
 mOutputFourDigit  macro       number
+   ;; получение тыс€ч, сотен, дес€тков и единиц
    mov               ax,         number
    mov               bx,         10
    mov               dx,         0
@@ -271,40 +303,50 @@ mOutputFourDigit  macro       number
    mov               ah,         0
    div               bl
    push              ax
-   add               al,         30h
+   add               al,         30h ;; перевод тыс€ч в символ
 
+   ;; вывод символа
    mov               ah,         9
    mov               bl,         0Fh
    mov               cx,         1
    int               10h
 
+   ;; смещение курсора
    mIncCursor
 
+   ;; перевод сотен в симол
    pop               ax
    mov               al,         ah
    add               al,         30h
 
+   ;; вывод символа
    mov               ah,         9
    mov               bl,         0Fh
    mov               cx,         1
    int               10h
 
+   ;; смещение курсора
    mIncCursor
 
+   ;; перевод дес€тка в символ
    pop               ax
    mov               al,         ah
    add               al,         30h
 
+   ;; вывод символа
    mov               ah,         9
    mov               bl,         0Fh
    mov               cx,         1
    int               10h
 
+   ;; смещение курсора
    mIncCursor
 
+   ;; перевод единиц в символ
    pop               ax
    add               al,         30h
 
+   ;; вывод символа
    mov               ah,         9
    mov               bl,         0Fh
    mov               cx,         1
@@ -317,42 +359,51 @@ mov               ax,         @data
 mov               ds,         ax
 sub               ax,         ax
 
+; очистка экрана
 mov               ax,         600h
 mov               bh,         7
 mov               cx,         0
 mov               dx,         184Fh
 int               10h
 
+; перемещение курсора в начало экрана
 mov               ah,         2
 mov               dh,         0
 mov               dl,         0
 mov               bh,         0
 int               10h
 
+; ввод N
 mPrint            inputN
 mInput            buffer,     1
 mov               N,          al
 mNextLine
 
+; ввод K
 mPrint            inputK
 mInput            buffer,     1
 mov               K,          al
 mNextLine
 
+; ввод C
 mPrint            inputC
 mInput            buffer,     4
 mov               C,          ax
 mNextLine
 
+; ввод D
 mPrint            inputD
 mInput            buffer,     4
 mov               D,          ax
 mNextLine
 
+
 CYCLE:
+   ; ввод числа
    mPrint            inputNumber
    mInput            buffer,     4
 
+   ; проверка числа на услови€
    cmp               K,          0
    jg                CONDITION_1
    jmp               END_CYCLE
@@ -367,6 +418,7 @@ CYCLE:
          jle               ADDITION
          jmp               END_CYCLE
 
+         ; добавление числа к сумме
          ADDITION:
             add               sum,        ax
             dec               K
@@ -377,6 +429,7 @@ CYCLE:
       cmp               N,        0
       jg                CYCLE
 
+; вывод результатов
 mPrint            result
 mOutput           sum
 
