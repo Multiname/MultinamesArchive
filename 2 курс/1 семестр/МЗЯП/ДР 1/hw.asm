@@ -3,8 +3,7 @@
 .386
 .data
 buffer                db          5 dup(0)
-baseMatrix            db          5 dup(5 dup(0))
-ResultMatrix          db          5 dup(5 dup(0))
+matrix                db          5 dup(5 dup(0))
 rows                  db          0
 columns               db          0
 
@@ -23,7 +22,20 @@ s_menu                db          '1. Transpose matrix', 10, 13
                       db          '4. Positive number', 10, 13
                       db          '0. Exit', 10, 13
                       db          '>>> ', '$'
-s_error               db          'Matrix is not square', '$'
+s_error               db          'The matrix is not square', '$'
+
+mSetColorMode     macro
+   push              ax
+   push              bx
+
+   mov               ah,         10h
+   mov               al,         3
+   sub               bl,         bl
+   int               10h
+
+   pop               bx
+   pop               ax
+endm
 
 mClearScreen      macro
    push              ax
@@ -33,7 +45,7 @@ mClearScreen      macro
 
    mov               ah,         6
    sub               al,         al
-   mov               bh,         7
+   mov               bh,         0F0h
    sub               cx,         cx
    mov               dx,         184Fh
    int               10h
@@ -52,7 +64,7 @@ mClearPlace       macro       frsRow,   frsCol, lstRow,   lstCol
 
    mov               ah,         6
    sub               al,         al
-   mov               bh,         7
+   mov               bh,         0F0h
    mov               ch,         frsRow
    mov               cl,         frsCol
    mov               dh,         lstRow
@@ -84,7 +96,7 @@ mPrintSymbol      macro       symbol
 
    mov               ah,         9
    mov               al,         symbol
-   mov               bl,         0Fh
+   mov               bl,         0F0h
    mov               cx,         1
    int               10h
 
@@ -419,54 +431,61 @@ mOutputMatrix     macro       matrix,   rows,   columns
    pop               ax
 endm
 
-mTranspose        macro       src,      dst,    rows,     columns
+mTranspose        macro       matrix,   rows,   columns
    LOCAL             ROW
    LOCAL             COLUMN
+   LOCAL             ONE_SPACE
+   LOCAL             TWO_SPACES
+   LOCAL             END_ROW
    
    push              ax
    push              bx
    push              cx
-   push              dx
    push              si
-   push              di
 
    sub               si,         si
-   sub               dx,         dx
    sub               cx,         cx
    mov               cl,         columns
 
    COLUMN:
       push              cx
       sub               bx,         bx
-      sub               di,         di
       sub               cx,         cx
       mov               cl,         rows
 
       ROW:
-         mov               al,         src[bx][si]
-         push              bx
-         mov               bx,         dx
-         mov               dst[bx][di],   al
-         pop               bx
+         mov               al,         matrix[bx][si]
+         cbw
+         mOutput
+
+         sub               ax,         ax
+         mov               al,         matrix[bx][si]
+         cmp               ax,         10
+         jl                TWO_SPACES
+         jmp               ONE_SPACE
+
+         TWO_SPACES:
+            mShiftCurcor      0,          2
+            jmp               END_ROW
+
+         ONE_SPACE:
+            mIncCursor
+
+         END_ROW:
 
          add               bl,         columns
-         inc               di
-
          dec               cx
          cmp               cx,         0
          jg                ROW
 
+      mNextLine
       inc               si
-      add               dl,         columns
-
       pop               cx
       dec               cx
       cmp               cx,         0
       jg                COLUMN
 
-   pop               di
    pop               si
-   pop               dx
    pop               cx
    pop               bx
    pop               ax
@@ -493,6 +512,7 @@ mFindQuantity     macro       matrix,   rows,   columns
    mPrintString      s_input_b
    mInput            buffer,     2
    mov               dl,         al
+   mNextLine
    mNextLine
 
    sub               si,         si
@@ -693,6 +713,7 @@ mov               ax,         @data
 mov               ds,         ax
 sub               ax,         ax
 
+mSetColorMode
 mClearScreen
 mMoveCursor       0,          0
 
@@ -707,12 +728,12 @@ mov               columns,    al
 mNextLine
 
 mPrintString      s_inputMatrix
-mInputMatrix      baseMatrix, rows,      columns
+mInputMatrix      matrix,     rows,      columns
 
 mClearScreen
 mMoveCursor       0,          0
 
-mOutputMatrix     baseMatrix, rows,      columns
+mOutputMatrix     matrix,     rows,      columns
 mNextLine
 mPrintString      s_menu
 
@@ -742,18 +763,17 @@ CYCLE:
    jmp               CYCLE
 
    TASK_1:
-      mTranspose        baseMatrix, ResultMatrix, rows, columns
-      mOutputMatrix     ResultMatrix,    rows,    columns
+      mTranspose        matrix,   rows, columns
       mMoveCursor       dh,       dl
       jmp               CYCLE
 
    TASK_2:
-      mFindQuantity     baseMatrix, rows, columns
+      mFindQuantity     matrix,   rows, columns
       mMoveCursor       dh,       dl
       jmp               CYCLE
 
    TASK_3:
-      mFindMean         baseMatrix, rows, columns
+      mFindMean         matrix,   rows, columns
       mMoveCursor       dh,       dl
       jmp               CYCLE
 
@@ -766,7 +786,7 @@ CYCLE:
          jmp               CYCLE
 
       SQUARE:
-         mFindPlus         baseMatrix, rows
+         mFindPlus         matrix,   rows
          mMoveCursor       dh,       dl
          jmp               CYCLE
 
