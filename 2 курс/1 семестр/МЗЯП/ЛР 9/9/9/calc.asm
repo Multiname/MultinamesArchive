@@ -4,8 +4,8 @@
 two dd 2.0
 six dd 6.0
 
-lowerBound dd 1.1
-upperBound dd 5.1
+lowerBound real8 1.1
+upperBound real8 5.1
 nine       dd 9.0
 fsttmp     dw 0
 

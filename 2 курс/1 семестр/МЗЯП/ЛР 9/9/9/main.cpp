@@ -1,5 +1,6 @@
 #define _USE_MATH_DEFINES
 #include <iostream>
+#include <iomanip>
 using namespace std;
 
 extern "C" double calc(double);
@@ -15,10 +16,10 @@ int main() {
 	if (x > 1 && sin(x) != -M_PI / 6 && sin(x * x) > 0 && cos(log2(sqrt(sin(x * x)))) != 0)
 	{
 		a = (2 * log2(sqrt(pow(x, 4) - 1))) / (M_PI / (sin(x) + M_PI / 6)) - pow(tan(log2(sqrt(sin(x * x)))), 2);
-		cout << "(C++) a = " << a << endl;
+		cout << "(C++) a = " << setprecision(15) << a << endl;
 
 		a = calc(x);
-		cout << "(Asm) a = " << a << endl;
+		cout << "(Asm) a = " << setprecision(15) << a << endl;
 	}
 	else
 	{
@@ -38,10 +39,10 @@ int main() {
 	{
 		a = 9*x*x + 9;
 	}
-	cout << "(C++) f(x) = " << a << endl;
+	cout << "(C++) f(x) = " << setprecision(15) << a << endl;
 
 	a = compare(x);
-	cout << "(Asm) f(x) = " << a << endl;
+	cout << "(Asm) f(x) = " << setprecision(15) << a << endl;
 
 	return 0;
 }
