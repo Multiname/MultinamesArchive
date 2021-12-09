@@ -148,14 +148,36 @@ mFormString macro FDescr, Buffer, index, String, oldString, newString, isNotLast
    lea si, newString
    rep movsb
 
+   mov oldString[bx], '$'
    mov bx, ax
    mov newString[bx], '$'
 
+   lea dx, oldString
+   print_string
+   lea dx, nextLine
+   print_string
    lea dx, newString
    print_string
 endm
 
 
+
+mov ah, 10h
+mov al, 3
+sub bl, bl
+int 10h
+
+mov ah, 6
+sub al, al
+mov bh, 0F0h
+sub cx, cx
+mov dx, 184Fh
+int 10h
+
+mov ah, 2
+xor dx, dx
+sub bh, bh
+int 10h
 
 mov ah, 3Dh
 xor al, al
@@ -287,6 +309,7 @@ MessageError3 db CR, LF, "File was not founded!", "$"
 MessageError4 db CR, LF, "File was not created!", "$"
 MessageError5 db CR, LF, "Error in writing in the file!", "$"
 MessageEnd db CR, LF, "Program was successfully finished!", "$"
+nextLine db CR, LF, '$'
 
 start endp
 sc ends
