@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32002.261
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LW 1", "LW 1\LW 1.csproj", "{8EE64199-4377-45D8-8C81-C8D3790E5729}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeightTest", "WeightTest\WeightTest.csproj", "{7DAC3009-7B98-4E21-8EB7-02D7740EE91D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8EE64199-4377-45D8-8C81-C8D3790E5729}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8EE64199-4377-45D8-8C81-C8D3790E5729}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8EE64199-4377-45D8-8C81-C8D3790E5729}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8EE64199-4377-45D8-8C81-C8D3790E5729}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7DAC3009-7B98-4E21-8EB7-02D7740EE91D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7DAC3009-7B98-4E21-8EB7-02D7740EE91D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7DAC3009-7B98-4E21-8EB7-02D7740EE91D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7DAC3009-7B98-4E21-8EB7-02D7740EE91D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {48E3F4CB-5AB5-4239-BB6F-D449317C4B93}
+	EndGlobalSection
+EndGlobal
