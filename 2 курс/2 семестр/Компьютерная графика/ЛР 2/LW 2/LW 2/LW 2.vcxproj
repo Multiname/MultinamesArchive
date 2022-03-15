@@ -149,7 +149,6 @@
     <ClCompile Include="Listing_7.cpp" />
     <ClCompile Include="Listing_8.cpp" />
     <ClCompile Include="Listing_9.cpp" />
-    <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

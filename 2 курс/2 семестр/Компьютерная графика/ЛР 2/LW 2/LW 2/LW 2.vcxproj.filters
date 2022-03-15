@@ -27,9 +27,6 @@
     <ClCompile Include="Listing_4.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Source.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="Listing_5.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
