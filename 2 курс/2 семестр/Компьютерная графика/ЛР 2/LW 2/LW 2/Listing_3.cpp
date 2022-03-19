@@ -1,6 +1,6 @@
 #include "glew.h" // System and OpenGL Stuff
 #include "glut.h"
-namespace Lisitng_3
+namespace Listing_3
 {
 	// Значения углов
 	static GLfloat xRot = 0.0f;
@@ -14,7 +14,7 @@ namespace Lisitng_3
 		GLfloat fCurrSize; // Запись текущего состояния
 		GLfloat blueColor = 1.0f;
 		GLfloat colorStep = 0.04f;
-		GLint factor = 5; // Множитель фактуры 
+		GLint factor = 1; // Множитель фактуры 
 		GLushort pattern = 0xFF00; // Шаблон фактуры
 		GLushort patternStep = 1;
 		// Очищаем окно текущим цветом очистки
@@ -50,7 +50,7 @@ namespace Lisitng_3
 		glutSwapBuffers();
 	}
 	// Функция выполняет необходимую инициализацию 
-		// в контексте визуализации 
+	// в контексте визуализации 
 	void SetupRC()
 	{
 		// Черный фон

@@ -2,9 +2,7 @@
 #include "glut.h"
 namespace Listing_8
 {
-	// Определяется константа со значением “пи”
-#define GL_PI 3.1415f
-// Значения углов
+	// Значения углов
 	static GLfloat xRot = 0.0f;
 	static GLfloat yRot = 0.0f;
 	bool flatMode = false;
@@ -12,7 +10,7 @@ namespace Listing_8
 	void RenderScene(void)
 	{
 		GLfloat x, y, z, angle; // Здесь хранятся координаты и углы
-			// Окно очищается текущим цветом очистки
+		// Окно очищается текущим цветом очистки
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		// Записываем состояние матрицы и выполняем поворот

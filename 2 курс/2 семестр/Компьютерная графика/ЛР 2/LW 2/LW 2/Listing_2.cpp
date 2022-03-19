@@ -3,8 +3,6 @@
 #include <math.h>
 namespace Listing_2
 {
-	// Определяется константа со значением “пи”
-	#define GL_PI 3.1415f
 	// Значения углов
 	static GLfloat xRot = 0.0f;
 	static GLfloat yRot = 0.0f;

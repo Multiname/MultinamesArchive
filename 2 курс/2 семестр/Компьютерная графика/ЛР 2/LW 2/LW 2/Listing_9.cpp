@@ -2,9 +2,7 @@
 #include "glut.h"
 namespace Listing_9
 {
-	// Определяется константа со значением “пи”
-#define GL_PI 3.1415f
-// Значения углов
+	// Значения углов
 	static GLfloat xRot = 0.0f;
 	static GLfloat yRot = 0.0f;
 	bool depthCheck = false;
@@ -14,7 +12,7 @@ namespace Listing_9
 	void RenderScene(void)
 	{
 		GLfloat x, y, z, angle; // Здесь хранятся координаты и углы
-			// Окно очищается текущим цветом очистки
+		// Окно очищается текущим цветом очистки
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		// Записываем состояние матрицы и выполняем поворот
@@ -160,9 +158,4 @@ namespace Listing_9
 		glutMainLoop();
 		return 0;
 	}
-}
-int main(int argc, char* argv[])
-{
-	Listing_9::main(argc, argv);
-	return 0;
 }

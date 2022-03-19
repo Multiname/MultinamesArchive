@@ -14,9 +14,9 @@ namespace Listing_4
 	void RenderScene(void)
 	{
 		GLfloat x, y, angle; // Здесь хранятся координаты и углы
-			// Окно очищается текущим цветом очистки
+		// Окно очищается текущим цветом очистки
 		glClear(GL_COLOR_BUFFER_BIT);
-		// Записываем состояние матрицы и выполняем поворот
+		// Записываем состояние матрицы и выполняем поворот
 		glPushMatrix();
 		glRotatef(xRot, 1.0f, 0.0f, 0.0f);
 		glRotatef(yRot, 0.0f, 1.0f, 0.0f);

@@ -3,18 +3,18 @@
 #include <math.h>
 namespace Listing_5
 {
-// Определяется константа со значением “пи”
-#define GL_PI 3.1415f
-// Значения углов
+	// Определяется константа со значением “пи”
+	#define GL_PI 3.1415f
+	// Значения углов
 	static GLfloat xRot = 0.0f;
 	static GLfloat yRot = 0.0f;
 	// Вызывается для рисования сцены
 	void RenderScene(void)
 	{
 		GLfloat x, y, z, angle; // Здесь хранятся координаты и углы
-			// Окно очищается текущим цветом очистки
+		// Окно очищается текущим цветом очистки
 		glClear(GL_COLOR_BUFFER_BIT);
-		// Записываем состояние матрицы и выполняем поворот
+		// Записываем состояние матрицы и выполняем поворот
 		glPushMatrix();
 		glRotatef(xRot, 1.0f, 0.0f, 0.0f);
 		glRotatef(yRot, 0.0f, 1.0f, 0.0f);
