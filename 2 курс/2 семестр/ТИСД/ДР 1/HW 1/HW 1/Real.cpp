@@ -42,7 +42,7 @@ namespace Real
 
 				++t;
 			}
-			if (number[i] == '0')
+			else if (number[i] == '0')
 			{
 				temp[t] = 0;
 
@@ -53,10 +53,9 @@ namespace Real
 
 				++t;
 			}
-
-			if (number[i] == '-')
+			else if (number[i] == '-')
 				_sign = true;
-			if (number[i] == '.')
+			else if (number[i] == '.')
 				isPointReached = true;
 		}
 
@@ -414,54 +413,262 @@ namespace Real
 
 			return result;
 		}
+	}
 
-		//unsigned short shift = degreeDifference - (reducedMantissaSize - subtractedMantissaSize);
+	Real* Real::Divide(Real number)
+	{
+		int* degree{};
+		if (CompareDegree(number._degree, _MaxDegreeLength) == -1)
+		{
+			int* temp = CopyDegree();
 
-		//Real* result = new Real(*this);
-		//result->IncreaseDegreeByUint(degreeDifference);
+			DecreaseDegree(number._degree, _MaxDegreeLength);
+			IncreaseDegree(_degreeShift, _MaxDegreeLength);
+			degree = CopyDegree();
 
-		//for (unsigned short i = shift; i < _MaxMantissaLength; ++i)
-		//	result->_mantissa[i] = _mantissa[i - shift];
-		//for (unsigned short i{}; i < shift; ++i)
-		//	result->_mantissa[i] = 0;
+			_degree = temp;
+		}
+		else if (CompareDegree(number._degree, _MaxDegreeLength) == 1)
+		{
+			number.DecreaseDegree(_degree, _MaxDegreeLength);
+			number.IncreaseDegree(_degreeShift, _MaxDegreeLength);
+			degree = number.CopyDegree();
+		}
+		else
+		{
+			degree = new int[_MaxDegreeLength] {};
+			for (unsigned short i{}; i < _MaxDegreeLength; ++i)
+				degree[i] = _degreeShift[i];
+		}
 
-		//unsigned short r = 0;
-		//for (unsigned short i{}; i < _MaxMantissaLength; ++i)
-		//{
-		//	result->_mantissa[i] -= number._mantissa[i];
-		//	result->_mantissa[i] -= r;
+		unsigned short divisibleMantissaSize = _MaxMantissaLength;
+		for (int i = _MaxMantissaLength - 1; i >= 0; --i)
+			if (_mantissa[i] != 0)
+				break;
+			else
+				--divisibleMantissaSize;
 
-		//	if (result->_mantissa[i] < 0)
-		//	{
-		//		r = 1;
-		//		result->_mantissa[i] += _Base;
-		//	}
-		//	else
-		//		r = 0;
-		//}
+		unsigned short divisorMantissaSize = _MaxMantissaLength;
+		for (int i = _MaxMantissaLength - 1; i >= 0; --i)
+			if (number._mantissa[i] != 0)
+				break;
+			else
+				--divisorMantissaSize;
 
-		//unsigned short startPointPosition = reducedMantissaSize + shift - degreeDifference - 1;
-		//int endPointPosition = _MaxMantissaLength - 1;
-		//for (; endPointPosition >= 0; --endPointPosition)
-		//	if (result->_mantissa[endPointPosition] != 0)
-		//		break;
+		int* divisibleMantissa{};
+		if (divisibleMantissaSize < divisorMantissaSize)
+		{
+			divisibleMantissa = new int[divisorMantissaSize] {};
+			for (unsigned short i{}; i < divisibleMantissaSize; ++i)
+				divisibleMantissa[i + divisorMantissaSize - divisibleMantissaSize] = _mantissa[i];
+			divisibleMantissaSize = divisorMantissaSize;
+		}
+		else
+		{
+			divisibleMantissa = new int[divisibleMantissaSize] {};
+			for (unsigned short i{}; i < divisibleMantissaSize; ++i)
+				divisibleMantissa[i] = _mantissa[i];
+		}
 
-		//if (endPointPosition == -1)
-		//	return new Real();
+		int* num = new int[divisorMantissaSize] {};
+		for (unsigned short i{}; i < divisorMantissaSize; ++i)
+			num[divisorMantissaSize - i - 1] = divisibleMantissa[divisibleMantissaSize - i - 1];
 
-		//unsigned short degreeShift = endPointPosition - startPointPosition;
+		unsigned short numSize = divisorMantissaSize;
+		unsigned short digitPosition = divisorMantissaSize;
 
+		bool needExpansion = false;
+		for (int i = divisorMantissaSize - 1; i >= 0; --i)
+			if (num[i] < number._mantissa[i])
+			{
+				needExpansion = true;
+				break;
+			}
+			else if (num[i] > number._mantissa[i])
+				break;
+
+		if (needExpansion)
+		{
+			int* temp = new int[numSize + 1]{};
+			for (unsigned short i{}; i < numSize; ++i)
+				temp[i + 1] = num[i];
+			delete[] num;
+			num = temp;
+			++numSize;
+
+			if (digitPosition != divisibleMantissaSize)
+				num[0] = divisibleMantissa[divisibleMantissaSize - digitPosition - 1];
+
+			unsigned short i = 0;
+			--degree[i];
+			while (i < _MaxDegreeLength && degree[i] < 0)
+			{
+				degree[i] = _Base - 1;
+				++i;
+				if (i < _MaxDegreeLength)
+					--degree[i];
+			}
+
+			++digitPosition;
+		}
+
+		unsigned short counter = _MaxMantissaLength;
+		int* result{};
+		unsigned short resultSize = 0;
+
+		bool numIsZero = false;
+		while (!numIsZero && counter > 0)
+		{
+			bool isNumLess = false;
+			if (numSize < divisorMantissaSize)
+				isNumLess = true;
+			else if (numSize == divisorMantissaSize)
+				for (int i = divisorMantissaSize - 1; i >= 0; --i)
+					if (num[i] < number._mantissa[i])
+					{
+						isNumLess = true;
+						break;
+					}
+					else if (num[i] > number._mantissa[i])
+						break;
+
+
+			int* temp = new int[resultSize + 1]{};
+			for (unsigned short i{}; i < resultSize; ++i)
+				temp[i + 1] = result[i];
+			delete[] result;
+			result = temp;
+			++resultSize;
+
+			if (!isNumLess)
+			{
+				unsigned short k = 1;
+
+				bool kIsFound = false;
+				while (!kIsFound)
+				{
+					int* subtracted = new int[numSize] {};
+
+					unsigned short r = 0;
+					for (unsigned short i{}; i < divisorMantissaSize; ++i)
+					{
+						subtracted[i] = (number._mantissa[i] * k + r) % _Base;
+						r = (number._mantissa[i] * k + r) / _Base;
+					}
+					if (numSize > divisorMantissaSize)
+						subtracted[numSize - 1] = r;
+
+					int* difference = new int[numSize] {};
+					r = 0;
+					for (unsigned short i{}; i < numSize; ++i)
+					{
+						difference[i] = num[i] - subtracted[i] - r;
+
+						if (difference[i] < 0)
+						{
+							r = 1;
+							difference[i] += _Base;
+						}
+						else
+							r = 0;
+					}
+
+					delete[] subtracted;
+
+					unsigned short differenceSize = numSize;
+					for (int i = numSize - 1; i >= 0; --i)
+						if (difference[i] != 0)
+							break;
+						else
+							--differenceSize;
+
+					if (differenceSize > divisorMantissaSize)
+						++k;
+					else if (differenceSize < divisorMantissaSize)
+						kIsFound = true;
+					else
+					{
+						bool isEqual = true;
+						for (int i = divisorMantissaSize - 1; i >= 0; --i)
+							if (difference[i] > number._mantissa[i])
+							{
+								++k;
+								isEqual = false;
+								break;
+							}
+							else if (difference[i] < number._mantissa[i])
+							{
+								kIsFound = true;
+								isEqual = false;
+								break;
+							}
+						if (isEqual)
+							++k;
+					}
+
+					if (kIsFound)
+					{
+						delete[] num;
+						num = new int[differenceSize] {};
+						for (unsigned short i{}; i < differenceSize; ++i)
+							num[i] = difference[i];
+						numSize = differenceSize;
+					}
+
+					delete[] difference;
+				}
+
+				result[0] = k;
+			}
+
+			temp = new int[numSize + 1]{};
+			for (unsigned short i{}; i < numSize; ++i)
+				temp[i + 1] = num[i];
+			delete[] num;
+			num = temp;
+			++numSize;
+
+			if (digitPosition < divisibleMantissaSize)
+			{
+				num[0] = divisibleMantissa[divisibleMantissaSize - digitPosition - 1];
+				++digitPosition;
+			}
+
+			--counter;
+
+			numIsZero = true;
+			for (unsigned short i{}; i < numSize; ++i)
+				if (num[i] != 0)
+				{
+					numIsZero = false;
+					break;
+				}
+		}
+
+		Real* resultReal = new Real();
+
+		resultReal->_sign = _sign && !number._sign || !_sign && number._sign;
+
+		for (unsigned short i{}; i < resultSize; ++i)
+			resultReal->_mantissa[i] = result[i];
+
+		delete[] resultReal->_degree;
+		resultReal->_degree = degree;
+		delete[] result;
+
+		return resultReal;
 	}
 
 	void Real::IncDegree()
 	{
 		unsigned short i = 0;
 		++_degree[i];
-		while (_degree[i] == _Base)
+		while (i < _MaxDegreeLength && _degree[i] == _Base)
 		{
 			_degree[i] = 0;
 			++i;
-			++_degree[i];
+			if (i < _MaxDegreeLength)
+				++_degree[i];
 		}
 	}
 
@@ -469,11 +676,12 @@ namespace Real
 	{
 		unsigned short i = 0;
 		--_degree[i];
-		while (_degree[i] < 0)
+		while (i < _MaxDegreeLength && _degree[i] < 0)
 		{
 			_degree[i] = _Base - 1;
 			++i;
-			--_degree[i];
+			if (i < _MaxDegreeLength)
+				--_degree[i];
 		}
 	}
 
@@ -524,6 +732,28 @@ namespace Real
 
 		if (size < _MaxDegreeLength)
 			_degree[size] -= r;
+	}
+
+	void Real::IncreaseDegree(int* value, unsigned short size)
+	{
+		unsigned short r = 0;
+		for (unsigned short i{}; i < size; ++i)
+		{
+			_degree[i] += r;
+
+			_degree[i] += value[i];
+
+			if (_degree[i] >= _Base)
+			{
+				_degree[i] -= _Base;
+				r = 1;
+			}
+			else
+				r = 0;
+		}
+
+		if (size < _MaxDegreeLength)
+			_degree[size] += r;
 	}
 
 	short Real::CompareDegree(int* value, unsigned short size)

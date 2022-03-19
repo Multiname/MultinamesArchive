@@ -15,6 +15,7 @@ namespace Real
 		Real* MultiplyByInt(int number);
 		short CompareAbs(Real number);
 		Real* SubtractLessPlus(Real number);
+		Real* Divide(Real number);
 
 	private:
 		void IncDegree();
@@ -22,6 +23,7 @@ namespace Real
 		void IncreaseDegreeByUint(unsigned short number);
 		void DecreaseDegreeByUint(unsigned short number);
 		void DecreaseDegree(int* value, unsigned short size);
+		void IncreaseDegree(int* value, unsigned short size);
 		short CompareDegree(int* value, unsigned short size);
 		int* CopyDegree();
 
