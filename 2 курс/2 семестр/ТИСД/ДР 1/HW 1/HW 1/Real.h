@@ -11,30 +11,45 @@ namespace Real
 		Real(Real& real);
 		~Real();
 
-		std::string ToString();
-		Real* MultiplyByInt(int number);
-		short CompareAbs(Real number);
-		Real* SubtractLessPlus(Real number);
+		std::string ToString();;
 		Real* Divide(Real number);
 
 	private:
 		void IncDegree();
 		void DecDegree();
-		void IncreaseDegreeByUint(unsigned short number);
-		void DecreaseDegreeByUint(unsigned short number);
 		void DecreaseDegree(int* value, unsigned short size);
 		void IncreaseDegree(int* value, unsigned short size);
 		short CompareDegree(int* value, unsigned short size);
 		int* CopyDegree();
 
-		const unsigned short _MaxMantissaLength = 30;
-		const unsigned short _MaxDegreeLength = 5;
-		const unsigned short _Base = 10;
+		static const struct Constants
+		{
+			Constants()
+			{
+				for (unsigned short i{}; i < MaxDegreeLength - 1; ++i)
+					DegreeShift[i] = Base - 1;
+				DegreeShift[MaxDegreeLength - 1] = (Base - 1) / 2;
+			}
 
-		int* _degreeShift{};
+			static const unsigned short MaxMantissaLength = 30;
+			static const unsigned short MaxDegreeLength = 5;
+			static const unsigned short Base = 10;
+
+			int DegreeShift[MaxDegreeLength];
+		} _Constants;
 
 		bool _sign{};
 		int* _mantissa{};
 		int* _degree{};
+	};
+
+	class DivisionByZeroException
+	{
+	public:
+		DivisionByZeroException(std::string error);
+		std::string GetError();
+
+	private:
+		std::string _error{};
 	};
 }

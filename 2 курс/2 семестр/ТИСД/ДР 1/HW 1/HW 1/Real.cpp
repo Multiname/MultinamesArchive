@@ -1,32 +1,20 @@
 #include "Real.h"
 
-#include <iostream>
-
 namespace Real
 {
-	Real::Real() : _sign(false), _mantissa(new int[_MaxMantissaLength] {}),
-		_degree(new int[_MaxDegreeLength] {})
-	{
-		_degreeShift = new int[_MaxDegreeLength] {};
-		for (unsigned short i{}; i < _MaxDegreeLength - 1; ++i)
-			_degreeShift[i] = _Base - 1;
-		_degreeShift[_MaxDegreeLength - 1] = (_Base - 1) / 2;
-	}
+	Real::Constants const Real::_Constants;
+
+	Real::Real() : _sign(false), _mantissa(new int[_Constants.MaxMantissaLength]{}),
+		_degree(new int[_Constants.MaxDegreeLength]{}) {}
 
 	Real::Real(std::string number)
 	{
-		_mantissa = new int[_MaxMantissaLength] {};
-		_degree = new int[_MaxDegreeLength] {};
-		_degreeShift = new int[_MaxDegreeLength] {};
-		for (unsigned short i{}; i < _MaxDegreeLength - 1; ++i)
-		{
-			_degree[i] = _Base - 1;
-			_degreeShift[i] = _Base - 1;
-		}
-		_degreeShift[_MaxDegreeLength - 1] = (_Base - 1) / 2;
-		_degree[_MaxDegreeLength - 1] = (_Base - 1) / 2;
+		_mantissa = new int[_Constants.MaxMantissaLength] {};
+		_degree = new int[_Constants.MaxDegreeLength] {};
+		for (unsigned short i{}; i < _Constants.MaxDegreeLength; ++i)
+			_degree[i] = _Constants.DegreeShift[i];
 
-		unsigned short* temp = new unsigned short[_MaxMantissaLength] {};
+		unsigned short* temp = new unsigned short[_Constants.MaxMantissaLength] {};
 		int t = 0;
 		bool isPointReached = false;
 		bool isNotZeroReached = false;
@@ -82,22 +70,17 @@ namespace Real
 
 	Real::Real(Real& real) : _sign(real._sign)
 	{
-		_degreeShift = new int [_MaxDegreeLength] {};
-		_degree = new int[_MaxDegreeLength] {};
-		_mantissa = new int[_MaxMantissaLength] {};
+		_degree = new int[_Constants.MaxDegreeLength] {};
+		_mantissa = new int[_Constants.MaxMantissaLength] {};
 
-		for (unsigned short i{}; i < _MaxDegreeLength; ++i)
-		{
-			_degreeShift[i] = real._degreeShift[i];
+		for (unsigned short i{}; i < _Constants.MaxDegreeLength; ++i)
 			_degree[i] = real._degree[i];
-		}
-		for (unsigned short i{}; i < _MaxMantissaLength; ++i)
+		for (unsigned short i{}; i < _Constants.MaxMantissaLength; ++i)
 			_mantissa[i] = real._mantissa[i];
 	}
 
 	Real::~Real()
 	{
-		delete[] _degreeShift;
 		delete[] _mantissa;
 		delete[] _degree;
 	}
@@ -109,7 +92,7 @@ namespace Real
 			number += '-';
 
 		int pos = -1;
-		for (int i = _MaxMantissaLength - 1; i >= 0; --i)
+		for (int i = _Constants.MaxMantissaLength - 1; i >= 0; --i)
 			if (_mantissa[i] != 0)
 			{
 				pos = i;
@@ -135,26 +118,27 @@ namespace Real
 		int* temp = CopyDegree();
 		IncDegree();
 
-		if (CompareDegree(_degreeShift, _MaxDegreeLength) == 1)
+		if (CompareDegree((int*)_Constants.DegreeShift, _Constants.MaxDegreeLength) == 1)
 		{
 			number += "-";
 
-			_degree = _degreeShift;
-			_degreeShift = CopyDegree();
-			DecreaseDegree(temp, _MaxDegreeLength);
+			for (unsigned short i{}; i < _Constants.MaxDegreeLength; ++i)
+				_degree[i] = _Constants.DegreeShift[i];
+
+			DecreaseDegree(temp, _Constants.MaxDegreeLength);
 			DecDegree();
 
-			int i = _MaxDegreeLength - 1;
+			int i = _Constants.MaxDegreeLength - 1;
 			while (_degree[i] == 0)
 				--i;
 			for (; i >= 0; --i)
 				number += (_degree[i] + '0');
 		}
-		else if (CompareDegree(_degreeShift, _MaxDegreeLength) == -1)
+		else if (CompareDegree((int*)_Constants.DegreeShift, _Constants.MaxDegreeLength) == -1)
 		{
-			DecreaseDegree(_degreeShift, _MaxDegreeLength);
+			DecreaseDegree((int*)_Constants.DegreeShift, _Constants.MaxDegreeLength);
 
-			int i = _MaxDegreeLength - 1;
+			int i = _Constants.MaxDegreeLength - 1;
 			while (_degree[i] == 0)
 				--i;
 			for (; i >= 0; --i)
@@ -168,288 +152,61 @@ namespace Real
 		return number;
 	}
 
-	Real* Real::MultiplyByInt(int number)
-	{
-		Real* result = new Real(*this);
-		if (number < 0)
-			result->_sign = true;
-		else
-			result->_sign = false;
-
-		number = abs(number);
-
-		unsigned short startSize = _MaxMantissaLength;
-		for (int i = _MaxMantissaLength - 1; i >= 0; --i)
-		{
-			if (_mantissa[i] != 0)
-				break;
-			--startSize;
-		}
-
-		unsigned short r = 0;
-		for (unsigned short i{}; i < _MaxMantissaLength; ++i)
-		{
-			result->_mantissa[i] = (_mantissa[i] * number + r) % _Base;
-			r = (_mantissa[i] * number + r) / _Base;
-		}
-
-		unsigned short endSize = _MaxMantissaLength;
-		for (int i = _MaxMantissaLength - 1; i >= 0; --i)
-		{
-			if (result->_mantissa[i] != 0)
-				break;
-			--endSize;
-		}
-
-		result->IncreaseDegreeByUint(endSize - startSize);
-
-		unsigned short shift = 0;
-		for (; shift < _MaxMantissaLength; ++shift)
-			if (result->_mantissa[shift] != 0)
-				break;
-		for (unsigned short i{}; i < _MaxMantissaLength - shift; ++i)
-			result->_mantissa[i] = result->_mantissa[i + shift];
-		for (unsigned short i = _MaxMantissaLength - shift; i < _MaxMantissaLength; ++i)
-			result->_mantissa[i] = 0;
-
-		return result;
-	}
-
-	short Real::CompareAbs(Real number)
-	{
-		if (CompareDegree(number._degree, _MaxDegreeLength) != 0)
-			return CompareDegree(number._degree, _MaxDegreeLength);
-		for (int i = _MaxMantissaLength - 1; i >= 0; --i)
-			if (number._mantissa[i] > _mantissa[i])
-				return 1;
-			else if (number._mantissa[i] < _mantissa[i])
-				return -1;
-		return 0;
-	}
-
-	Real* Real::SubtractLessPlus(Real number)
-	{
-		int* temp = CopyDegree();
-
-		DecreaseDegree(number._degree, _MaxDegreeLength);
-		unsigned short degreeDifference = 0;
-		for (unsigned short i{}; i < _MaxDegreeLength; ++i)
-			degreeDifference += _degree[i] * pow(_Base, i);
-
-		delete[] _degree;
-		_degree = temp;
-
-		unsigned short reducedMantissaSize = _MaxMantissaLength;
-		for (int i = _MaxMantissaLength - 1; i >= 0; --i)
-		{
-			if (_mantissa[i] != 0)
-				break;
-			--reducedMantissaSize;
-		}
-
-		unsigned short subtractedMantissaSize = _MaxMantissaLength;
-		for (int i = _MaxMantissaLength - 1; i >= 0; --i)
-		{
-			if (number._mantissa[i] != 0)
-				break;
-			--subtractedMantissaSize;
-		}
-
-		int expansion = subtractedMantissaSize - reducedMantissaSize + degreeDifference;
-		if (expansion > 0)
-		{
-			unsigned short size = _MaxMantissaLength + expansion;
-			int* reducedMantissa = new int[size] {};
-			int* subtractedMantissa = new int[size] {};
-
-			for (unsigned short i{}; i < _MaxMantissaLength; ++i)
-			{
-				reducedMantissa[i + expansion] = _mantissa[i];
-				subtractedMantissa[i] = number._mantissa[i];
-			}
-
-			unsigned short r = 0;
-			for (unsigned short i{}; i < size; ++i)
-			{
-				reducedMantissa[i] -= subtractedMantissa[i];
-				reducedMantissa[i] -= r;
-
-				if (reducedMantissa[i] < 0)
-				{
-					r = 1;
-					reducedMantissa[i] += _Base;
-				}
-				else
-					r = 0;
-			}
-
-			unsigned short startPointPosition = reducedMantissaSize + expansion - 1;
-			int endPointPosition = size - 1;
-			for (; endPointPosition >= 0; --endPointPosition)
-				if (reducedMantissa[endPointPosition] != 0)
-					break;
-			if (endPointPosition == -1)
-				return new Real();
-			unsigned short degreeShift = startPointPosition - endPointPosition;
-
-			unsigned short mantissaShift = 0;
-			for (; mantissaShift < size; ++mantissaShift)
-				if (reducedMantissa[mantissaShift] != 0)
-					break;
-
-			Real* result = new Real();
-			if (endPointPosition - mantissaShift + 1 > _MaxMantissaLength)
-				for (unsigned short i{}; i < _MaxMantissaLength; ++i)
-					result->_mantissa[_MaxMantissaLength - i - 1] = reducedMantissa[endPointPosition - i];
-			else
-				for (unsigned short i{}; i < endPointPosition - mantissaShift + 1; ++i)
-					result->_mantissa[i] = reducedMantissa[i + mantissaShift];
-			
-			delete[] result->_degree;
-			result->_degree = CopyDegree();
-			result->DecreaseDegreeByUint(degreeShift);
-
-			return result;
-		}
-		else if (expansion < 0)
-		{
-			expansion *= -1;
-			unsigned short size = _MaxMantissaLength + expansion;
-			int* reducedMantissa = new int[size] {};
-			int* subtractedMantissa = new int[size] {};
-
-			for (unsigned short i{}; i < _MaxMantissaLength; ++i)
-			{
-				reducedMantissa[i] = _mantissa[i];
-				subtractedMantissa[i + expansion] = number._mantissa[i];
-			}
-
-			unsigned short r = 0;
-			for (unsigned short i{}; i < size; ++i)
-			{
-				reducedMantissa[i] -= subtractedMantissa[i];
-				reducedMantissa[i] -= r;
-
-				if (reducedMantissa[i] < 0)
-				{
-					r = 1;
-					reducedMantissa[i] += _Base;
-				}
-				else
-					r = 0;
-			}
-
-			unsigned short startPointPosition = reducedMantissaSize - 1;
-			int endPointPosition = size - 1;
-			for (; endPointPosition >= 0; --endPointPosition)
-				if (reducedMantissa[endPointPosition] != 0)
-					break;
-			if (endPointPosition == -1)
-				return new Real();
-			unsigned short degreeShift = startPointPosition - endPointPosition;
-
-			unsigned short mantissaShift = 0;
-			for (; mantissaShift < size; ++mantissaShift)
-				if (reducedMantissa[mantissaShift] != 0)
-					break;
-
-			Real* result = new Real();
-			if (endPointPosition - mantissaShift + 1 > _MaxMantissaLength)
-				for (unsigned short i{}; i < _MaxMantissaLength; ++i)
-					result->_mantissa[_MaxMantissaLength - i - 1] = reducedMantissa[endPointPosition - i];
-			else
-				for (unsigned short i{}; i < endPointPosition - mantissaShift + 1; ++i)
-					result->_mantissa[i] = reducedMantissa[i + mantissaShift];
-
-			delete[] result->_degree;
-			result->_degree = CopyDegree();
-			result->DecreaseDegreeByUint(degreeShift);
-
-			return result;
-		}
-		else
-		{
-			int* reducedMantissa = new int[_MaxMantissaLength] {};
-
-			for (unsigned short i{}; i < _MaxMantissaLength; ++i)
-				reducedMantissa[i] = _mantissa[i];
-
-			unsigned short r = 0;
-			for (unsigned short i{}; i < _MaxMantissaLength; ++i)
-			{
-				reducedMantissa[i] -= number._mantissa[i];
-				reducedMantissa[i] -= r;
-
-				if (reducedMantissa[i] < 0)
-				{
-					r = 1;
-					reducedMantissa[i] += _Base;
-				}
-				else
-					r = 0;
-			}
-
-			unsigned short startPointPosition = reducedMantissaSize - 1;
-			int endPointPosition = _MaxMantissaLength - 1;
-			for (; endPointPosition >= 0; --endPointPosition)
-				if (reducedMantissa[endPointPosition] != 0)
-					break;
-			if (endPointPosition == -1)
-				return new Real();
-			unsigned short degreeShift = startPointPosition - endPointPosition;
-
-			unsigned short mantissaShift = 0;
-			for (; mantissaShift < _MaxMantissaLength; ++mantissaShift)
-				if (reducedMantissa[mantissaShift] != 0)
-					break;
-
-			Real* result = new Real();
-			for (unsigned short i{}; i < endPointPosition - mantissaShift + 1; ++i)
-				result->_mantissa[i] = reducedMantissa[i + mantissaShift];
-
-			delete[] result->_degree;
-			result->_degree = CopyDegree();
-			result->DecreaseDegreeByUint(degreeShift);
-
-			return result;
-		}
-	}
-
 	Real* Real::Divide(Real number)
 	{
+		bool dividedByZero = true;
+		for (unsigned short i{}; i < _Constants.MaxMantissaLength; ++i)
+			if (number._mantissa[i] != 0)
+			{
+				dividedByZero = false;
+				break;
+			}
+		if (dividedByZero)
+			throw DivisionByZeroException("Division by zero");
+
+		bool divisibleIsZero = true;
+		for (unsigned short i{}; i < _Constants.MaxMantissaLength; ++i)
+			if (_mantissa[i] != 0)
+			{
+				divisibleIsZero = false;
+				break;
+			}
+		if (divisibleIsZero)
+			return new Real();
+
 		int* degree{};
-		if (CompareDegree(number._degree, _MaxDegreeLength) == -1)
+		if (CompareDegree(number._degree, _Constants.MaxDegreeLength) == -1)
 		{
 			int* temp = CopyDegree();
 
-			DecreaseDegree(number._degree, _MaxDegreeLength);
-			IncreaseDegree(_degreeShift, _MaxDegreeLength);
+			DecreaseDegree(number._degree, _Constants.MaxDegreeLength);
+			IncreaseDegree((int*)_Constants.DegreeShift, _Constants.MaxDegreeLength);
 			degree = CopyDegree();
 
 			_degree = temp;
 		}
-		else if (CompareDegree(number._degree, _MaxDegreeLength) == 1)
+		else if (CompareDegree(number._degree, _Constants.MaxDegreeLength) == 1)
 		{
-			number.DecreaseDegree(_degree, _MaxDegreeLength);
-			number.IncreaseDegree(_degreeShift, _MaxDegreeLength);
+			number.DecreaseDegree(_degree, _Constants.MaxDegreeLength);
+			number.IncreaseDegree((int*)_Constants.DegreeShift, _Constants.MaxDegreeLength);
 			degree = number.CopyDegree();
 		}
 		else
 		{
-			degree = new int[_MaxDegreeLength] {};
-			for (unsigned short i{}; i < _MaxDegreeLength; ++i)
-				degree[i] = _degreeShift[i];
+			degree = new int[_Constants.MaxDegreeLength] {};
+			for (unsigned short i{}; i < _Constants.MaxDegreeLength; ++i)
+				degree[i] = _Constants.DegreeShift[i];
 		}
 
-		unsigned short divisibleMantissaSize = _MaxMantissaLength;
-		for (int i = _MaxMantissaLength - 1; i >= 0; --i)
+		unsigned short divisibleMantissaSize = _Constants.MaxMantissaLength;
+		for (int i = _Constants.MaxMantissaLength - 1; i >= 0; --i)
 			if (_mantissa[i] != 0)
 				break;
 			else
 				--divisibleMantissaSize;
 
-		unsigned short divisorMantissaSize = _MaxMantissaLength;
-		for (int i = _MaxMantissaLength - 1; i >= 0; --i)
+		unsigned short divisorMantissaSize = _Constants.MaxMantissaLength;
+		for (int i = _Constants.MaxMantissaLength - 1; i >= 0; --i)
 			if (number._mantissa[i] != 0)
 				break;
 			else
@@ -501,18 +258,18 @@ namespace Real
 
 			unsigned short i = 0;
 			--degree[i];
-			while (i < _MaxDegreeLength && degree[i] < 0)
+			while (i < _Constants.MaxDegreeLength && degree[i] < 0)
 			{
-				degree[i] = _Base - 1;
+				degree[i] = _Constants.Base - 1;
 				++i;
-				if (i < _MaxDegreeLength)
+				if (i < _Constants.MaxDegreeLength)
 					--degree[i];
 			}
 
 			++digitPosition;
 		}
 
-		unsigned short counter = _MaxMantissaLength;
+		unsigned short counter = _Constants.MaxMantissaLength;
 		int* result{};
 		unsigned short resultSize = 0;
 
@@ -552,8 +309,8 @@ namespace Real
 					unsigned short r = 0;
 					for (unsigned short i{}; i < divisorMantissaSize; ++i)
 					{
-						subtracted[i] = (number._mantissa[i] * k + r) % _Base;
-						r = (number._mantissa[i] * k + r) / _Base;
+						subtracted[i] = (number._mantissa[i] * k + r) % _Constants.Base;
+						r = (number._mantissa[i] * k + r) / _Constants.Base;
 					}
 					if (numSize > divisorMantissaSize)
 						subtracted[numSize - 1] = r;
@@ -567,7 +324,7 @@ namespace Real
 						if (difference[i] < 0)
 						{
 							r = 1;
-							difference[i] += _Base;
+							difference[i] += _Constants.Base;
 						}
 						else
 							r = 0;
@@ -655,6 +412,8 @@ namespace Real
 		delete[] resultReal->_degree;
 		resultReal->_degree = degree;
 		delete[] result;
+		delete[] num;
+		delete[] divisibleMantissa;
 
 		return resultReal;
 	}
@@ -663,11 +422,11 @@ namespace Real
 	{
 		unsigned short i = 0;
 		++_degree[i];
-		while (i < _MaxDegreeLength && _degree[i] == _Base)
+		while (i < _Constants.MaxDegreeLength && _degree[i] == _Constants.Base)
 		{
 			_degree[i] = 0;
 			++i;
-			if (i < _MaxDegreeLength)
+			if (i < _Constants.MaxDegreeLength)
 				++_degree[i];
 		}
 	}
@@ -676,39 +435,12 @@ namespace Real
 	{
 		unsigned short i = 0;
 		--_degree[i];
-		while (i < _MaxDegreeLength && _degree[i] < 0)
+		while (i < _Constants.MaxDegreeLength && _degree[i] < 0)
 		{
-			_degree[i] = _Base - 1;
+			_degree[i] = _Constants.Base - 1;
 			++i;
-			if (i < _MaxDegreeLength)
+			if (i < _Constants.MaxDegreeLength)
 				--_degree[i];
-		}
-	}
-
-	void Real::IncreaseDegreeByUint(unsigned short number)
-	{
-		unsigned short r = 0;
-		for (unsigned short i{}; i < _MaxDegreeLength; ++i)
-		{
-			_degree[i] += (number / (int)pow(_Base, i)) % _Base + r;
-			r = _degree[i] / _Base;
-			_degree[i] %= _Base;
-		}
-	}
-
-	void Real::DecreaseDegreeByUint(unsigned short number)
-	{
-		unsigned short r = 0;
-		for (unsigned short i{}; i < _MaxDegreeLength; ++i)
-		{
-			_degree[i] -= (number / (int)pow(_Base, i)) % _Base + r;
-			if (_degree[i] < 0)
-			{
-				r = 1;
-				_degree += _Base;
-			}
-			else
-				r = 0;
 		}
 	}
 
@@ -723,14 +455,14 @@ namespace Real
 
 			if (_degree[i] < 0)
 			{
-				_degree[i] += _Base;
+				_degree[i] += _Constants.Base;
 				r = 1;
 			}
 			else
 				r = 0;
 		}
 
-		if (size < _MaxDegreeLength)
+		if (size < _Constants.MaxDegreeLength)
 			_degree[size] -= r;
 	}
 
@@ -743,28 +475,28 @@ namespace Real
 
 			_degree[i] += value[i];
 
-			if (_degree[i] >= _Base)
+			if (_degree[i] >= _Constants.Base)
 			{
-				_degree[i] -= _Base;
+				_degree[i] -= _Constants.Base;
 				r = 1;
 			}
 			else
 				r = 0;
 		}
 
-		if (size < _MaxDegreeLength)
+		if (size < _Constants.MaxDegreeLength)
 			_degree[size] += r;
 	}
 
 	short Real::CompareDegree(int* value, unsigned short size)
 	{
-		if (size > _MaxDegreeLength)
+		if (size > _Constants.MaxDegreeLength)
 			return 1;
-		else if (size < _MaxDegreeLength)
+		else if (size < _Constants.MaxDegreeLength)
 			return -1;
 		else
 		{
-			for (int i = _MaxDegreeLength - 1; i >= 0; --i)
+			for (int i = _Constants.MaxDegreeLength - 1; i >= 0; --i)
 			{
 				if (value[i] > _degree[i])
 					return 1;
@@ -778,9 +510,12 @@ namespace Real
 
 	int* Real::CopyDegree()
 	{
-		int* temp = new int[_MaxDegreeLength] {};
-		for (unsigned short i{}; i < _MaxDegreeLength; ++i)
+		int* temp = new int[_Constants.MaxDegreeLength] {};
+		for (unsigned short i{}; i < _Constants.MaxDegreeLength; ++i)
 			temp[i] = _degree[i];
 		return temp;
 	}
+
+	DivisionByZeroException::DivisionByZeroException(std::string error) : _error(error) {}
+	std::string DivisionByZeroException::GetError() { return _error; }
 }
