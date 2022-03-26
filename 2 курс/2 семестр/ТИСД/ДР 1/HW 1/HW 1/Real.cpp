@@ -1,11 +1,46 @@
 #include "Real.h"
 
+#include <iostream>
+
 namespace Real
 {
 	Real::Constants const Real::_Constants;
 
 	Real::Real() : _sign(false), _mantissa(new int[_Constants.MaxMantissaLength]{}),
 		_degree(new int[_Constants.MaxDegreeLength]{}) {}
+
+	Real::Real(std::string sign, std::string mantissa, std::string degree)
+	{
+		_sign = sign[0] == '-';
+
+		_mantissa = new int[_Constants.MaxMantissaLength]{};
+		if (mantissa.size() > _Constants.MaxMantissaLength)
+			for (unsigned short i{}; i < _Constants.MaxMantissaLength; ++i)
+				_mantissa[i] = mantissa[mantissa.size() - _Constants.MaxMantissaLength + i] - '0';
+		else
+			for (unsigned short i{}; i < mantissa.size(); ++i)
+				_mantissa[i] = mantissa[mantissa.size() - i - 1] - '0';
+
+		_degree = new int[_Constants.MaxDegreeLength]{};
+		if (degree[0] == '-')
+		{
+			int* temp = new int[_Constants.MaxDegreeLength]{};
+			for (unsigned short i{}; i < degree.size() - 1; ++i)
+				temp[i] = degree[degree.size() - i - 1] - '0';
+
+			for (unsigned short i{}; i < _Constants.MaxDegreeLength; ++i)
+				_degree[i] = _Constants.DegreeShift[i];
+			DecreaseDegree(temp, _Constants.MaxDegreeLength);
+			delete[] temp;
+		}
+		else
+		{
+			for (unsigned short i{}; i < degree.size(); ++i)
+				_degree[i] = degree[degree.size() - i - 1] - '0';
+			IncreaseDegree((int*)_Constants.DegreeShift, _Constants.MaxDegreeLength);
+		}
+	}
+
 
 	Real::Real(std::string number)
 	{

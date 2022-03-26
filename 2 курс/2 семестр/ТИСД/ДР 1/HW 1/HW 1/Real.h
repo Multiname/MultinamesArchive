@@ -7,6 +7,7 @@ namespace Real
 	{
 	public:
 		Real();
+		Real(std::string sign, std::string mantissa, std::string degree);
 		Real(std::string number);
 		Real(Real& real);
 		~Real();
