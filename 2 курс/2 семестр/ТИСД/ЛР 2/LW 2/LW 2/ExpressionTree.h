@@ -27,6 +27,9 @@ namespace DTAS
 		std::string GetExpressionSymmetrical();
 		std::string GetExpressionConversely();
 
+		std::string GetExpression();
+		void CreateFromExpression(std::ifstream& stream);
+
 	private:
 		struct Number
 		{
@@ -46,6 +49,10 @@ namespace DTAS
 			Selection selection = None);
 		void Place(Number* pointer, std::vector<int> branch);
 		void Place(Number* pointer, std::ifstream& stream);
+
+		std::string MakeString(Number* pointer);
+		Number* MakeNumber(std::ifstream& stream, bool bracketMet = false);
+
 		void DrawElement(Number* pointer,
 			std::set<unsigned short> columnsToDraw,
 			unsigned short numberPosition,

@@ -4,7 +4,7 @@ int main(int argc, char* argv[])
 {
 	if (argc == 1)
 	{
-		DTAS::Menu menu{};
+		DTAS::Menu menu{ "Input.txt" };
 		menu.Run();
 	}
 	else if (argc == 2)

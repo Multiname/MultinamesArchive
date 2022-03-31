@@ -107,6 +107,115 @@ namespace DTAS
 		}
 	}
 
+	std::string ExpressionTree::GetExpression()
+	{
+		if (_root != nullptr)
+			return MakeString(_root);
+		return "";
+	}
+
+	std::string ExpressionTree::MakeString(Number* pointer)
+	{
+		std::string str = "";
+
+		if (pointer->left != nullptr && pointer->right != nullptr)
+			str += "( " + std::to_string(pointer->number) + " + " +
+			MakeString(pointer->left) + " ) * " + MakeString(pointer->right);
+		else if (pointer->left != nullptr)
+			str += std::to_string(pointer->number) + " + " +
+			MakeString(pointer->left);
+		else if (pointer->right != nullptr)
+			str += std::to_string(pointer->number) + " * " +
+			MakeString(pointer->right);
+		else
+			str += std::to_string(pointer->number);
+
+		return str;
+	}
+
+	void ExpressionTree::CreateFromExpression(std::ifstream& stream)
+	{
+		_root =  MakeNumber(stream);
+	}
+
+	ExpressionTree::Number* ExpressionTree::MakeNumber(std::ifstream& stream, bool bracketMet)
+	{
+		std::string input{};
+		if (!bracketMet)
+			stream >> input;
+
+		if (input == "(" || bracketMet)
+		{
+			Number* number = new Number{ 0, nullptr, new Number{1, nullptr, nullptr} };
+
+			stream >> input;
+
+			if (input == "(")
+				number->left = MakeNumber(stream, true);
+			else
+			{
+				int n = std::stoi(input);
+
+				stream >> input;
+
+				if (input == "+")
+				{
+					number->number = n;
+					number->left = MakeNumber(stream);
+				}
+				else if (input == "*")
+					number->left = new Number{ n, nullptr, MakeNumber(stream) };
+			}
+
+			std::string temp = "";
+			stream >> temp;
+			input = temp;
+			if (input.size())
+			{
+				if (input == ")")
+					return number;
+				else if (input == "+")
+				{
+					number->right->left = MakeNumber(stream);
+					return number;
+				}
+				else if (input == "*")
+				{
+					number->right = MakeNumber(stream);
+					return number;
+				}
+			}
+			else
+				return number;
+		}
+		else
+		{
+			Number* number = new Number{ std::stoi(input), nullptr, nullptr };
+
+			std::string temp = "";
+			stream >> temp;
+			input = temp;
+
+			if (input.size())
+			{
+				if (input == "+")
+				{
+					number->left = MakeNumber(stream);
+					return number;
+				}
+				else if (input == "*")
+				{
+					number->right = MakeNumber(stream);
+					return number;
+				}
+				else if (input == ")")
+					return number;
+			}
+			else
+				return number;
+		}
+	}
+
 	void ExpressionTree::Print()
 	{
 		if (!IsEmpty())

@@ -11,7 +11,8 @@ namespace DTAS
 	{
 		std::ifstream inputData(input);
 		if (inputData)
-			_tree.Create(inputData);
+			//_tree.Create(inputData);
+			_tree.CreateFromExpression(inputData);
 		else
 		{
 			std::ofstream errorData(_logFile, std::ios_base::app);
@@ -46,6 +47,8 @@ namespace DTAS
 			std::cout << "9. Form expression directly\n";
 			std::cout << "10. Form expression symmetrical\n";
 			std::cout << "11. Form expression conversely\n\n";
+
+			std::cout << "12. Form expression 2.0\n\n";
 
 			std::cout << "0. Exit\n";
 			std::cout << ">>> ";
@@ -114,6 +117,17 @@ namespace DTAS
 				break;
 			case 11:
 				result = _tree.GetExpressionConversely();
+				std::cout << result;
+				if (!_tree.IsEmpty())
+				{
+					std::ofstream outputData(_output);
+					outputData << result;
+					outputData.close();
+					Pause();
+				}
+				break;
+			case 12:
+				result = _tree.GetExpression();
 				std::cout << result;
 				if (!_tree.IsEmpty())
 				{
