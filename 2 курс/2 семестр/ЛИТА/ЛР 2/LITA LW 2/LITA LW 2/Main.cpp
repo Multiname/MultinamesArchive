@@ -1,10 +1,9 @@
 #include <vector>
 #include <iostream>
-#include <set>
-
-#include <ctime>
-
+#include <random>
+#include <time.h>
 #include <iomanip>
+#include <fstream>
 
 const int MinimumPossibleNumber = 0;
 const int maximumPossibleNumber = 9;
@@ -120,48 +119,99 @@ using namespace std;
 //			printLCS(i, j - 1, prev, x);
 //}
 
-int LCIS(vector<int> arr1, vector<int> arr2)
+//int LCIS(vector<int> arr1, vector<int> arr2)
+//{
+//	int n = arr1.size();
+//	int m = arr2.size();
+//
+//	// table[j] is going to store length of LCIS
+//	// ending with arr2[j]. We initialize it as 0,
+//	int *table = new int[m];
+//	for (int j = 0; j < m; j++)
+//		table[j] = 0;
+//
+//	// Traverse all elements of arr1[]
+//	for (int i = 0; i < n; i++)
+//	{
+//		// Initialize current length of LCIS
+//		int current = 0;
+//
+//		// For each element of arr1[], traverse all
+//		// elements of arr2[].
+//		for (int j = 0; j < m; j++)
+//		{
+//			// If both the array have same elements.
+//			// Note that we don't break the loop here.
+//			if (arr1[i] == arr2[j])
+//				if (current + 1 > table[j])
+//					table[j] = current + 1;
+//
+//			/* Now seek for previous smaller common
+//			   element for current element of arr1 */
+//			if (arr1[i] > arr2[j])
+//				if (table[j] > current)
+//					current = table[j];
+//		}
+//	}
+//
+//	// The maximum value in table[] is out result
+//	int result = 0;
+//	for (int i = 0; i < m; i++)
+//		if (table[i] > result)
+//			result = table[i];
+//
+//	return result;
+//}
+
+void LCS(vector<int> X, vector<int> Y, char**& s)
 {
-	int n = arr1.size();
-	int m = arr2.size();
+	int n = X.size();
+	int m = Y.size();
 
-	// table[j] is going to store length of LCIS
-	// ending with arr2[j]. We initialize it as 0,
-	int *table = new int[m];
-	for (int j = 0; j < m; j++)
-		table[j] = 0;
-
-	// Traverse all elements of arr1[]
-	for (int i = 0; i < n; i++)
+	int** c = new int* [n + 1]{};
+	int** v = new int* [n + 1]{};
+	for (int i{}; i < n + 1; ++i)
 	{
-		// Initialize current length of LCIS
-		int current = 0;
-
-		// For each element of arr1[], traverse all
-		// elements of arr2[].
-		for (int j = 0; j < m; j++)
-		{
-			// If both the array have same elements.
-			// Note that we don't break the loop here.
-			if (arr1[i] == arr2[j])
-				if (current + 1 > table[j])
-					table[j] = current + 1;
-
-			/* Now seek for previous smaller common
-			   element for current element of arr1 */
-			if (arr1[i] > arr2[j])
-				if (table[j] > current)
-					current = table[j];
-		}
+		c[i] = new int[m + 1]{};
+		v[i] = new int[m + 1]{ MinimumPossibleNumber - 1 };
 	}
+	for (int i{}; i < m; ++i)
+		v[0][i + 1] = MinimumPossibleNumber - 1;
 
-	// The maximum value in table[] is out result
-	int result = 0;
-	for (int i = 0; i < m; i++)
-		if (table[i] > result)
-			result = table[i];
+	s = new char* [n] {};
+	for (int i{}; i < n; ++i)
+		s[i] = new char[m] {};
 
-	return result;
+	for (int i = 1; i < n + 1; ++i)
+		for (int j = 1; j < m + 1; ++j)
+		{
+			if (X[i - 1] == Y[j - 1] && v[i - 1][j - 1] <= X[i - 1])
+			{
+				c[i][j] = c[i - 1][j - 1] + 1;
+				v[i][j] = X[i - 1];
+				s[i - 1][j - 1] = '\\';
+			}
+			else if (c[i - 1][j] >= c[i][j - 1])
+			{
+				c[i][j] = c[i - 1][j];
+				v[i][j] = v[i - 1][j];
+				s[i - 1][j - 1] = '|';
+			}
+			else
+			{
+				c[i][j] = c[i][j - 1];
+				v[i][j] = v[i][j - 1];
+				s[i - 1][j - 1] = '-';
+			}
+		}
+
+	for (int i{}; i < n + 1; ++i)
+	{
+		delete[] c[i];
+		delete[] v[i];
+	}
+	delete[] c;
+	delete[] v;
 }
 
 int LCS(vector<int> X, vector<int> Y, int i, int j,
@@ -212,61 +262,186 @@ int LCS(vector<int> X, vector<int> Y, int i, int j,
 	return c[i][j];
 }
 
+void Recursion()
+{
+	vector<vector<clock_t>> times{};
+
+	for (int n = 7; n < 12; ++n)
+	{
+		vector<clock_t> subtimes{};
+		for (int m = 7; m < 12; ++m)
+		{
+			vector<int> a{};
+			vector<int> b{};
+			int** c = new int* [n] {};
+			char** s = new char* [n] {};
+			for (int i{}; i < n; ++i)
+			{
+				a.push_back(MinimumPossibleNumber + rand() % (maximumPossibleNumber - MinimumPossibleNumber + 1));
+				c[i] = new int[m] {};
+				s[i] = new char[m] {};
+				for (int j{}; j < m; ++j)
+					s[i][j] = ' ';
+			}
+			for (int i{}; i < m; ++i)
+				b.push_back(MinimumPossibleNumber + rand() % (maximumPossibleNumber - MinimumPossibleNumber + 1));
+
+			int maxNum = maximumPossibleNumber + 1;
+			clock_t start = clock();
+			LCS(a, b, n - 1, m - 1, c, s, maxNum);
+			clock_t end = clock();
+
+			cout << "1st sequence: ";
+			for (int i{}; i < n; ++i)
+				cout << a[i] << " ";
+
+			cout << "\n2nd sequence: ";
+			for (int i{}; i < m; ++i)
+				cout << b[i] << " ";
+
+			vector<int> subsequence{};
+			int i = a.size() - 1;
+			int j = b.size() - 1;
+			while (i >= 0 && j >= 0)
+			{
+				if (s[i][j] == '\\')
+				{
+					subsequence.push_back(a[i]);
+					--i;
+					--j;
+				}
+				else if (s[i][j] == '|')
+					--i;
+				else if (s[i][j] == '-')
+					--j;
+			}
+
+			cout << "\nSubsequence: ";
+			for (int i = subsequence.size() - 1; i >= 0; --i)
+				cout << subsequence[i] << " ";
+
+			cout << "\nTime: " << (end - start) / (CLOCKS_PER_SEC / 1000) << "\n";
+			subtimes.push_back((end - start) / (CLOCKS_PER_SEC / 1000));
+
+			for (int i{}; i < a.size(); ++i)
+			{
+				delete[] c[i];
+				delete[] s[i];
+			}
+			delete[] c;
+			delete[] s;
+		}
+		times.push_back(subtimes);
+	}
+
+	ofstream file("recursion.csv");
+	for (int i{}; i < times.size(); ++i)
+	{
+		for (int j{}; j < times[i].size(); ++j)
+		{
+			cout << setw(5) << times[i][j] << " ";
+			file << times[i][j];
+			if (j != times[i].size() - 1)
+				file << ',';
+		}
+		cout << "\n";
+		file << '\n';
+	}
+	file.close();
+}
+
+void Iteration()
+{
+	vector<vector<clock_t>> times{};
+
+	for (int n = 500; n < 3000; n += 500)
+	{
+		vector<clock_t> subtimes{};
+		for (int m = 500; m < 3000; m += 500)
+		{
+			vector<int> a{};
+			vector<int> b{};
+			for (int i{}; i < n; ++i)
+				a.push_back(MinimumPossibleNumber + rand() % (maximumPossibleNumber - MinimumPossibleNumber + 1));
+			for (int i{}; i < m; ++i)
+				b.push_back(MinimumPossibleNumber + rand() % (maximumPossibleNumber - MinimumPossibleNumber + 1));
+
+			//cout << "1st sequence: ";
+			//for (int i{}; i < n; ++i)
+			//	cout << a[i] << " ";
+
+			//cout << "\n2nd sequence: ";
+			//for (int i{}; i < m; ++i)
+			//	cout << b[i] << " ";
+
+			char** s{};
+			clock_t start = clock();
+			LCS(a, b, s);
+			clock_t end = clock();
+
+			vector<int> subsequence{};
+			int i = a.size() - 1;
+			int j = b.size() - 1;
+			while (i >= 0 && j >= 0)
+			{
+				if (s[i][j] == '\\')
+				{
+					subsequence.push_back(a[i]);
+					--i;
+					--j;
+				}
+				else if (s[i][j] == '|')
+					--i;
+				else if (s[i][j] == '-')
+					--j;
+			}
+
+			//cout << "\nSubsequence: ";
+			//for (int i = subsequence.size() - 1; i >= 0; --i)
+			//	cout << subsequence[i] << " ";
+
+			//cout << "\nTime: " << (end - start) / (CLOCKS_PER_SEC / 1000) << "\n\n";
+			subtimes.push_back((end - start) / (CLOCKS_PER_SEC / 1000));
+
+			for (int i{}; i < a.size(); ++i)
+				delete[] s[i];
+			delete[] s;
+		}
+		times.push_back(subtimes);
+	}
+
+	ofstream file("iteration.csv");
+	for (int i{}; i < times.size(); ++i)
+	{
+		for (int j{}; j < times[i].size(); ++j)
+		{
+			cout << setw(5) << times[i][j] << " ";
+			file << times[i][j];
+			if (j != times[i].size() - 1)
+				file << ',';
+		}
+		cout << "\n";
+		file << '\n';
+	}
+	file.close();
+}
+
 int main()
 {
-	vector<int> a{ 1, 3, 5, 7, 6, 4, 2, 9 };
-	vector<int> b{ 1, 5, 7, 4, 2, 9 };
+	unsigned int seed = time(NULL);
+	srand(seed);
+	Recursion();
 
-	//vector<int> a{ 1, 4, 2, 5, -12 };
-	//vector<int> b{ -12, 1, 2, 4 };
-
-	int** c = new int* [a.size()]{};
-	char** s = new char* [a.size()]{};
-	for (int i{}; i < a.size(); ++i)
-	{
-		c[i] = new int[b.size()]{};
-		s[i] = new char[b.size()]{};
-		for (int j{}; j < b.size(); ++j)
-			s[i][j] = ' ';
-	}
-
-	int maxNum = maximumPossibleNumber + 1;
-	size_t start = clock();
-	//cout << LCIS(a, b) << "\n";
-	cout << LCS(a, b, a.size() - 1, b.size() - 1, c, s, maxNum) << "\n";
-	size_t end = clock();
-
-	for (int i{}; i < a.size(); ++i)
-	{
-		for (int j{}; j < b.size(); ++j)
-			cout << setw(4) << s[i][j] << c[i][j] << " ";
-		cout << "\n";
-	}
-
-	int i = a.size() - 1;
-	int j = b.size() - 1;
-	while (i >= 0 && j >= 0)
-	{
-		if (s[i][j] == '\\')
-		{
-			cout << a[i] << " " << i << " " << j << "   ";
-			--i;
-			--j;
-		}
-		else if (s[i][j] == '|')
-			--i;
-		else if (s[i][j] == '-')
-			--j;
-	}
-
-	cout << "\n" << (end - start) / CLOCKS_PER_SEC;
-
-	//vector<int> result = LCS_2(a, b);
-	//for (int i = result.size() - 1; i >= 0 ; --i)
-	//	cout << result[i] << " ";
-	//cout << "\n";
-
-	//printLCS(a.size() - 1, b.size() - 1, LCS(a, b), a);
+	srand(seed);
+	//Iteration();
 
 	return 0;
 }
+
+//cout << "\n";
+			//for (int i{}; i < a.size(); ++i)
+			//{
+			//	for (int j{}; j < b.size(); ++j)
+			//		cout << setw(4) << s_2[i][j] << c_2[i + 1][j + 1] << " ";
+			//	cout << "\n";
+			//}
