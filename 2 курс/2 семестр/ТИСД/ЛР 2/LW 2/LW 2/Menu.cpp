@@ -1,6 +1,8 @@
 #include "Menu.h"
 #include <fstream>
 #include <iostream>
+#include <exception>
+#include "TreePrinter.h"
 
 namespace DTAS
 {
@@ -12,7 +14,8 @@ namespace DTAS
 		std::ifstream inputData(input);
 		if (inputData)
 			//_tree.Create(inputData);
-			_tree.CreateFromExpression(inputData);
+			//_tree.CreateFromExpression(inputData);
+			_tree.CreateUniversal(inputData);
 		else
 		{
 			std::ofstream errorData(_logFile, std::ios_base::app);
@@ -31,7 +34,8 @@ namespace DTAS
 		while (input != 0)
 		{
 			system("cls");
-			_tree.Print();
+			TreePrinter::BeautifulPrint(_tree, true);
+			//_tree.Print();
 
 			std::cout << "\n1. Create tree\n";
 			std::cout << "2. Delete tree\n\n";
@@ -48,7 +52,8 @@ namespace DTAS
 			std::cout << "10. Form expression symmetrical\n";
 			std::cout << "11. Form expression conversely\n\n";
 
-			std::cout << "12. Form expression 2.0\n\n";
+			std::cout << "12. Form expression 2.0\n";
+			std::cout << "13. Form expression 3.0\n\n";
 
 			std::cout << "0. Exit\n";
 			std::cout << ">>> ";
@@ -128,6 +133,17 @@ namespace DTAS
 				break;
 			case 12:
 				result = _tree.GetExpression();
+				std::cout << result;
+				if (!_tree.IsEmpty())
+				{
+					std::ofstream outputData(_output);
+					outputData << result;
+					outputData.close();
+					Pause();
+				}
+				break;
+			case 13:
+				result = _tree.GetUniversal();
 				std::cout << result;
 				if (!_tree.IsEmpty())
 				{

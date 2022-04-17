@@ -1,10 +1,12 @@
 #include "Menu.h"
 
+#include <iostream>
+
 int main(int argc, char* argv[])
 {
 	if (argc == 1)
 	{
-		DTAS::Menu menu{ "Input.txt" };
+		DTAS::Menu menu{};
 		menu.Run();
 	}
 	else if (argc == 2)

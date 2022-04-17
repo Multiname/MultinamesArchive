@@ -12,27 +12,27 @@ namespace DTAS
 	void ExpressionTree::Create()
 	{
 		std::cout << "Input root: ";
-		int input{};
+		std::string input{};
 		std::cin >> input;
 		_root = new Number{ input, nullptr, nullptr };
 
-		std::vector<int> branch{};
+		std::vector<std::string> branch{};
 		branch.push_back(input);
 
 		Place(_root, branch);
 	}
 
-	void ExpressionTree::Place(Number* pointer, std::vector<int> branch)
+	void ExpressionTree::Place(Number* pointer, std::vector<std::string> branch)
 	{
-		int input{};
+		std::string input{};
 
 		std::string branchStr{};
 		for (size_t i{}; i < branch.size() - 1; ++i)
 		{
-			branchStr += std::to_string(branch[i]);
+			branchStr += branch[i];
 			branchStr += " - ";
 		}
-		branchStr += std::to_string(branch[branch.size() - 1]);
+		branchStr += branch[branch.size() - 1];
 		branchStr += "\n";
 
 		system("cls");
@@ -43,7 +43,7 @@ namespace DTAS
 		std::cout << ">>> ";
 		std::cin >> input;
 
-		if (input == 1)
+		if (input == "1")
 		{
 			std::cout << "Input number: ";
 			std::cin >> input;
@@ -63,7 +63,7 @@ namespace DTAS
 		std::cout << ">>> ";
 		std::cin >> input;
 
-		if (input == 1)
+		if (input == "1")
 		{
 			std::cout << "Input number: ";
 			std::cin >> input;
@@ -78,7 +78,7 @@ namespace DTAS
 
 	void ExpressionTree::Create(std::ifstream& stream)
 	{
-		int number{};
+		std::string number{};
 		stream >> number;
 		_root = new Number{ number, nullptr, nullptr };
 
@@ -87,10 +87,10 @@ namespace DTAS
 
 	void ExpressionTree::Place(Number* pointer, std::ifstream& stream)
 	{
-		int input{};
+		std::string input{};
 		stream >> input;
 
-		if (input == 1)
+		if (input == "1")
 		{
 			stream >> input;
 			pointer->left = new Number{ input, nullptr, nullptr };
@@ -99,7 +99,7 @@ namespace DTAS
 
 		stream >> input;
 
-		if (input == 1)
+		if (input == "1")
 		{
 			stream >> input;
 			pointer->right = new Number{ input, nullptr, nullptr };
@@ -119,16 +119,16 @@ namespace DTAS
 		std::string str = "";
 
 		if (pointer->left != nullptr && pointer->right != nullptr)
-			str += "( " + std::to_string(pointer->number) + " + " +
+			str += "( " + pointer->number + " + " +
 			MakeString(pointer->left) + " ) * " + MakeString(pointer->right);
 		else if (pointer->left != nullptr)
-			str += std::to_string(pointer->number) + " + " +
+			str += pointer->number + " + " +
 			MakeString(pointer->left);
 		else if (pointer->right != nullptr)
-			str += std::to_string(pointer->number) + " * " +
+			str += pointer->number + " * " +
 			MakeString(pointer->right);
 		else
-			str += std::to_string(pointer->number);
+			str += pointer->number;
 
 		return str;
 	}
@@ -146,7 +146,7 @@ namespace DTAS
 
 		if (input == "(" || bracketMet)
 		{
-			Number* number = new Number{ 0, nullptr, new Number{1, nullptr, nullptr} };
+			Number* number = new Number{ "0", nullptr, new Number{"1", nullptr, nullptr}};
 
 			stream >> input;
 
@@ -154,7 +154,7 @@ namespace DTAS
 				number->left = MakeNumber(stream, true);
 			else
 			{
-				int n = std::stoi(input);
+				std::string n = input;
 
 				stream >> input;
 
@@ -190,7 +190,7 @@ namespace DTAS
 		}
 		else
 		{
-			Number* number = new Number{ std::stoi(input), nullptr, nullptr };
+			Number* number = new Number{ input, nullptr, nullptr };
 
 			std::string temp = "";
 			stream >> temp;
@@ -215,6 +215,78 @@ namespace DTAS
 				return number;
 		}
 	}
+
+	std::string ExpressionTree::GetUniversal()
+	{
+		std::string result = "";
+		if (!IsEmpty())
+			result = MakeExpression(_root);
+		return result;
+	}
+
+	std::string ExpressionTree::MakeExpression(Number* pointer)
+	{
+		std::string result = "";
+
+		if (pointer->left != nullptr)
+		{
+			result += "( ";
+			result += MakeExpression(pointer->left);
+			result += pointer->number;
+			result += " ";
+			result += MakeExpression(pointer->right);
+			result += ") ";
+		}
+		else
+			result = pointer->number + " ";
+
+		return result;
+	}
+
+	void ExpressionTree::CreateUniversal(std::ifstream& stream)
+	{
+		_root = new Number{};
+		CreateNode(_root, stream);
+	}
+
+	void ExpressionTree::CreateNode(Number* pointer, std::ifstream& stream)
+	{
+		std::string input{};
+		do
+		{
+			stream >> input;
+		} while (input == ")");
+
+		if (input == "(")
+		{
+			pointer->left = new Number{};
+			CreateNode(pointer->left, stream);
+
+			do
+			{
+				stream >> input;
+			} while (input == ")");
+			pointer->number = input;
+
+			pointer->right = new Number{};
+			CreateNode(pointer->right, stream);
+		}
+		else
+			pointer->number = input;
+	}
+
+	int ExpressionTree::GetHeight()
+	{
+		return GetHeight(_root);
+	}
+
+	int ExpressionTree::GetHeight(Number* pointer)
+	{
+		if (pointer == nullptr) { return 0; }
+		int height = std::max(GetHeight(pointer->left), GetHeight(pointer->right)) + 1;
+		return height;
+	}
+
 
 	void ExpressionTree::Print()
 	{
@@ -583,7 +655,7 @@ namespace DTAS
 	{
 		if (!IsEmpty())
 		{
-			std::string result = std::to_string(_root->number);
+			std::string result = _root->number;
 
 			if (_root->left != nullptr || _root->right != nullptr)
 			{
@@ -610,7 +682,7 @@ namespace DTAS
 		{
 			destination += "(";
 
-			destination += std::to_string(pointer->number);
+			destination += pointer->number;
 			destination += " + ";
 
 			if (pointer->left != nullptr)
@@ -625,7 +697,7 @@ namespace DTAS
 			destination += ")";
 		}
 		else
-			destination += std::to_string(pointer->number);
+			destination += pointer->number;
 	}
 
 	std::string ExpressionTree::GetExpressionSymmetrical()
@@ -649,7 +721,7 @@ namespace DTAS
 			destination += " + ";
 		}
 
-		destination += std::to_string(pointer->number);
+		destination += pointer->number;
 
 		if (pointer->right != nullptr)
 		{
@@ -715,6 +787,6 @@ namespace DTAS
 			destination += " + ";
 		}
 
-		destination += std::to_string(pointer->number);
+		destination += pointer->number;
 	}
 }

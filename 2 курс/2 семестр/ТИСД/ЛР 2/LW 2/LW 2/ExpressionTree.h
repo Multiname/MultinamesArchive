@@ -30,13 +30,21 @@ namespace DTAS
 		std::string GetExpression();
 		void CreateFromExpression(std::ifstream& stream);
 
-	private:
+		std::string GetUniversal();
+		void CreateUniversal(std::ifstream& stream);
+
+		int GetHeight();
+
 		struct Number
 		{
-			int number{};
+			std::string number{};
 			Number* left{};
 			Number* right{};
 		};
+
+		Number* _root{};
+
+	private:
 
 		enum Selection
 		{
@@ -47,11 +55,15 @@ namespace DTAS
 
 		void Print(Number* elementToHighlight,
 			Selection selection = None);
-		void Place(Number* pointer, std::vector<int> branch);
+		void Place(Number* pointer, std::vector<std::string> branch);
 		void Place(Number* pointer, std::ifstream& stream);
 
 		std::string MakeString(Number* pointer);
 		Number* MakeNumber(std::ifstream& stream, bool bracketMet = false);
+
+		std::string MakeExpression(Number* pointer);
+		void CreateNode(Number* pointer,
+			std::ifstream& stream);
 
 		void DrawElement(Number* pointer,
 			std::set<unsigned short> columnsToDraw,
@@ -69,6 +81,7 @@ namespace DTAS
 		void AddMemberSymmetrical(Number* pointer, std::string& destination);
 		void AddMemberConversely(Number* pointer, std::string& destination);
 
-		Number* _root{};
+		int GetHeight(Number* pointer);
+
 	};
 }

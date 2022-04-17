@@ -146,6 +146,7 @@
   <ItemGroup>
     <ClInclude Include="ExpressionTree.h" />
     <ClInclude Include="Menu.h" />
+    <ClInclude Include="TreePrinter.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
