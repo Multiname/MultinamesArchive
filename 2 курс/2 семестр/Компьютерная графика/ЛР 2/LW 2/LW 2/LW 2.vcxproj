@@ -140,6 +140,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Listing 3-1.cpp" />
+    <ClCompile Include="Listing 3-2.cpp" />
+    <ClCompile Include="Listing 3-3.cpp" />
+    <ClCompile Include="Listing 3-4.cpp" />
+    <ClCompile Include="Listing 3-5.cpp" />
+    <ClCompile Include="Listing 3-7.cpp" />
     <ClCompile Include="Listing_1.cpp" />
     <ClCompile Include="Listing_2.cpp" />
     <ClCompile Include="Listing_3.cpp" />
