@@ -159,13 +159,18 @@ namespace DTAS
 
 			if (s < _size && d < _size)
 			{
-				delete _weights[s][d];
 				if (weight == "-")
+				{
+					delete _weights[s][d];
 					_weights[s][d] = nullptr;
-				else if (std::find_if(weight.begin(), weight.end(), [](char c) { return !std::isdigit(c); }) != weight.end())
+				}
+				else if (std::find_if(weight[0] == '-' ? weight.begin() + 1 : weight.begin(), weight.end(), [](char c) { return !std::isdigit(c); }) != weight.end())
 					throw IncorrectWeightException("Incorrect weight");
 				else
+				{
+					delete _weights[s][d];
 					_weights[s][d] = new int(std::stoi(weight));
+				}
 			}
 		}
 
