@@ -156,9 +156,3 @@ namespace Listing_3_1
 		return 0;
 	}
 }
-
-int main(int argc, char* argv[])
-{
-	Listing_3_1::main(argc, argv);
-	return 0;
-}

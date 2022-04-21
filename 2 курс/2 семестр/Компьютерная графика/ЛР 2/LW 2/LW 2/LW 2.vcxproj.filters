@@ -8,6 +8,9 @@
     <Filter Include="LW 3">
       <UniqueIdentifier>{4b4ed8a4-a5ef-433f-b128-5bcda4e62ba2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="LW 4">
+      <UniqueIdentifier>{8ea746b8-dc4e-4e24-9c2a-90c02ac67715}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Listing_1.cpp">
@@ -55,5 +58,49 @@
     <ClCompile Include="Listing 3-7.cpp">
       <Filter>LW 3</Filter>
     </ClCompile>
+    <ClCompile Include="Task 4-1.cpp">
+      <Filter>LW 4</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjLoader.cpp">
+      <Filter>LW 4</Filter>
+    </ClCompile>
+    <ClCompile Include="Task 4-2.cpp">
+      <Filter>LW 4</Filter>
+    </ClCompile>
+    <ClCompile Include="Task 4-3.cpp">
+      <Filter>LW 4</Filter>
+    </ClCompile>
+    <ClCompile Include="Task 4-4.cpp">
+      <Filter>LW 4</Filter>
+    </ClCompile>
+    <ClCompile Include="Task 4-5.cpp">
+      <Filter>LW 4</Filter>
+    </ClCompile>
+    <ClCompile Include="Task 4-6.cpp">
+      <Filter>LW 4</Filter>
+    </ClCompile>
+    <ClCompile Include="Task 4-7.cpp">
+      <Filter>LW 4</Filter>
+    </ClCompile>
+    <ClCompile Include="Task 4-8.cpp">
+      <Filter>LW 4</Filter>
+    </ClCompile>
+    <ClCompile Include="Task 4-9-2.cpp">
+      <Filter>LW 4</Filter>
+    </ClCompile>
+    <ClCompile Include="Task 4-9-3.cpp">
+      <Filter>LW 4</Filter>
+    </ClCompile>
+    <ClCompile Include="Task 4-9-4.cpp">
+      <Filter>LW 4</Filter>
+    </ClCompile>
+    <ClCompile Include="Task 4-9-5.cpp">
+      <Filter>LW 4</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ObjLoader.h">
+      <Filter>LW 4</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
