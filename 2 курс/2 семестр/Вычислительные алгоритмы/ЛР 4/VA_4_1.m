@@ -2,17 +2,8 @@ clc;
 clear;
 clear global;
 
-figure
-fplot(@(x)sin(x),[-0.6 0.2]);
-hold on;
-grid on;
-
 x = [-0.6 -0.5 -0.3 -0.2 0 0.2];
 y = sin(x);
-
-figure
-plot(x, y,'-rs')
-grid on;
 
 global Matrix;
 
@@ -46,11 +37,11 @@ end
 yy = newton(x, y, xx);
 
 figure
-plot(x,y,'--rs',xx,yy, '-g')
+plot(xx,yy, '-g', xx, sin(xx),'--r')
 grid on;
 opengl('software');
 opengl('save','software');
-legend('Линейная интерполяция', 'Через интерполяционный многочлен Ньютона');
+legend('Через интерполяционный многочлен Ньютона', 'sin(x)');
 
 names = {'i','Узлы','Pi(x*)','f(x*)-Pi(x*)','Mi+1','Ri(x*)'};
 i = [0;1;2;3;4;5];
