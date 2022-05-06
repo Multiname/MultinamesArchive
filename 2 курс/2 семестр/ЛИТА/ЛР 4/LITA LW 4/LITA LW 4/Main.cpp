@@ -177,16 +177,16 @@ void SetupRC()
 
 	std::sort(possibleValues.begin(), possibleValues.end(), CompareRGB);
 
-	//std::vector<int> times{};
-	//for (size_t size = 500000; size < 5000000; size += 500000)
-	//{
-	//	colorCodes.clear();
+	std::vector<int> times{};
+	for (size_t size = 500000; size < 5000000; size += 500000)
+	{
+		colorCodes.clear();
 
-	//	numberOfColors = size;
+		numberOfColors = size;
 		for (size_t i{}; i < numberOfColors; ++i)
 			colorCodes.push_back(rand() % possibleValues.size());
 
-		/*float start = clock();
+		float start = clock();
 		CountingSort();
 		float end = clock();
 
@@ -199,7 +199,7 @@ void SetupRC()
 		std::cout << times[i] << "\n";
 		file << times[i] << '\n';
 	}
-	file.close();*/
+	file.close();
 
 	GetColorCount();
 }
