@@ -17,7 +17,7 @@ namespace LW_2.AttendedCourse
         public abstract bool IsPassed();
 
         public DateTimeOffset EnrollmentDate { get; }
-        public uint RegNumber { get { return Student.RegNumber; } }
+        public string RegNumber { get { return Student.RegNumber; } }
         public Student Student { get; }
         public Course Course { get; }
         public List<CourseWorkResult> Results { get; }
