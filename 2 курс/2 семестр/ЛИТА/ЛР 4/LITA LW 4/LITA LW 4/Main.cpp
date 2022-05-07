@@ -142,6 +142,26 @@ void RenderScene(void)
 		glVertex2f(leftEdge, lowerEdge);
 		glEnd();
 	}
+
+	if (!showUnsorted)
+	{
+		glColor3f(1.0f, 1.0f, 1.0f);
+		glBegin(GL_POLYGON);
+		glVertex2f(0.78, 0.78);
+		glVertex2f(0.78, 0.92);
+		glVertex2f(0.92, 0.92);
+		glVertex2f(0.92, 0.78);
+		glEnd();
+
+		glColor3f(possibleValues[iteration - 1].red, possibleValues[iteration - 1].green, possibleValues[iteration - 1].blue);
+		glBegin(GL_POLYGON);
+		glVertex2f(0.8, 0.8);
+		glVertex2f(0.8, 0.9);
+		glVertex2f(0.9, 0.9);
+		glVertex2f(0.9, 0.8);
+		glEnd();
+	}
+
 	showUnsorted = false;
 	// Отобразить результаты
 	glutSwapBuffers();
@@ -177,29 +197,29 @@ void SetupRC()
 
 	std::sort(possibleValues.begin(), possibleValues.end(), CompareRGB);
 
-	std::vector<int> times{};
-	for (size_t size = 500000; size < 5000000; size += 500000)
-	{
-		colorCodes.clear();
+	//std::vector<int> times{};
+	//for (size_t size = 500000; size < 5000000; size += 500000)
+	//{
+	//	colorCodes.clear();
 
-		numberOfColors = size;
+	//	numberOfColors = size;
 		for (size_t i{}; i < numberOfColors; ++i)
 			colorCodes.push_back(rand() % possibleValues.size());
 
-		float start = clock();
-		CountingSort();
-		float end = clock();
+	//	float start = clock();
+	//	CountingSort();
+	//	float end = clock();
 
-		times.push_back((end - start) / (CLOCKS_PER_SEC / 1000));
-	}
+	//	times.push_back((end - start) / (CLOCKS_PER_SEC / 1000));
+	//}
 
-	std::ofstream file("WorkTimes.csv");
-	for (size_t i{}; i < times.size(); ++i)
-	{
-		std::cout << times[i] << "\n";
-		file << times[i] << '\n';
-	}
-	file.close();
+	//std::ofstream file("WorkTimes.csv");
+	//for (size_t i{}; i < times.size(); ++i)
+	//{
+	//	std::cout << times[i] << "\n";
+	//	file << times[i] << '\n';
+	//}
+	//file.close();
 
 	GetColorCount();
 }
