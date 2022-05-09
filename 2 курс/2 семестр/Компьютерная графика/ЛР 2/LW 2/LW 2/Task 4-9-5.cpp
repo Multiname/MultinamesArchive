@@ -124,5 +124,3 @@ namespace Task_4_9_5
 		return 0;
 	}
 }
-
-int main(int argc, char* argv[]) { return Task_4_9_5::main(argc, argv); }

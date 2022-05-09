@@ -11,6 +11,9 @@
     <Filter Include="LW 4">
       <UniqueIdentifier>{8ea746b8-dc4e-4e24-9c2a-90c02ac67715}</UniqueIdentifier>
     </Filter>
+    <Filter Include="LW 5">
+      <UniqueIdentifier>{85a6622f-8e68-45d3-8ce1-6ca82ac538ef}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Listing_1.cpp">
@@ -96,6 +99,18 @@
     </ClCompile>
     <ClCompile Include="Task 4-9-5.cpp">
       <Filter>LW 4</Filter>
+    </ClCompile>
+    <ClCompile Include="Task 5-1.cpp">
+      <Filter>LW 5</Filter>
+    </ClCompile>
+    <ClCompile Include="Task 5-2.cpp">
+      <Filter>LW 5</Filter>
+    </ClCompile>
+    <ClCompile Include="Task 5-3.cpp">
+      <Filter>LW 5</Filter>
+    </ClCompile>
+    <ClCompile Include="Task 5-4.cpp">
+      <Filter>LW 5</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

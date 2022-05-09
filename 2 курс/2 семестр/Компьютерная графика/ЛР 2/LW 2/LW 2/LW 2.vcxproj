@@ -168,6 +168,10 @@
     <ClCompile Include="Task 4-9-3.cpp" />
     <ClCompile Include="Task 4-9-4.cpp" />
     <ClCompile Include="Task 4-9-5.cpp" />
+    <ClCompile Include="Task 5-1.cpp" />
+    <ClCompile Include="Task 5-2.cpp" />
+    <ClCompile Include="Task 5-3.cpp" />
+    <ClCompile Include="Task 5-4.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ObjLoader.h" />
