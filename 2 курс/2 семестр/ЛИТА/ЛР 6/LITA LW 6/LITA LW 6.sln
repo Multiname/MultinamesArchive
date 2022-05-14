@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32002.261
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LITA LW 6", "LITA LW 6\LITA LW 6.csproj", "{FBF295DF-5E42-4D30-AD07-CAC310288F03}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Testing", "Testing\Testing.csproj", "{B9396D1C-A9D5-42EB-B448-14B845135718}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FBF295DF-5E42-4D30-AD07-CAC310288F03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBF295DF-5E42-4D30-AD07-CAC310288F03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FBF295DF-5E42-4D30-AD07-CAC310288F03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBF295DF-5E42-4D30-AD07-CAC310288F03}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B9396D1C-A9D5-42EB-B448-14B845135718}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9396D1C-A9D5-42EB-B448-14B845135718}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9396D1C-A9D5-42EB-B448-14B845135718}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9396D1C-A9D5-42EB-B448-14B845135718}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {61590C90-90E6-4EF9-8E57-991F301B7061}
+	EndGlobalSection
+EndGlobal
