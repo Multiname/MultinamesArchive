@@ -7,9 +7,12 @@ namespace LW_4
 	class Knuth
 	{
 	public:
+		Knuth();
 		Knuth(std::string inputFile, std::string saveFile = "Output.txt");
 
 		void Print();
+		void Restore();
+		void ShowNumberAtPosition(uint16_t i, uint16_t j);
 		void ReplaceColumns(uint16_t firstColumn, uint16_t secondColumn);
 
 	private:

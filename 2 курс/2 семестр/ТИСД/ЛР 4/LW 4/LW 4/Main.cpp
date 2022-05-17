@@ -1,11 +1,9 @@
-#include "Knuth.h"
+#include "Menu.h"
 
 int main()
 {
-	LW_4::Knuth knuth("Input.txt");
-	knuth.Print();
-	knuth.ReplaceColumns(2, 4);
-	knuth.Print();
+	LW_4::Menu menu("Input.txt");
+	menu.Run();
 
 	return 0;
 }

@@ -5,6 +5,10 @@
 
 namespace LW_4
 {
+	Knuth::Knuth(): _saveFile("Output.txt"),
+		_an{}, _i{}, _j{}, _nr{}, _nc{}, _jr{}, _jc{},
+		_numberOfRows{}, _numberOfColumns{} {}
+
 	Knuth::Knuth(std::string inputFile, std::string saveFile): _saveFile(saveFile)
 	{
 		std::ifstream file(inputFile);
@@ -84,8 +88,52 @@ namespace LW_4
 		}
 	}
 
+	void Knuth::Restore()
+	{
+		int** matrix = new int* [_numberOfRows] {};
+		for (uint16_t i{}; i < _numberOfRows; ++i)
+			matrix[i] = new int[_numberOfColumns] {};
+
+		for (uint16_t i{}; i < _an.size(); ++i)
+			matrix[_i[i] - 1][_j[i] - 1] = _an[i];
+
+		std::cout << "    ";
+		for (uint16_t j{}; j < _numberOfColumns; ++j)
+			std::cout << j + 1 << " ";
+		std::cout << "\n\n";
+		for (uint16_t i{}; i < _numberOfRows; ++i)
+		{
+			std::cout << i + 1 << "   ";
+			for (uint16_t j{}; j < _numberOfColumns; ++j)
+				std::cout << matrix[i][j] << " ";
+			std::cout << "\n";
+		}
+
+		for (uint16_t i{}; i < _numberOfRows; ++i)
+			delete[] matrix[i];
+		delete[] matrix;
+	}
+
+	void Knuth::ShowNumberAtPosition(uint16_t i, uint16_t j)
+	{
+		uint16_t k;
+		for (k = 0; k < _an.size(); ++k)
+			if (_i[k] == i && _j[k] == j)
+			{
+				std::cout << _an[k];
+				return;
+			}
+
+		std::cout << 0;
+	}
+
 	void Knuth::Print()
 	{
+		std::cout << "     ";
+		for (uint16_t i{}; i < _an.size(); ++i)
+			std::cout << i + 1 << " ";
+		std::cout << "\n";
+
 		std::cout << "AN = ";
 		for (uint16_t i{}; i < _an.size(); ++i)
 			std::cout << _an[i] << " ";
