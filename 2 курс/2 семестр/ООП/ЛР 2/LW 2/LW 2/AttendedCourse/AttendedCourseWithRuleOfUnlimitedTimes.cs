@@ -8,7 +8,7 @@ namespace LW_2.AttendedCourse
         public AttendedCourseWithRuleOfUnlimitedTimes(DateTimeOffset enrollmentDate,
             Student student, Course course) : base(enrollmentDate, student, course) { }
 
-        public override void CreateResult(DateTimeOffset dateTime, bool isPassed, ushort score, CourseWorkRequirements work)
+        protected override void CreateResult(DateTimeOffset dateTime, bool isPassed, ushort score, CourseWorkRequirements work)
         {
             double lateness = (dateTime - work.Deadline).TotalDays;
             if (lateness >= 0 && lateness <= 7)

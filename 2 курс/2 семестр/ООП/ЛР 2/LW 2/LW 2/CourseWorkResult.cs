@@ -16,8 +16,8 @@ namespace LW_2
         }
 
         public DateTimeOffset DateTime { get; }
-        public bool IsPassed { get; }
-        public ushort Score { get; }
+        public bool IsPassed { get; set; }
+        public ushort Score { get; set; }
         public CourseWorkRequirements Requirements { get; }
     }
 }

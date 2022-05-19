@@ -7,7 +7,7 @@ namespace LW_2.AttendedCourse
         public AttendedCourseWithRuleOfFifty(DateTimeOffset enrollmentDate,
             Student student, Course course) : base(enrollmentDate, student, course) { }
 
-        public override void CreateResult(DateTimeOffset dateTime, bool isPassed, ushort score, CourseWorkRequirements work)
+        protected override void CreateResult(DateTimeOffset dateTime, bool isPassed, ushort score, CourseWorkRequirements work)
         {
             foreach (CourseWorkResult result in Results)
                 if (result.Requirements == work)

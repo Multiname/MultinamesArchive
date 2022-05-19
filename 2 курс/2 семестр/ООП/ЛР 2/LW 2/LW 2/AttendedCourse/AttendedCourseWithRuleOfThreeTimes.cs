@@ -8,7 +8,7 @@ namespace LW_2.AttendedCourse
         public AttendedCourseWithRuleOfThreeTimes(DateTimeOffset enrollmentDate,
             Student student, Course course) : base(enrollmentDate, student, course) { }
 
-        public override void CreateResult(DateTimeOffset dateTime, bool isPassed, ushort score, CourseWorkRequirements work)
+        protected override void CreateResult(DateTimeOffset dateTime, bool isPassed, ushort score, CourseWorkRequirements work)
         {
             int number = 0;
             foreach (CourseWorkResult result in Results)

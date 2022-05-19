@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace LW_2
 {
@@ -7,6 +8,11 @@ namespace LW_2
     {
         public Course(uint code, string title, string professor, ushort passingScore, Rule ruleType)
         {
+            if (!Regex.IsMatch(title.ToLower(), @"[a-z]+"))
+                throw new ArgumentException("Title without letters");
+            if (!Regex.IsMatch(professor.ToLower(), @"[a-z]+"))
+                throw new ArgumentException("Professor's name without letters");
+
             Code = code;
             Title = title;
             Professor = professor;
