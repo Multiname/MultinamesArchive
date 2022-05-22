@@ -70,15 +70,13 @@ namespace LITA_LW_6
                         for (int k = 0; k < (list[j].InventoryNumber.Length > list[j + 1].InventoryNumber.Length ? 
                             list[j + 1].InventoryNumber.Length : list[j].InventoryNumber.Length); ++k )
                         {
-                            if (list[j].InventoryNumber[k] > list[j].InventoryNumber[k])
+                            if (list[j].InventoryNumber[k] > list[j + 1].InventoryNumber[k])
                             {
                                 isNeededToSort = true;
                                 break;
                             }
-                            if (list[j].InventoryNumber[k] < list[j].InventoryNumber[k])
-                            {
+                            if (list[j].InventoryNumber[k] < list[j + 1].InventoryNumber[k])
                                 break;
-                            }
                         }
 
                         if (isNeededToSort)
@@ -90,6 +88,27 @@ namespace LITA_LW_6
                         }
                     }
                 }
+                ++i;
+            }
+
+            return list;
+        }
+
+        public static List<Stock> SortByCost(List<Stock> list)
+        {
+            int i = 0;
+            bool isUnsorted = true;
+            while (isUnsorted)
+            {
+                isUnsorted = false;
+                for (int j = 0; j < list.Count - i - 1; ++j)
+                    if (list[j].Cost > list[j + 1].Cost)
+                    {
+                        Stock temp = list[j];
+                        list[j] = list[j + 1];
+                        list[j + 1] = temp;
+                        isUnsorted = true;
+                    }
                 ++i;
             }
 

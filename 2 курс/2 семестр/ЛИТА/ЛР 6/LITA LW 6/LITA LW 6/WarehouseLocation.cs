@@ -12,5 +12,9 @@
         public string Zone { get; set; }
         public string Area { get; set; }
         public uint Cell { get; set; }
+
+        public static bool operator ==(WarehouseLocation first, WarehouseLocation second) =>
+            first.Zone == second.Zone && first.Area == second.Area && first.Cell == second.Cell;
+        public static bool operator !=(WarehouseLocation first, WarehouseLocation second) => !(first == second);
     }
 }
