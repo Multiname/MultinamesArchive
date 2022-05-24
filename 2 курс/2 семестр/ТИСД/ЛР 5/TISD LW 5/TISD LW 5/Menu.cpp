@@ -40,6 +40,7 @@ namespace LW_5
 			std::cout << "Image size: " << _bmp->getSizeImage() << " B\n\n";
 
 			std::cout << "1. Change image\n";
+			std::cout << "2. Draw\n";
 			std::cout << "0. Exit\n";
 			std::cout << ">>> ";
 			std::cin >> command;
@@ -64,6 +65,39 @@ namespace LW_5
 					std::cout << ex.what() << "\n";
 					Pause();
 				}
+			}
+			if (command == 2)
+			{
+				std::cout << "X: ";
+				uint32_t x;
+				std::cin >> x;
+
+				std::cout << "Y: ";
+				uint32_t y;
+				std::cin >> y;
+
+				std::cout << "Width: ";
+				uint32_t width;
+				std::cin >> width;
+
+				std::cout << "Height: ";
+				uint32_t height;
+				std::cin >> height;
+
+				std::cout << "Red: ";
+				uint32_t r;
+				std::cin >> r;
+
+				std::cout << "Green: ";
+				uint32_t g;
+				std::cin >> g;
+
+				std::cout << "Blue: ";
+				uint32_t b;
+				std::cin >> b;
+
+				_bmp->fillRegion(x, y, width, height, r, g, b, 255);
+				_bmp->save("Result.bmp");
 			}
 		}
 	}
