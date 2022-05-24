@@ -14,6 +14,9 @@
     <Filter Include="LW 5">
       <UniqueIdentifier>{85a6622f-8e68-45d3-8ce1-6ca82ac538ef}</UniqueIdentifier>
     </Filter>
+    <Filter Include="LW 6">
+      <UniqueIdentifier>{8444960b-508b-4886-8408-b99047c781f7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Listing_1.cpp">
@@ -112,10 +115,25 @@
     <ClCompile Include="Task 5-4.cpp">
       <Filter>LW 5</Filter>
     </ClCompile>
+    <ClCompile Include="Task 6-1.cpp">
+      <Filter>LW 6</Filter>
+    </ClCompile>
+    <ClCompile Include="Task 6-2.cpp">
+      <Filter>LW 6</Filter>
+    </ClCompile>
+    <ClCompile Include="Task 6-3.cpp">
+      <Filter>LW 6</Filter>
+    </ClCompile>
+    <ClCompile Include="Misc.cpp">
+      <Filter>LW 6</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ObjLoader.h">
       <Filter>LW 4</Filter>
+    </ClInclude>
+    <ClInclude Include="Misc.h">
+      <Filter>LW 6</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -1035,5 +1035,3 @@ namespace Task_5_4
 		return 0;
 	}
 }
-
-int main(int argc, char* argv[]) { return Task_5_4::main(argc, argv); }
