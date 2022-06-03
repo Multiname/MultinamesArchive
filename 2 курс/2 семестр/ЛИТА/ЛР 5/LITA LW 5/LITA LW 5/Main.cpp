@@ -7,18 +7,49 @@
 
 int main()
 {
-	//LITA_LW_5::HashTable table(5);
-	//table.Print();
-	//table.Add(5, "Bob");
-	//table.Print();
-	//table.Add(10, "Mike");
-	//table.Print();
-	//table.Add(11, "Alice");
-	//table.Print();
-	//std::string data = "";
-	//table.Find(11, data);
-	//std::cout << data << "\n";
-	//std::cout << table.Find(15, data) << "\n";
+	LITA_LW_5::HashTable table(5);
+	uint16_t command = 1;
+	while (command != 0)
+	{
+		system("cls");
+
+		table.Print();
+
+		std::cout << "1. Add\n";
+		std::cout << "2. Find\n";
+		std::cout << "0. Exit\n";
+		std::cout << ">>> ";
+		std::cin >> command;
+		std::cout << "\n";
+
+		if (command == 1)
+		{
+			std::cout << "Key: ";
+			int key;
+			std::cin >> key;
+			std::cin.ignore();
+
+			std::cout << "Data: ";
+			std::string data;
+			std::getline(std::cin, data);
+
+			table.Add(key, data);
+		}
+		else if (command == 2)
+		{
+			std::cout << "Key: ";
+			int key;
+			std::cin >> key;
+			std::string data;
+
+			if (table.Find(key, data))
+				std::cout << "Value: " << data << "\n";
+			else
+				std::cout << "Value wasn't found\n";
+
+			system("pause");
+		}
+	}
 
 	srand(time(NULL));
 	size_t elementsNumber = 15;
