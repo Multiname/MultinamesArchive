@@ -1,0 +1,24 @@
+Разработка сервиса ведения инцидентов
+
+Знакомство с GitHub
+Знакомство с основами Docker
+Веб-разработка
+Базы данных
+Развертывание проекта (ci/cd)
+
+summary комментарии
+C# ASP.NET 6.0
+Visual Studio
+Semver
+Commit convention
+Swagger
+EF Core
+Postgres
+
+Yandex cloud инциденты
+GitHub Status
+
+GET
+GET
+POST
+PUT
