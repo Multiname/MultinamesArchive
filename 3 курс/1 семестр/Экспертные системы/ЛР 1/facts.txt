@@ -1,0 +1,20 @@
+(deftemplate fruits_of_thailand
+	(slot name(type STRING))
+	(slot season(type STRING))
+	(slot price(type STRING))
+	(slot useful_properties(type STRING))
+	(slot taste(type STRING))
+	(slot sorts(type STRING))
+)
+
+(deffacts fruits_of_thailand
+	(fruits_of_thailand (name "pineapple") (season "all year") (price "10-20") (useful_properties "vitamins C, A, phosphorus") (taste "sweet") (sorts "yellow, green"))
+	(fruits_of_thailand (name "bananas") (season "all year") (price "15-35") (useful_properties "kalium") (taste "sweet") (sorts "yellow, green"))
+	(fruits_of_thailand (name "mango") (season "all year") (price "20-120") (useful_properties "laxative effect") (taste "sweet, sour") (sorts "yellow, green"))
+	(fruits_of_thailand (name "dragon fruit") (season "all year") (price "60-80") (useful_properties "improvement of blood circulation") (taste "sweet") (sorts "yellow, green"))
+	(fruits_of_thailand (name "mangostin") (season "may-july") (price "40-80") (useful_properties "xanthones") (taste "sour") (sorts "yellow, green"))
+	(fruits_of_thailand (name "durian") (season "may-august") (price "70-100") (useful_properties "vitamins B, C") (taste "sweet") (sorts "yellow, green"))
+	(fruits_of_thailand (name "lychee") (season "may-june") (price "20-80") (useful_properties "antioxidant, tonic properties") (taste "sweet") (sorts "yellow, green"))
+	(fruits_of_thailand (name "jackfruit") (season "all year") (price "50-120") (useful_properties "low-calorie") (taste "sweet") (sorts "yellow, green"))
+	(fruits_of_thailand (name "pink apple") (season "all year") (price "10") (useful_properties "low-calorie, quenches thirst") (taste "sweet") (sorts "yellow, green"))
+)
