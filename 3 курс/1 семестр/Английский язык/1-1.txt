@@ -1,0 +1,7 @@
+	Computer is an electronic machine that processes data and perform calculations. There are three types of it: the digital computer, the analog computer and the hybrid computer.
+	Digital computers can be divided into four types. Microcomputers are the smallest and ususally single-user. Laptop is transportable computer. Mainframes can service hundreds of users. Supercomputers are mostly used for complex scientific tasks.
+	The physical components of a computer system is called hardware. A collection of computer programms is called software. 
+	The CPU is the main component of a computer, it executes program instructions and controls other parts. It includes the arithmetic and logic unit and control unit.
+	RAM provides direct access to the memory locations. It loses all information when power goes out.
+	ROM is a permanent type of memory storage. BIOS is a type of ROM that establish basic communication when the computer is turned on.
+	Cash temporarily copies data to improve overall computer performance.
