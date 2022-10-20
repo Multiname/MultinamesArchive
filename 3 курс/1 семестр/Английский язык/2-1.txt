@@ -1,0 +1,7 @@
+	Computers can only operate on digitally formatted data.
+	Its circuits can be in one of two states: on or off. Each value is known as a bit, combinations of it is called binary code. It can be used to represent various data.
+	Software types fall into 2 categories: system and application ones. First types is also fall into 3 categories: programming languages, OS and utility software.
+	Programming languages are the various methods of writing computer instructions. With high-level languages programmers can work on and write software for different computers.
+	IBM began charging a separate fee for its software, thus opening a market for independent software developers.
+	Operating systems have become larger and more sophisticated in response to the capabilities of new hardware and software.
+	Utility software expands the performance of the OS by adding new functions.

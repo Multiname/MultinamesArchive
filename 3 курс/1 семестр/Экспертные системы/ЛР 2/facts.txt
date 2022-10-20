@@ -1,0 +1,128 @@
+(deftemplate fruits_of_thailand
+	(slot name(type STRING))
+	(slot season(type STRING))
+	(slot price(type INTEGER))
+	(slot useful_properties(type STRING))
+	(slot taste(type STRING))
+	(slot sorts(type STRING))
+)
+
+(deftemplate tasted_fruits
+	(slot name(type STRING))
+)
+
+(deffacts fruits_of_thailand_temp
+	(fruits_of_thailand (name "pineapple") (season "all year") (price 15) (useful_properties "vitamins C, A, phosphorus") (taste "sweet") (sorts "yellow, green"))
+	(fruits_of_thailand (name "bananas") (season "all year") (price 30) (useful_properties "kalium") (taste "sweet") (sorts "small, medium, large"))
+	(fruits_of_thailand (name "mango") (season "all year") (price 70) (useful_properties "laxative effect") (taste "sweet, sour") (sorts "yellow, green"))
+	(fruits_of_thailand (name "dragon fruit") (season "all year") (price 70) (useful_properties "improvement of blood circulation") (taste "juicy") (sorts "pink, red, yellow"))
+	(fruits_of_thailand (name "mangostin") (season "may-july") (price 60) (useful_properties "xanthones") (taste "sour") (sorts "no"))
+	(fruits_of_thailand (name "durian") (season "may-august") (price 85) (useful_properties "vitamins B, C") (taste "creamy") (sorts "Chani, Montong, Gumpan"))
+	(fruits_of_thailand (name "lychee") (season "may-june") (price 50) (useful_properties "antioxidant, tonic properties") (taste "sweet, sour") (sorts "Chin, Purbi, Skented"))
+	(fruits_of_thailand (name "jackfruit") (season "all year") (price 85) (useful_properties "low-calorie") (taste "sweet") (sorts "no"))
+	(fruits_of_thailand (name "pink apple") (season "all year") (price 10) (useful_properties "low-calorie, quenches thirst") (taste "sweet") (sorts "pink, pearl, Vinerpo"))
+)
+
+(deffacts tasted_fruits_temp
+	(tasted_fruits (name "pineapple"))
+	(tasted_fruits (name "bananas"))
+	(tasted_fruits (name "mango"))
+	(tasted_fruits (name "dragon fruit"))
+	(tasted_fruits (name "mangostin"))
+	(tasted_fruits (name "durian"))
+	(tasted_fruits (name "lychee"))
+	(tasted_fruits (name "jackfruit"))
+	(tasted_fruits (name "pink apple"))
+)
+
+(defrule rule1
+(fruits_of_thailand (name ?x) (season ?y))
+=>
+(printout t "rule 1: " ?x "'s season is " ?y crlf)
+)
+
+(defrule rule2
+(fruits_of_thailand (name ?x) (season ?y))
+(test (eq ?y "all year"))
+=>
+(printout t "rule 2: " ?x " is all year available" crlf)
+)
+
+(defrule rule3
+(fruits_of_thailand (name ?x) (price ?y))
+(test (>= ?y 50))
+=>
+(printout t "rule 3: " ?x " costs " ?y crlf)
+)
+
+(defrule rule4
+(fruits_of_thailand (name ?x) (season ?y) (sorts ?z))
+(test (or (eq ?y "all year") (eq ?z "no")))
+=>
+(printout t "rule 4: " ?x "'s season is " ?y " and has sorts: " ?z crlf)
+)
+
+(defrule rule5
+(fruits_of_thailand (name ?n) (season ?s) (price ?p) (taste ?t) (sorts ?z))
+(test (or (and (eq ?s "all year") (eq ?z "no")) (and (<= ?p 50) (eq ?t "sweet"))))
+=>
+(printout t "rule 5: " ?n "'s season is " ?s "; price: " ?p "; tase: " ?t "; sorts: " ?z crlf)
+)
+
+(defrule rule6
+(fruits_of_thailand (name ?x) (season ?y))
+(test (not (eq ?y "all year")))
+=>
+(printout t "rule 6: " ?x " is NOT all year available" crlf)
+)
+
+(defrule rule7
+(exists (fruits_of_thailand (sorts "no")))
+=>
+(printout t "rule 7: " "There is a fruit without sorts" crlf)
+)
+
+(defrule rule8
+(forall
+(fruits_of_thailand (name ?x))
+(tasted_fruits (name ?x))
+)
+=>
+(printout t "rule 8: " "All fruits are tasted" crlf)
+)
+
+(defrule rule9
+(logical
+(fruits_of_thailand (name "pineapple") (season "all year") (price 15) (useful_properties "vitamins C, A, phosphorus") (taste "sweet") (sorts "yellow, green"))
+)
+=>
+(assert (tasted_fruits (name "pineapple")))
+)
+
+(defrule rule10
+(fruits_of_thailand (name ?x) (taste ?y))
+(fruits_of_thailand (name ?z) (taste ?y))
+(test (not (eq ?x ?z)))
+=>
+(printout t "rule 10: " ?x " and " ?z " have same taste: " ?y crlf)
+)
+
+(defrule rule11
+?x <- (fruits_of_thailand (price ?p))
+(test (< ?p 50))
+=>
+(retract ?x)
+)
+
+(defrule rule12
+(fruits_of_thailand (name ?n1) (price ?p1))
+(fruits_of_thailand (name ?n2) (price ?p2))
+(fruits_of_thailand (name ?n3) (price ?p3))
+(fruits_of_thailand (name ?n4) (price ?p4))
+(test (< ?p1 ?p2))
+(test (< ?p2 ?p3))
+(test (= ?p2 ?p4))
+(test (not (eq ?n2 ?n4)))
+=>
+(printout t "rule 12: " ?n2 " is more expensive than " ?n1 " but is cheaper than " ?n3 " and costs the same as " ?n4 crlf)
+)

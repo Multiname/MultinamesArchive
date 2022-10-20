@@ -1,0 +1,79 @@
+h1 {
+    font-family: 'Arial Rounded MT';
+    font-size: 400%;
+}
+
+h2 {
+    font-family: 'OCR A';
+    font-size: 300%;
+}
+
+body {
+    background-color: #ffa31a;
+}
+
+ul li {
+    list-style-type: none;
+}
+
+a {
+    color: #1b1b1b;
+}
+
+img {
+    border: 4px solid #ffa31a;
+    width: 100%;
+}
+
+img:hover {
+    border: 4px solid #1b1b1b;
+}
+
+a:visited {
+    color: #1b1b1b;
+}
+
+.centered {
+    text-align: center;
+}
+
+#events-table {
+    margin-left: 20%;
+    margin-right: 20%;
+    border-spacing: 10px 10px;
+}
+
+.text {
+    font-family: 'Berlin Sans FB';
+}
+
+#links {
+    font-size: 200%;
+}
+
+#contacts-list {
+    font-size: 150%;
+}
+
+#reviews {
+    font-size: 150%;
+    border: solid;
+    border-collapse: collapse;
+}
+
+.review-cell {
+    border: solid;
+}
+
+#comment-input {
+    width: 50%;
+}
+
+.review-input {
+    font-size: 150%;
+}
+
+input {
+    font-family: 'Berlin Sans FB';
+    font-size: 100%;
+}

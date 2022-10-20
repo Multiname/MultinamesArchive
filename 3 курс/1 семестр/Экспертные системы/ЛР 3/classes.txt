@@ -1,0 +1,72 @@
+Аквариумная рыбка
+	Имя
+	Пол
+
+Петушки
+	Противники
+
+Барбус
+	Размер
+
+Моллинезии
+	Цвет
+
+Рыба-попугай
+	Цвет
+
+Астронотус
+	Хозяин
+
+
+(defclass AquariumFish (is-a USER)
+	(role abstract)
+	(slot nickname (type STRING) (access read-write) (visibility public))
+	(slot gender (type SYMBOL) (access initialize-only))
+)
+
+(defclass Barbus (is-a AquariumFish)
+	(role concrete)
+	(pattern-match reactive)
+	(slot size (type SYMBOL) (access initialize-only) (default little))
+)
+
+(defclass Mollinesia (is-a AquariumFish)
+	(role concrete)
+	(pattern-match reactive)
+	(slot color (type SYMBOL) (access initialize-only) (default black))
+)
+
+(defclass Astronotus (is-a AquariumFish)
+	(role concrete)
+	(pattern-match reactive)
+	(slot master (type STRING) (access read-write))
+)
+
+(defmessage-handler Astronotus let-pet (?a)
+	(printout t ?a " pets " ?self:nickname crlf)
+)
+
+(make-instance Barbus_1 of Barbus (nickname "Alice") (gender female) (size large))
+(make-instance Barbus_2 of Barbus (nickname "Bob") (gender male))
+
+(make-instance Mollinesia_1 of Mollinesia (nickname "Carl") (gender male) (color red))
+(make-instance Mollinesia_2 of Mollinesia (nickname "Dan") (gender male))
+
+(make-instance Astronotus_1 of Astronotus (nickname "Ellie") (gender female) (master "Nick"))
+(make-instance Astronotus_2 of Astronotus (nickname "Frederick") (gender male) (master "Alan"))
+(make-instance Astronotus_3 of Astronotus (nickname "George") (gender male) (master "John"))
+
+(send [Astronotus_3] put-master "Tom")
+(send [Astronotus_3] delete)
+
+(defrule allFishes
+	?fish <- (object (is-a AquariumFish))
+	=>
+	(printout t "There is " (send ?fish get-nickname) crlf)
+)
+
+(defrule petAstronotuses
+	?fish <- (object (is-a Astronotus))
+	=>
+	(send ?fish let-pet (send ?fish get-master))
+)

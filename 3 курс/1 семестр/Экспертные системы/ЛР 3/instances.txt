@@ -1,0 +1,39 @@
+(defclass A (is-a USER)
+(role concrete)
+(slot x  (create-accessor write) (default 1))
+)
+
+(definstances A-OBJECTS 
+(a1 of A)
+(of A (x 65))
+)
+
+(defclass B (is-a USER) (role concrete)
+(slot x (create-accessor read) (default abc))
+)
+
+(make-instance b of B)
+(sym-cat (send [b] get-x) def)
+(send [b] put-x "New value")
+
+(send b delete)
+
+(defclass C (is-a USER)
+(role concrete)
+(slot foo)
+(slot bar)
+)
+
+(make-instance c of C)
+(modify-instance c (foo 123))
+
+(defmessage-handler C print-args (?a ?b $?c)
+(printout t (instance-name ?self) )
+)
+
+(defmessage-handler C print-args (?a ?b $?c)
+(printout t (instance-name ?self) " " ?a " " ?b 
+" and " (length$ ?c) " extras: " ?c crlf)
+)
+
+(send [c] print-args a b c d)
