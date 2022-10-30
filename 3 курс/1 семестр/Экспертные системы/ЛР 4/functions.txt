@@ -1,0 +1,76 @@
+(printout t "Hello, World!" crlf)
+
+(open "data.txt" mydata "w")
+(printout mydata "red green")
+(close)
+(open "data.txt" mydata)
+(read mydata)
+(read mydata)
+(close)
+
+(open "data.txt" mydata)
+(readline mydata)
+(close)
+
+(format nil "Hexadecimal: |%x|" 12)
+(format nil "Octal: |%o|" 12)
+
+(rename "data.txt" "Data.txt")
+(remove "Data.txt")
+
+(nth$ 3 (create$ а b с d е f g))
+
+(member$ blue (create$ red 3 "text" 8.7 blue))
+(member$ 4 (create$ red 3 "text" 8.7 blue))
+(member$ (create$ b c) (create$ a b e d))
+(member$ (create$ b c) (create$ a b c d))
+
+(subsetp (create$ hammer saw drill) (create$ hammer drill wrench pilers saw))
+
+(delete$ (create$ hammer drill saw pliers wrench) 3 4)
+(delete$ (create$ computer printer hard-disk) 1 1)
+
+(explode$ "hammer drill saw screw")
+(implode$ (create$ hammer drill screwdriver))
+
+(subseq$ (create$ hammer drill wrench pliers) 3 4)
+
+(replace$ (create$ drill wrench pliers) 3 3 machete)
+(replace$ (create$ a b e d) 2 3 x y (create$ q r s))
+
+(insert$ (create$ a b e d) 4 у z)
+(insert$ (create$ a b e d)  5 (create$ q r))
+
+(first$ (create$ a b c))
+(rest$ (create$ a b c))
+
+(length$ (create$ a b с d е f g))
+
+(delete-member$ (create$ a b a c) b a)
+
+(replace-member$ (create$  a b a b) (create$ a b a) a b)
+
+(str-cat "super" "star")
+(sym-cat super star)
+
+(sub-string 3 8 "abcdefghijkl")
+
+(str-index "def" "abcdefghi")
+
+(str-compare "def" "abcdefghi")
+
+(str-length "def")
+
+(upcase Hello) 
+(lowcase Hello)
+
+(+ 2 3.0 5)
+
+(max 2 3 4)
+(min 2 5)
+
+(abs -3)
+
+(random 1 100)
+
+(time)

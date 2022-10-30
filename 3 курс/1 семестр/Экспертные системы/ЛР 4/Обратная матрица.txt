@@ -1,0 +1,76 @@
+(deffunction get-num (?arr ?n ?i ?j)
+	(return (nth$ (+ (* (- ?i 1) ?n) ?j) ?arr))
+)
+
+(deffunction remove-lines (?arr ?n ?row ?col)
+	(bind ?res (create$))
+	(loop-for-count (?i 1 (- ?row 1)) do
+		(loop-for-count (?j 1 (- ?col 1)) do
+			(bind ?res (insert$ ?res (+ (length$ ?res) 1) (get-num ?arr ?n ?i ?j)))
+		)
+		(loop-for-count (?j (+ ?col 1) ?n) do
+			(bind ?res (insert$ ?res (+ (length$ ?res) 1) (get-num ?arr ?n ?i ?j)))
+		)
+	)
+	(loop-for-count (?i (+ ?row 1) ?n) do
+		(loop-for-count (?j 1 (- ?col 1)) do
+			(bind ?res (insert$ ?res (+ (length$ ?res) 1) (get-num ?arr ?n ?i ?j)))
+		)
+		(loop-for-count (?j (+ ?col 1) ?n) do
+			(bind ?res (insert$ ?res (+ (length$ ?res) 1) (get-num ?arr ?n ?i ?j)))
+		)
+	)
+	(return ?res)
+)
+
+(deffunction calculate-determinant (?arr ?n)
+	(if (= ?n 1)
+	then
+		(return (nth$ 1 ?arr))
+	)
+	(if (= ?n 2)
+	then
+		(return (- (* (nth$ 1 ?arr) (nth$ 4 ?arr)) (* (nth$ 2 ?arr) (nth$ 3 ?arr))))
+	)
+	(bind ?res 0)
+	(loop-for-count (?j 1 ?n) do
+		(bind ?a (get-num ?arr ?n 1 ?j))
+		(bind ?d (calculate-determinant (remove-lines ?arr ?n 1 ?j) (- ?n 1)))
+		(bind ?res (+ ?res (* (** -1 (+ ?j 1)) ?a ?d)))
+	)
+	(return ?res)
+)
+
+(deffunction calculate-invertible (?arr ?n ?det)
+	(bind ?res (create$))
+	(loop-for-count (?j 1 ?n) do
+		(loop-for-count (?i 1 ?n) do
+			(bind ?md (calculate-determinant (remove-lines ?arr ?n ?i ?j) (- ?n 1)))
+			(bind ?res (insert$ ?res (+ (length$ ?res) 1) (/ (* (** -1 (+ ?i ?j)) ?md) ?det)))
+		)
+	)
+	(return ?res)
+)
+
+(deffunction create-invertible-matrix (?file-name)
+	(open ?file-name input-data)
+	(bind ?size (integer (float (string-to-field (readline input-data)))))
+	(bind ?nums (explode$ (readline input-data)))
+	(close)
+	(bind ?determinant (calculate-determinant ?nums ?size))
+	(if (= ?determinant 0)
+	then
+		(printout t "Determinant equals 0" crlf)
+	else
+		(bind ?res (implode$ (calculate-invertible ?nums ?size ?determinant)))
+		(printout t ?res crlf)
+		(open "result.txt" input-data "w")
+		(printout input-data ?res)
+		(close)
+	)
+)
+
+(create-invertible-matrix data.txt)
+
+
+			(bind ?res (insert$ ?res (+ (length$ ?res) 1) (/ (* (** -1 (+ ?i ?j)) ?md) ?det)))
