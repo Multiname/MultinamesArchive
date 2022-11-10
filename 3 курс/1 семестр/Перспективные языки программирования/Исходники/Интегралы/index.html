@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Интеграл методом прямоугольников и трапеций</title>
+    </head>
+    <body>
+        <form name="inputData">
+            <label>Введите коэффициенты через пробел</label><br />
+            <label><i>(Пример: x + 2x²: 1 2; 6x² + 9x³: 0 6 9)</i></label><br />
+            <input type="text" name="polynomial" /><br />
+            <label>Введите начало промежутка</label><br />
+            <input type="text" name="start" /><br />
+            <label>Введите конец промежутка</label><br />
+            <input type="text" name="end" /><br />
+            <label>Введите количество отрезков</label><br />
+            <input type="number" name="segments" /><br /><br />
+            <input type="button" name="calculate" value="Посчитать" />
+            <br /><br />
+
+            <label id="rectangle"></label><br />
+            <label id="trapezoid"></label>
+        </form>
+
+        <script src="calculate.js" charset="utf-8"></script>
+    </body>
+</html>
