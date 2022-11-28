@@ -1,0 +1,126 @@
+(deffacts light_switches
+	(light_switch (off 0.8))
+	(light_switch (on 0.2))
+)
+
+(defrule crisp-simple-rule
+	(declare (CF 0.7)) ;crisp rule certainty factor of 0.7
+	(light_switch off) ;crisp antecedent
+	=>
+	(assert (illumination_level dark)) ; fuzzy consequent
+)
+
+(deftemplate weight
+	700 3000 g (
+		(small (700 1) (1000 0))
+		(medium (800 0) (1500 1) (2000 0))
+		(large (1800 0) (3000 1))
+	)
+)
+
+(deffacts some-weight (weight small) CF 0.8)
+
+(defrule fall_sound
+	(declare (CF 0.8) )
+	(weight small)
+	=>
+	(assert (sound quiet))
+)
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+(deftemplate price
+	10 120 baht (
+		(cheap     (10 1) (85 0))
+		(expensive (10 0) (120 1))
+	)
+)
+
+(deftemplate sweetness
+	0 1 (
+		(sweet   (0 0) (1 1))
+		(bitter  (1 0) (1 0))
+	)
+)
+
+(deftemplate weight
+	60 3000 g (
+		(small  (60 1)   (100 0))
+		(medium (80 0)   (1500 1) (2000 0))
+		(large  (1000 0) (3000 1))
+	)
+)
+
+(deftemplate fruit_of_thailand
+	(slot name(type STRING))
+	(slot season(type STRING))
+	(slot cost(type FUZZY-VALUE price))
+	(slot useful_properties(type STRING))
+	(slot taste(type FUZZY-VALUE sweetness))
+	(slot sorts(type STRING))
+	(slot mass(type FUZZY-VALUE weight))
+)
+
+(deffacts fruits_of_thailand_temp
+	(fruit_of_thailand (name "pineapple")    (season "all year")   (cost (10 0) (15 1) (20 0))  (useful_properties "vitamins C, A, phosphorus")        (taste sweet)                   (sorts "yellow, green")          (mass (400 0) (1200 1) (2000 0)))
+	(fruit_of_thailand (name "bananas")      (season "all year")   (cost (25 0) (30 1) (35 0))  (useful_properties "kalium")                           (taste sweet)                   (sorts "small, medium, large")   (mass small))
+	(fruit_of_thailand (name "mango")        (season "all year")   (cost (20 0) (70 1) (120 0)) (useful_properties "laxative effect")                  (taste (0.5 0) (1 1))           (sorts "yellow, green")          (mass (60 0.5) (80 1) (120 0)))
+	(fruit_of_thailand (name "dragon fruit") (season "all year")   (cost (60 0) (70 1) (80 0))  (useful_properties "improvement of blood circulation") (taste (0.9 1) (1 1))           (sorts "pink, red, yellow")      (mass (60 0) (100 1) (140 0)))
+	(fruit_of_thailand (name "mangostin")    (season "may-july")   (cost (40 0) (60 1) (80 0))  (useful_properties "xanthones")                        (taste (0.3 0) (0.5 1) (0.8 0)) (sorts "no")                     (mass small))
+	(fruit_of_thailand (name "durian")       (season "may-august") (cost (70 0) (85 1) (100 0)) (useful_properties "vitamins B, C")                    (taste (0.8 0) (1 1))           (sorts "Chani, Montong, Gumpan") (mass medium))
+	(fruit_of_thailand (name "lychee")       (season "may-june")   (cost (20 0) (50 1) (80 0))  (useful_properties "antioxidant, tonic properties")    (taste (0.5 0) (1 1))           (sorts "Chin, Purbi, Skented")   (mass (60 0.5) (80 1) (120 0)))
+	(fruit_of_thailand (name "jackfruit")    (season "all year")   (cost (50 0) (85 1) (120 0)) (useful_properties "low-calorie")                      (taste sweet)                   (sorts "no")                     (mass large))
+	(fruit_of_thailand (name "pink apple")   (season "all year")   (cost cheap)                 (useful_properties "low-calorie, quenches thirst")     (taste sweet)                   (sorts "pink, pearl, Vinerpo")   (mass small))
+)
+
+(defrule isBig
+	(declare (CF 0.95))
+	(fruit_of_thailand (name ?n) (mass large))
+	=> (assert (out ?n is big))
+)
+
+(defrule isNotBig
+	(declare (CF 0.95))
+	(fruit_of_thailand (name ?n) (mass not large))
+	=> (assert (out ?n is not big))
+)
+
+(defrule isPopular
+	(declare (CF 0.8))
+	(fruit_of_thailand (name ?n) (taste sweet))
+	=> (assert (out ?n is popular))
+)
+
+(defrule bestseller
+	(declare (CF 0.7))
+	(fruit_of_thailand (name ?n) (cost cheap) (taste sweet))
+	=> (assert (out ?n is bestseller))
+)
+
+(defrule isBoughtOneAtTime
+	(declare (CF 0.9))
+	(fruit_of_thailand (name ?n) (cost expensive) (mass medium or large))
+	=> (assert (out ?n is bought one at a time))
+)
+
+(defrule alwaysBought
+	(declare (CF 0.8))
+	(fruit_of_thailand (name ?n) (season ?s) (cost cheap))
+	(test (eq ?s "all year"))
+	=> (assert (out ?n is always bought))
+)
+
+(defrule alwaysSweet
+	(declare (CF 0.8))
+	(fruit_of_thailand (name ?n) (sorts ?s) (taste sweet))
+	(test (eq ?s "no"))
+	=> (assert (out ?n is always sweet))
+)
+
+(defrule equallySweet
+	(declare (CF 0.8))
+	(fruit_of_thailand (name ?n1) (season ?s) (taste sweet))
+	(fruit_of_thailand (name ?n2) (season ?s) (taste sweet))
+	(test (not (eq ?n1 ?n2)))
+	=> (assert (out ?n1 and ?n2 are equally sweet))
+)
