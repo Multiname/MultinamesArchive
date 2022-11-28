@@ -1,0 +1,52 @@
+(deftemplate weight
+	60 3000 g (
+		(small  (60 1)   (100 0))
+		(medium (80 0)   (1500 1) (2000 0))
+		(large  (1000 0) (3000 1))
+	)
+)
+
+(deftemplate size
+	0 100 (
+		(small  (0 1)   (50 0))
+		(medium (25 0)   (50 1) (75 0))
+		(large  (50 0) (100 1))
+	)
+)
+
+
+
+(defrule Rule01
+ (weight small) => (assert (size small)) )
+
+(defrule Rule02
+ (weight medium) => (assert (size medium)) )
+
+(defrule Rule03
+ (weight large) => (assert (size large)) )
+
+(defrule start
+ (initial-fact)
+ =>
+ (set-fuzzy-inference-type max-prod)
+ ;(set-fuzzy-inference-type max-min)
+ (printout t crlf "===> Enter weight: ")
+ (bind ?t (read))
+ (if (eq ?t 0)
+ then (halt)
+ else (assert (weight (pi 0 ?t)))
+ )
+)
+
+(defrule ShowResults
+ (declare (salience -100))
+ ?ind <- (size ?d)
+ =>
+ (plot-fuzzy-value t "*" nil nil ?ind)
+ (printout t "===> Inference Type: "
+ (get-fuzzy-inference-type) crlf)
+ (printout t "===> Defuzzification:" crlf)
+ (printout t " COG algorithm: "
+ (moment-defuzzify ?ind) crlf)
+ (printout t " MOM algorithm: "
+ (maximum-defuzzify ?ind) crlf))
