@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="static/styles.css">
+
+    <title>Fitness center Lifeform</title>
+    <link rel="icon" href="static/icon.png" />
+</head>
+<body>
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="/">Fitness center Lifeform</a>
+
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="static/doc.pdf" target="_self">Service list</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/contacts">Contacts</a>
+                </li>
+            </ul>
+
+            {% if "login" in session %}
+            <ul class="navbar-nav my-lg-0">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">{{ session["login"] }}</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/logout">Log out</a>
+                </li>
+            </ul>
+            {% else %}
+            <ul class="navbar-nav my-lg-0">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/registration">Sign up</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/login">Login</a>
+                </li>
+            </ul>
+            {% endif %}
+        </div>
+    </nav>
+
+    {% block content %}
+    {% endblock %}
+
+    <footer>
+        <div class="footer fixed-bottom footer-expand-lg footer-dark bg-dark py-3 text-light text-center">
+            Made with hate
+        </div>
+    </footer>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>

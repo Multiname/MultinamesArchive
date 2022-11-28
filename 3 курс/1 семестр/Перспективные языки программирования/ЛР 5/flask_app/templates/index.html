@@ -1,0 +1,129 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <div class="container">
+        <div class="row justify-content-lg-center">
+            <h2>News and events</h2>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row justify-content-lg-center">
+            <div class="col-lg-4 col-xs-12"><img src="/static/2.png" class="img-fluid" /></div>
+            <div class="col-lg-4 col-xs-12"><img src="/static/3.png" class="img-fluid" /></div>
+            <div class="col-lg-4 col-xs-12"><img src="/static/4.png" class="img-fluid" /></div>
+        </div>
+        <div class="row justify-content-lg-center">
+            <div class="col-lg-4 col-xs-12"><img src="/static/1.png" class="img-fluid" /></div>
+            <div class="col-lg-4 col-xs-12"><img src="/static/5.png" class="img-fluid" /></div>
+            <div class="col-lg-4 col-xs-12"><img src="/static/6.png" class="img-fluid" /></div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row justify-content-lg-center">
+            <h2>Reviews</h2>
+        </div>
+
+        <div class="row justify-content-lg-center">
+            <div class="col-lg-6">
+                <table id="reviews" class="table text">
+                </table>
+            </div>
+        </div>
+    </div>
+
+    {% if "login" in session %}
+    <div class="container pb-5">
+        <div class="justify-content-center d-flex">
+            <h2>Send your review</h2>
+        </div>
+        <div class="row text justify-content-center">
+            <form class="text text-center" id="review-form" method="POST" onsubmit="create_review(event)">
+                <p>
+                    <label for="comment">Your comment: </label>
+                    <input id="review-comment" name="comment" required>
+                </p>
+                <input type="submit" id="review-send" value="Send">
+            </form>
+        </div>
+    </div>
+    <script>
+        function create_review(event) {
+            event.preventDefault();
+            formdata = new FormData(document.getElementById("review-form"));
+
+            fetch("{{url_for('create_review')}}", {
+                method: "POST",
+                body: formdata
+            })
+                .then((response) => response.text())
+                .then((text) => {
+                    json = JSON.parse(text)
+                    if (json["response"] == "OK") {
+                        load_reviews(event)
+                    }
+                    else {
+
+                    }
+                })
+                .catch((error) => console.log(error))
+        }
+    </script>
+    {% else %}
+    <div class="container text-center pb-5">
+        <div class="row justify-content-lg-center">
+            <h2>Log in to send review</h2>
+        </div>
+    </div>
+    {% endif %}
+    <script>
+        function load_reviews(event) {
+            event.preventDefault();
+
+            fetch("{{url_for('load_reviews')}}", {
+                method: "GET"
+            })
+                .then((response) => response.text())
+                .then((text) => {
+                    console.log(text)
+                    json = JSON.parse(text)
+                    if (json["response"] == "OK") {
+                        document.getElementById("reviews").innerHTML = ""
+                        var thead = document.createElement("thead")
+                        var tr = document.createElement("tr")
+                        var td1 = document.createElement("td")
+                        td1.appendChild(document.createTextNode(json['data']['column_names']['name']))
+                        td1.classList = "review-cell"
+                        var td2 = document.createElement("td")
+                        td2.appendChild(document.createTextNode(json['data']['column_names']['comment']))
+                        td2.classList = "review-cell"
+                        tr.append(td1, td2)
+                        thead.append(tr)
+                        document.getElementById("reviews").append(thead)
+                        var tbody = document.createElement("tbody")
+                        json["data"]['reviews'].forEach((element) => {
+                            tr = document.createElement("tr")
+                            td1 = document.createElement("td")
+                            td1.classList = "review-cell"
+                            td1.appendChild(document.createTextNode(element['name']))
+
+                            td2 = document.createElement("td")
+                            td2.classList = "review-cell"
+                            td2.appendChild(document.createTextNode(element['comment']))
+                            tr.append(td1, td2)
+                            tbody.append(tr)
+                        })
+                        document.getElementById("reviews").append(tbody)
+                    }
+                    else {
+
+                    }
+                })
+                .catch((error) => console.log(error))
+        }
+        document.addEventListener("DOMContentLoaded", (event) => {
+            load_reviews(event)
+        })
+    </script>
+{% endblock %}
