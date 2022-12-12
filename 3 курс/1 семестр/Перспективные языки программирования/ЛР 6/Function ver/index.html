@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Fitness center Lifeform</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="styles.css">
+        <link rel="icon" href="icon.png" />
+    </head>
+    <body>
+
+        <div class="container">
+            <div class="row d-flex justify-content-center">
+                <h1>Fitness center Lifeform</h1>
+            </div>
+            <div class="row d-flex justify-content-center">
+                <h2>News and events</h2>
+            </div>
+        </div>
+
+        <div id="root"></div>
+
+        <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+        <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+        <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+        <script type="text/babel">
+            function Pictures(props) {
+                if (props.hide == "true")
+                {
+                    return <tbody>
+                        <tr>
+                            <td><img src={props.image1} class="img-fluid"/></td>
+                            <td><img src={props.image2} class="img-fluid"/></td>
+                            <td><img src={props.image3} class="img-fluid"/></td>
+                        </tr>
+                    </tbody>;
+                }
+                else
+                {
+                    return <tbody>
+                        <tr>
+                            <td><img src={props.image1} class="img-fluid"/></td>
+                            <td><img src={props.image2} class="img-fluid"/></td>
+                            <td><img src={props.image3} class="img-fluid"/></td>
+                        </tr>
+                        <tr>
+                            <td><img src={props.image4} class="img-fluid"/></td>
+                            <td><img src={props.image5} class="img-fluid"/></td>
+                            <td><img src={props.image6} class="img-fluid"/></td>
+                        </tr>
+                    </tbody>;
+                }
+            }
+
+            function ShowMore(props) {
+                return <button class="btn btn-dark" onClick={ props.click }>{ props.label }</button>;
+            }
+
+            function PictureBlock(props){
+                const [hide, setHide] = React.useState(true);
+
+                const Show = () => {
+                    setHide(false);
+                }
+
+                const Hide = () => {
+                    setHide(true);
+                }
+
+                if (hide)
+                {
+                    return <div class="container">
+                            <div class="row">
+                                <Pictures hide="true" image1="2.png" image2="3.png" image3="4.png" image4="1.png" image5="5.png" image6="6.png" />
+                            </div>
+                            <div class="row d-flex justify-content-center">
+                                <ShowMore label="ShowMore" click={ Show } />
+                            </div>
+                    </div>;
+                }
+                else
+                {
+                    return <div class="container">
+                            <div class="row">
+                                <Pictures hide="false" image1="2.png" image2="3.png" image3="4.png" image4="1.png" image5="5.png" image6="6.png" />
+                            </div>
+                            <div class="row d-flex justify-content-center">
+                                <ShowMore label="Hide" click={ Hide } />
+                            </div>
+                    </div>;
+                }
+            }
+
+            ReactDOM.createRoot(
+                document.getElementById("root")
+            ).render(
+                    <PictureBlock />
+            );
+        </script>
+    </body>
+</html>

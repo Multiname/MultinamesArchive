@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Fitness center Lifeform</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="styles.css">
+        <link rel="icon" href="icon.png" />
+    </head>
+    <body>
+
+        <div class="container">
+            <div class="row d-flex justify-content-center">
+                <h1>Fitness center Lifeform</h1>
+            </div>
+            <div class="row d-flex justify-content-center">
+                <h2>News and events</h2>
+            </div>
+        </div>
+
+        <div id="root"></div>
+
+        <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+        <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+        <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+        <script type="text/babel">
+            class Pictures extends React.Component {
+                constructor(props) {
+                    super(props);
+                }
+
+                render() {
+                    if (this.props.hide == "true")
+                    {
+                        return <tbody>
+                            <tr>
+                                <td><img src={this.props.image1} class="img-fluid"/></td>
+                                <td><img src={this.props.image2} class="img-fluid"/></td>
+                                <td><img src={this.props.image3} class="img-fluid"/></td>
+                            </tr>
+                        </tbody>;
+                    }
+                    else
+                    {
+                        return <tbody>
+                            <tr>
+                                <td><img src={this.props.image1} class="img-fluid"/></td>
+                                <td><img src={this.props.image2} class="img-fluid"/></td>
+                                <td><img src={this.props.image3} class="img-fluid"/></td>
+                            </tr>
+                            <tr>
+                                <td><img src={this.props.image4} class="img-fluid"/></td>
+                                <td><img src={this.props.image5} class="img-fluid"/></td>
+                                <td><img src={this.props.image6} class="img-fluid"/></td>
+                            </tr>
+                        </tbody>;
+                    }
+                }
+            }
+
+            class ShowMore extends React.Component {
+                constructor(props) {
+                    super(props);
+                }
+
+                render() {
+                    return <button class="btn btn-dark" onClick={ this.props.click }>{ this.props.label }</button>;
+                }
+            }
+
+            class PictureBlock extends React.Component{
+                constructor(props){
+                    super(props);
+                    this.state = { hide: true }
+                }
+
+                render(){
+                    return (
+                        <div class="container">
+                            <div class="row">
+                                <Pictures hide={this.state.hide.toString()} image1="2.png" 
+                                    image2="3.png" image3="4.png" image4="1.png" image5="5.png" image6="6.png" />
+                            </div>
+                            <div class="row d-flex justify-content-center">
+                                <ShowMore label={this.state.hide ? "Show" : "Hide"} click={ this.state.hide ? this.Show : this.Hide } />
+                            </div>
+                        </div>
+                    )
+                }
+
+                Show = () => {
+                    this.setState({ hide : false });
+                }
+
+                Hide = () => {
+                    this.setState({ hide : true });
+                }
+            }
+
+            ReactDOM.createRoot(
+                document.getElementById("root")
+            ).render(
+                    <PictureBlock />
+            );
+        </script>
+    </body>
+</html>

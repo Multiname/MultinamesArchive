@@ -1,0 +1,40 @@
+body {
+    background-color: #ffa31a;
+}
+
+h1 {
+    font-family: 'Arial Rounded MT';
+}
+
+h2 {
+    font-family: 'OCR A';
+}
+
+a {
+    color: #1b1b1b;
+}
+
+.table-borderedless td {
+    border: none;
+}
+
+.text {
+    font-family: 'Berlin Sans FB';
+}
+
+#reviews {
+    border: solid;
+    border-collapse: collapse;
+}
+
+.review-cell {
+    border: solid;
+}
+
+img {
+    border: 4px solid #ffa31a;
+}
+
+img:hover {
+    border: 4px solid #1b1b1b;
+}
