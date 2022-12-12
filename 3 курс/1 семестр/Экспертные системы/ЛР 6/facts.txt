@@ -14,39 +14,37 @@
 	)
 )
 
-
-
 (defrule Rule01
- (weight small) => (assert (size small)) )
+	(weight small) => (assert (size small)) )
 
 (defrule Rule02
- (weight medium) => (assert (size medium)) )
+	(weight medium) => (assert (size medium)) )
 
 (defrule Rule03
- (weight large) => (assert (size large)) )
+	(weight large) => (assert (size large)) )
 
 (defrule start
- (initial-fact)
- =>
- (set-fuzzy-inference-type max-prod)
- ;(set-fuzzy-inference-type max-min)
- (printout t crlf "===> Enter weight: ")
- (bind ?t (read))
- (if (eq ?t 0)
- then (halt)
- else (assert (weight (pi 0 ?t)))
- )
+	(initial-fact)
+	=>
+	;(set-fuzzy-inference-type max-prod)
+	(set-fuzzy-inference-type max-min)
+	(printout t crlf "===> Enter weight: ")
+	(bind ?t (read))
+	(if (eq ?t 0)
+	then (halt)
+	else (assert (weight (pi 0 ?t)))
+	)
 )
 
 (defrule ShowResults
- (declare (salience -100))
- ?ind <- (size ?d)
- =>
- (plot-fuzzy-value t "*" nil nil ?ind)
- (printout t "===> Inference Type: "
- (get-fuzzy-inference-type) crlf)
- (printout t "===> Defuzzification:" crlf)
- (printout t " COG algorithm: "
- (moment-defuzzify ?ind) crlf)
- (printout t " MOM algorithm: "
- (maximum-defuzzify ?ind) crlf))
+	(declare (salience -100))
+	?ind <- (size ?d)
+	=>
+	(plot-fuzzy-value t "*" nil nil ?ind)
+	(printout t "===> Inference Type: "
+	(get-fuzzy-inference-type) crlf)
+	(printout t "===> Defuzzification:" crlf)
+	(printout t " COG algorithm: "
+	(moment-defuzzify ?ind) crlf)
+	(printout t " MOM algorithm: "
+	(maximum-defuzzify ?ind) crlf))
