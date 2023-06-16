@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ColorActivity">
+
+    <ImageButton
+        android:id="@+id/darkRedImageButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="70dp"
+        android:background="#a50200"
+        android:contentDescription="TODO"
+        android:onClick="onColorClicked"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="250dp"
+        />
+
+    <ImageButton
+        android:id="@+id/redImageButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="25dp"
+        android:background="#ff110e"
+        android:contentDescription="TODO"
+        android:onClick="onColorClicked"
+        app:layout_constraintStart_toEndOf="@+id/darkRedImageButton"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="250dp"/>
+
+    <ImageButton
+        android:id="@+id/brightRedImageButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="25dp"
+        android:background="#ff6d6c"
+        android:contentDescription="TODO"
+        android:onClick="onColorClicked"
+        app:layout_constraintStart_toEndOf="@+id/redImageButton"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="250dp"/>
+
+    <ImageButton
+        android:id="@+id/darkBlackImageButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="25dp"
+        android:background="#000000"
+        android:contentDescription="TODO"
+        android:onClick="onColorClicked"
+        app:layout_constraintStart_toEndOf="@+id/brightRedImageButton"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="250dp"/>
+
+    <ImageButton
+        android:id="@+id/darkGreenImageButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="25dp"
+        android:background="#448c00"
+        android:contentDescription="TODO"
+        android:onClick="onColorClicked"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/darkRedImageButton" />
+
+    <ImageButton
+        android:id="@+id/greenImageButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="25dp"
+        android:background="#78f600"
+        android:contentDescription="TODO"
+        android:onClick="onColorClicked"
+        app:layout_constraintStart_toEndOf="@+id/darkGreenImageButton"
+        app:layout_constraintTop_toBottomOf="@+id/redImageButton" />
+
+    <ImageButton
+        android:id="@+id/brightGreenImageButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="25dp"
+        android:background="#b0ff65"
+        android:contentDescription="TODO"
+        android:onClick="onColorClicked"
+        app:layout_constraintStart_toEndOf="@+id/greenImageButton"
+        app:layout_constraintTop_toBottomOf="@+id/brightRedImageButton" />
+
+    <ImageButton
+        android:id="@+id/blackImageButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="25dp"
+        android:background="#777777"
+        android:contentDescription="TODO"
+        android:onClick="onColorClicked"
+        app:layout_constraintStart_toEndOf="@+id/brightGreenImageButton"
+        app:layout_constraintTop_toBottomOf="@+id/darkBlackImageButton" />
+
+    <ImageButton
+        android:id="@+id/darkBlueImageButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="25dp"
+        android:background="#009190"
+        android:contentDescription="TODO"
+        android:onClick="onColorClicked"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/darkGreenImageButton" />
+
+    <ImageButton
+        android:id="@+id/blueImageButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="25dp"
+        android:background="#0ffffd"
+        android:contentDescription="TODO"
+        android:onClick="onColorClicked"
+        app:layout_constraintStart_toEndOf="@+id/darkBlueImageButton"
+        app:layout_constraintTop_toBottomOf="@+id/greenImageButton" />
+
+    <ImageButton
+        android:id="@+id/brightBlueImageButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="25dp"
+        android:background="#9bfffe"
+        android:contentDescription="TODO"
+        android:onClick="onColorClicked"
+        app:layout_constraintStart_toEndOf="@+id/blueImageButton"
+        app:layout_constraintTop_toBottomOf="@+id/brightGreenImageButton" />
+
+    <ImageButton
+        android:id="@+id/brightBlackImageButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="25dp"
+        android:background="#bebebe"
+        android:contentDescription="TODO"
+        android:onClick="onColorClicked"
+        app:layout_constraintStart_toEndOf="@+id/brightBlueImageButton"
+        app:layout_constraintTop_toBottomOf="@+id/blackImageButton" />
+
+    <ImageButton
+        android:id="@+id/darkPurpleImageButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="25dp"
+        android:background="#4a0090"
+        android:contentDescription="TODO"
+        android:onClick="onColorClicked"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/darkBlueImageButton" />
+
+    <ImageButton
+        android:id="@+id/purpleImageButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="25dp"
+        android:background="#8708ff"
+        android:contentDescription="TODO"
+        android:onClick="onColorClicked"
+        app:layout_constraintStart_toEndOf="@+id/darkPurpleImageButton"
+        app:layout_constraintTop_toBottomOf="@+id/blueImageButton" />
+
+    <ImageButton
+        android:id="@+id/brightPurpleImageButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="25dp"
+        android:background="#c990ff"
+        android:contentDescription="TODO"
+        android:onClick="onColorClicked"
+        app:layout_constraintStart_toEndOf="@+id/purpleImageButton"
+        app:layout_constraintTop_toBottomOf="@+id/brightBlueImageButton" />
+
+    <ImageButton
+        android:id="@+id/randomImageButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="25dp"
+        android:background="#ffffff"
+        android:contentDescription="TODO"
+        android:onClick="onColorClicked"
+        app:layout_constraintStart_toEndOf="@+id/brightPurpleImageButton"
+        app:layout_constraintTop_toBottomOf="@+id/brightBlackImageButton" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

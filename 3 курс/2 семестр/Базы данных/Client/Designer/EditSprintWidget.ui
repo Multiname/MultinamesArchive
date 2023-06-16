@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>EditSprintWidget</class>
+ <widget class="QDialog" name="EditSprintWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>600</width>
+    <height>500</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>600</width>
+    <height>500</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Изменение спринта</string>
+  </property>
+  <layout class="QVBoxLayout" name="EditSprintWidgetVerticalLayout">
+   <item>
+    <layout class="QHBoxLayout" name="nameHorizontalLayout" stretch="1,0">
+     <item>
+      <widget class="QLabel" name="nameLabel">
+       <property name="font">
+        <font>
+         <family>GOST type B</family>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Название</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="renamePushButton">
+       <property name="font">
+        <font>
+         <family>GOST type B</family>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Переименовать</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="dateHorizontalLayout">
+     <item>
+      <widget class="QGroupBox" name="startDateGroupBox">
+       <property name="font">
+        <font>
+         <family>GOST type B</family>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="title">
+        <string>Начало</string>
+       </property>
+       <layout class="QHBoxLayout" name="startDateGroupBoxHorizontalLayout">
+        <item>
+         <widget class="QDateEdit" name="startDateEdit">
+          <property name="font">
+           <font>
+            <pointsize>12</pointsize>
+           </font>
+          </property>
+          <property name="date">
+           <date>
+            <year>2023</year>
+            <month>1</month>
+            <day>1</day>
+           </date>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+     <item>
+      <widget class="QGroupBox" name="endDateGroupBox">
+       <property name="font">
+        <font>
+         <family>GOST type B</family>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="title">
+        <string>Конец</string>
+       </property>
+       <layout class="QHBoxLayout" name="endDateGroupBoxHorizontalLayout">
+        <item>
+         <widget class="QDateEdit" name="endDateEdit">
+          <property name="font">
+           <font>
+            <pointsize>12</pointsize>
+           </font>
+          </property>
+          <property name="date">
+           <date>
+            <year>2023</year>
+            <month>1</month>
+            <day>1</day>
+           </date>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QTableWidget" name="epicsAndStoriesTableWidget">
+     <property name="font">
+      <font>
+       <family>GOST type B</family>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="removePushButton">
+       <property name="font">
+        <font>
+         <family>GOST type B</family>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Удалить</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

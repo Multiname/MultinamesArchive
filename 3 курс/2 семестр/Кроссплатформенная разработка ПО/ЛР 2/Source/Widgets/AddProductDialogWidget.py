@@ -1,0 +1,46 @@
+from PyQt5 import QtCore, QtGui, QtWidgets
+
+class Ui_AddProductDialogWidget(object):
+    def setupUi(self, AddProductDialogWidget):
+        AddProductDialogWidget.setObjectName("AddProductDialogWidget")
+        AddProductDialogWidget.resize(400, 173)
+        self.nameLabel = QtWidgets.QLabel(AddProductDialogWidget)
+        self.nameLabel.setGeometry(QtCore.QRect(20, 20, 111, 41))
+        font = QtGui.QFont()
+        font.setPointSize(14)
+        self.nameLabel.setFont(font)
+        self.nameLabel.setObjectName("nameLabel")
+        self.nameLineEdit = QtWidgets.QLineEdit(AddProductDialogWidget)
+        self.nameLineEdit.setGeometry(QtCore.QRect(150, 20, 231, 41))
+        font = QtGui.QFont()
+        font.setPointSize(14)
+        self.nameLineEdit.setFont(font)
+        self.nameLineEdit.setObjectName("nameLineEdit")
+        self.priceLabel = QtWidgets.QLabel(AddProductDialogWidget)
+        self.priceLabel.setGeometry(QtCore.QRect(20, 70, 111, 41))
+        font = QtGui.QFont()
+        font.setPointSize(14)
+        self.priceLabel.setFont(font)
+        self.priceLabel.setObjectName("priceLabel")
+        self.priceLineEdit = QtWidgets.QLineEdit(AddProductDialogWidget)
+        self.priceLineEdit.setGeometry(QtCore.QRect(150, 70, 231, 41))
+        font = QtGui.QFont()
+        font.setPointSize(14)
+        self.priceLineEdit.setFont(font)
+        self.priceLineEdit.setObjectName("priceLineEdit")
+        self.addPushButton = QtWidgets.QPushButton(AddProductDialogWidget)
+        self.addPushButton.setGeometry(QtCore.QRect(150, 120, 231, 41))
+        font = QtGui.QFont()
+        font.setPointSize(14)
+        self.addPushButton.setFont(font)
+        self.addPushButton.setObjectName("addPushButton")
+
+        self.retranslateUi(AddProductDialogWidget)
+        QtCore.QMetaObject.connectSlotsByName(AddProductDialogWidget)
+
+    def retranslateUi(self, AddProductDialogWidget):
+        _translate = QtCore.QCoreApplication.translate
+        AddProductDialogWidget.setWindowTitle(_translate("AddProductDialogWidget", "Добавление товара"))
+        self.nameLabel.setText(_translate("AddProductDialogWidget", "Название"))
+        self.priceLabel.setText(_translate("AddProductDialogWidget", "Цена, р."))
+        self.addPushButton.setText(_translate("AddProductDialogWidget", "Создать"))

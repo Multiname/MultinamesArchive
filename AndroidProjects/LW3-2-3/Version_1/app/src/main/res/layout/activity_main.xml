@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="150dp"
+        android:layout_height="290dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="25dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RadioButton
+            android:id="@+id/radioButtonSize_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:onClick="onSizeButtonClicked"
+            android:text="Размер 1"
+            android:textSize="12sp" />
+
+        <RadioButton
+            android:id="@+id/radioButtonSize_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onSizeButtonClicked"
+            android:text="Размер 2"
+            android:textSize="14sp" />
+
+        <RadioButton
+            android:id="@+id/radioButtonSize_3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onSizeButtonClicked"
+            android:text="Размер 3"
+            android:textSize="16sp" />
+
+        <RadioButton
+            android:id="@+id/radioButtonSize_4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onSizeButtonClicked"
+            android:text="Размер 4"
+            android:textSize="18sp" />
+
+        <RadioButton
+            android:id="@+id/radioButtonSize_5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onSizeButtonClicked"
+            android:text="Размер 5"
+            android:textSize="20sp" />
+
+        <RadioButton
+            android:id="@+id/radioButtonSize_6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onSizeButtonClicked"
+            android:text="Размер 6"
+            android:textSize="22sp" />
+    </RadioGroup>
+
+    <ImageButton
+        android:id="@+id/darkRedImageButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="25dp"
+        android:background="#a50200"
+        android:contentDescription="TODO"
+        android:onClick="onColorClicked"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+
+    <ImageButton
+        android:id="@+id/redImageButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="25dp"
+        android:background="#ff110e"
+        android:contentDescription="TODO"
+        android:onClick="onColorClicked"
+        app:layout_constraintStart_toEndOf="@+id/darkRedImageButton"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+
+    <ImageButton
+        android:id="@+id/brightRedImageButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="25dp"
+        android:background="#ff6d6c"
+        android:contentDescription="TODO"
+        android:onClick="onColorClicked"
+        app:layout_constraintStart_toEndOf="@+id/redImageButton"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+
+    <ImageButton
+        android:id="@+id/darkBlackImageButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="25dp"
+        android:background="#000000"
+        android:contentDescription="TODO"
+        android:onClick="onColorClicked"
+        app:layout_constraintStart_toEndOf="@+id/brightRedImageButton"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+
+    <ImageButton
+        android:id="@+id/darkGreenImageButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="25dp"
+        android:background="#448c00"
+        android:contentDescription="TODO"
+        android:onClick="onColorClicked"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/darkRedImageButton" />
+
+    <ImageButton
+        android:id="@+id/greenImageButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="25dp"
+        android:background="#78f600"
+        android:contentDescription="TODO"
+        android:onClick="onColorClicked"
+        app:layout_constraintStart_toEndOf="@+id/darkGreenImageButton"
+        app:layout_constraintTop_toBottomOf="@+id/redImageButton" />
+
+    <ImageButton
+        android:id="@+id/brightGreenImageButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="25dp"
+        android:background="#b0ff65"
+        android:contentDescription="TODO"
+        android:onClick="onColorClicked"
+        app:layout_constraintStart_toEndOf="@+id/greenImageButton"
+        app:layout_constraintTop_toBottomOf="@+id/brightRedImageButton" />
+
+    <ImageButton
+        android:id="@+id/blackImageButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="25dp"
+        android:background="#777777"
+        android:contentDescription="TODO"
+        android:onClick="onColorClicked"
+        app:layout_constraintStart_toEndOf="@+id/brightGreenImageButton"
+        app:layout_constraintTop_toBottomOf="@+id/darkBlackImageButton" />
+
+    <ImageButton
+        android:id="@+id/darkBlueImageButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="25dp"
+        android:background="#009190"
+        android:contentDescription="TODO"
+        android:onClick="onColorClicked"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/darkGreenImageButton" />
+
+    <ImageButton
+        android:id="@+id/blueImageButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="25dp"
+        android:background="#0ffffd"
+        android:contentDescription="TODO"
+        android:onClick="onColorClicked"
+        app:layout_constraintStart_toEndOf="@+id/darkBlueImageButton"
+        app:layout_constraintTop_toBottomOf="@+id/greenImageButton" />
+
+    <ImageButton
+        android:id="@+id/brightBlueImageButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="25dp"
+        android:background="#9bfffe"
+        android:contentDescription="TODO"
+        android:onClick="onColorClicked"
+        app:layout_constraintStart_toEndOf="@+id/blueImageButton"
+        app:layout_constraintTop_toBottomOf="@+id/brightGreenImageButton" />
+
+    <ImageButton
+        android:id="@+id/brightBlackImageButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="25dp"
+        android:background="#bebebe"
+        android:contentDescription="TODO"
+        android:onClick="onColorClicked"
+        app:layout_constraintStart_toEndOf="@+id/brightBlueImageButton"
+        app:layout_constraintTop_toBottomOf="@+id/blackImageButton" />
+
+    <ImageButton
+        android:id="@+id/darkPurpleImageButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="25dp"
+        android:background="#4a0090"
+        android:contentDescription="TODO"
+        android:onClick="onColorClicked"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/darkBlueImageButton" />
+
+    <ImageButton
+        android:id="@+id/purpleImageButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="25dp"
+        android:background="#8708ff"
+        android:contentDescription="TODO"
+        android:onClick="onColorClicked"
+        app:layout_constraintStart_toEndOf="@+id/darkPurpleImageButton"
+        app:layout_constraintTop_toBottomOf="@+id/blueImageButton" />
+
+    <ImageButton
+        android:id="@+id/brightPurpleImageButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="25dp"
+        android:background="#c990ff"
+        android:contentDescription="TODO"
+        android:onClick="onColorClicked"
+        app:layout_constraintStart_toEndOf="@+id/purpleImageButton"
+        app:layout_constraintTop_toBottomOf="@+id/brightBlueImageButton" />
+
+    <ImageButton
+        android:id="@+id/randomImageButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="25dp"
+        android:background="#ffffff"
+        android:contentDescription="TODO"
+        android:onClick="onColorClicked"
+        app:layout_constraintStart_toEndOf="@+id/brightPurpleImageButton"
+        app:layout_constraintTop_toBottomOf="@+id/brightBlackImageButton" />
+
+    <Button
+        android:id="@+id/leftButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onAlignmentButtonClicked"
+        android:text="Слева"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/radioGroup"
+        app:layout_constraintTop_toTopOf="@+id/radioGroup"
+        android:layout_marginTop="10dp"/>
+
+    <Button
+        android:id="@+id/centerButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onAlignmentButtonClicked"
+        android:text="По центру"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/radioGroup"
+        app:layout_constraintTop_toBottomOf="@+id/leftButton"
+        android:layout_marginTop="10dp"/>
+
+    <Button
+        android:id="@+id/rightButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onAlignmentButtonClicked"
+        android:text="Справа"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/radioGroup"
+        app:layout_constraintTop_toBottomOf="@+id/centerButton"
+        android:layout_marginTop="10dp"/>
+
+    <Button
+        android:id="@+id/resultButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onResultButtonClicked"
+        android:text="Результат"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/radioGroup"
+        app:layout_constraintTop_toBottomOf="@+id/rightButton"
+        android:layout_marginTop="35dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

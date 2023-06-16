@@ -1,0 +1,45 @@
+clients
+	create
+	read
+	update
+	delete
+
+products
+	create
+	read
+	update
+	delete
+
+contracts
+	create
+	read
+	update
+	delete
+
+
+main
+	clients
+		create	с
+	products
+		create	a
+		read
+		update	a
+		delete	a
+	contracts
+		create	c
+
+profile
+	clients
+		update
+	contracts
+		read
+
+admin
+	clients
+		read
+		update
+		delete
+	contracts
+		read
+		update
+		delete

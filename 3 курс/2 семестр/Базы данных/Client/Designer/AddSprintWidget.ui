@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>AddSprintWidget</class>
+ <widget class="QDialog" name="AddSprintWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>600</width>
+    <height>200</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>600</width>
+    <height>200</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>16777215</width>
+    <height>200</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Новый спринт</string>
+  </property>
+  <layout class="QVBoxLayout" name="AddSprintWidgetVerticalLayout">
+   <item>
+    <layout class="QHBoxLayout" name="nameHorizontalLayout">
+     <item>
+      <widget class="QLabel" name="nameLabel">
+       <property name="font">
+        <font>
+         <family>GOST type B</family>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Название</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="nameLineEdit">
+       <property name="font">
+        <font>
+         <family>GOST type B</family>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="dateHorizontalLayout">
+     <item>
+      <widget class="QGroupBox" name="startDateGroupBox">
+       <property name="font">
+        <font>
+         <family>GOST type B</family>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="title">
+        <string>Начало</string>
+       </property>
+       <layout class="QHBoxLayout" name="startDateGroupBoxHorizontalLayout">
+        <item>
+         <widget class="QDateEdit" name="startDateEdit">
+          <property name="font">
+           <font>
+            <pointsize>12</pointsize>
+           </font>
+          </property>
+          <property name="date">
+           <date>
+            <year>2023</year>
+            <month>1</month>
+            <day>1</day>
+           </date>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+     <item>
+      <widget class="QGroupBox" name="endDateGroupBox">
+       <property name="font">
+        <font>
+         <family>GOST type B</family>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="title">
+        <string>Конец</string>
+       </property>
+       <layout class="QHBoxLayout" name="endDateGroupBoxHorizontalLayout">
+        <item>
+         <widget class="QDateEdit" name="endDateEdit">
+          <property name="font">
+           <font>
+            <pointsize>12</pointsize>
+           </font>
+          </property>
+          <property name="date">
+           <date>
+            <year>2023</year>
+            <month>1</month>
+            <day>1</day>
+           </date>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QPushButton" name="createPushButton">
+     <property name="font">
+      <font>
+       <family>GOST type B</family>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Создать</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

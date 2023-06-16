@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SizeActivity">
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="150dp"
+        android:layout_height="290dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RadioButton
+            android:id="@+id/radioButtonSize_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onSizeButtonClicked"
+            android:text="Размер 1"
+            android:textSize="12sp" />
+
+        <RadioButton
+            android:id="@+id/radioButtonSize_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onSizeButtonClicked"
+            android:text="Размер 2"
+            android:textSize="14sp" />
+
+        <RadioButton
+            android:id="@+id/radioButtonSize_3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onSizeButtonClicked"
+            android:text="Размер 3"
+            android:textSize="16sp" />
+
+        <RadioButton
+            android:id="@+id/radioButtonSize_4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onSizeButtonClicked"
+            android:text="Размер 4"
+            android:textSize="18sp" />
+
+        <RadioButton
+            android:id="@+id/radioButtonSize_5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onSizeButtonClicked"
+            android:text="Размер 5"
+            android:textSize="20sp" />
+
+        <RadioButton
+            android:id="@+id/radioButtonSize_6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onSizeButtonClicked"
+            android:text="Размер 6"
+            android:textSize="22sp" />
+    </RadioGroup>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

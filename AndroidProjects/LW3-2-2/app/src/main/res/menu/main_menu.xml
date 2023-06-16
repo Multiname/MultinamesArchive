@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/change_size"
+        android:title="@string/size" >
+        <menu>
+            <item android:id="@+id/small"
+                android:title="@string/small" />
+            <item android:id="@+id/medium"
+                android:title="@string/medium" />
+            <item android:id="@+id/big"
+                android:title="@string/big" />
+        </menu>
+    </item>
+    <item android:id="@+id/change_color"
+        android:title="@string/color">
+        <menu>
+            <item android:id="@+id/red"
+                android:title="@string/red" />
+            <item android:id="@+id/green"
+                android:title="@string/green" />
+            <item android:id="@+id/blue"
+                android:title="@string/blue" />
+        </menu>
+    </item>
+    <item android:id="@+id/change_background"
+        android:title="@string/background">
+        <menu>
+            <item android:id="@+id/cyan"
+                android:title="@string/cyan" />
+            <item android:id="@+id/magenta"
+                android:title="@string/magenta" />
+            <item android:id="@+id/yellow"
+                android:title="@string/yellow" />
+        </menu>
+    </item>
+</menu>

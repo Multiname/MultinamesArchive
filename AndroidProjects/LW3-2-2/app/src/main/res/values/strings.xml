@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">LW3-2-2</string>
+    <string name="pick_first">Выбрать первый текст</string>
+    <string name="pick_second">Выбрать второй текст</string>
+    <string name="pick_third">Выбрать третий текст</string>
+    <string name="first">Первый текст</string>
+    <string name="second">Второй текст</string>
+    <string name="third">Третий текст</string>
+    <string name="size">Изменить размер</string>
+    <string name="color">Изменить цвет</string>
+    <string name="background">Изменить фон</string>
+    <string name="small">Малый</string>
+    <string name="medium">Средний</string>
+    <string name="big">Большой</string>
+    <string name="red">Красный</string>
+    <string name="green">Зеленый</string>
+    <string name="blue">Синий</string>
+    <string name="cyan">Голубой</string>
+    <string name="magenta">Пурпурный</string>
+    <string name="yellow">Желтый</string>
+</resources>

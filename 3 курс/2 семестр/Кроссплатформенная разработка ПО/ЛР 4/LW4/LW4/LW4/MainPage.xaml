@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LW4.MainPage">
+    <StackLayout>
+        <Label Padding="20,20,0,0" Text="Введите логическую формулу" />
+        <Label Padding="20,0,0,0" Text="Возможные элементы (разделять пробелами):" />
+        <Label Padding="30,0,0,0" Text="- Переменные от A до Z" />
+        <Label Padding="30,0,0,0" Text="- Знаки '+', '*', '!', '(', ')'" />
+
+        <Entry 
+            x:Name="inputEntry"
+            TextTransform="Uppercase"
+            Margin="10,0,10,0"
+            Placeholder="A + ( B * ( C + D ) ) + ! ( E * F * ! G )" />
+
+        <Button 
+            x:Name="solveButton" 
+            Text="Решить"
+            Clicked="OnSolveButtonClicked" />
+
+        <ScrollView Padding="10,0,10,0">
+            <Grid x:Name="resultGrid"/>
+        </ScrollView>
+    </StackLayout>
+</ContentPage>

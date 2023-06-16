@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/columnNumberTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Columns number"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.259"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.144" />
+
+    <TextView
+        android:id="@+id/horizontalSpacingTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Horizontal spacing"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.268"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/columnNumberTextView"
+        app:layout_constraintVertical_bias="0.121" />
+
+    <Spinner
+        android:id="@+id/columnNumberSpinner"
+        android:layout_width="100dp"
+        android:layout_height="48dp"
+        android:contentDescription="columnNumberSpinner"
+        app:layout_constraintBottom_toBottomOf="@+id/columnNumberTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.364"
+        app:layout_constraintStart_toEndOf="@+id/columnNumberTextView"
+        app:layout_constraintTop_toTopOf="@+id/columnNumberTextView"
+        app:layout_constraintVertical_bias="0.482" />
+
+    <Spinner
+        android:id="@+id/horizontalSpacingSpinner"
+        android:layout_width="100dp"
+        android:layout_height="48dp"
+        android:contentDescription="horizontalSpacingSpinner"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.315"
+        app:layout_constraintStart_toEndOf="@+id/horizontalSpacingTextView"
+        app:layout_constraintTop_toBottomOf="@+id/columnNumberSpinner"
+        app:layout_constraintVertical_bias="0.078" />
+
+    <ImageButton
+        android:id="@+id/imageButton_1"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="#ff0003"
+        android:onClick="onColorClick"
+        android:contentDescription="imageButton_1"
+        app:layout_constraintBottom_toBottomOf="@+id/imageButton_2"
+        app:layout_constraintEnd_toStartOf="@+id/imageButton_2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageButton_2" />
+
+    <ImageButton
+        android:id="@+id/imageButton_2"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="#ff8800"
+        android:onClick="onColorClick"
+        android:contentDescription="imageButton_2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/horizontalSpacingTextView"
+        app:layout_constraintVertical_bias="0.207" />
+
+    <ImageButton
+        android:id="@+id/imageButton_3"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="#fff200"
+        android:onClick="onColorClick"
+        android:contentDescription="imageButton_3"
+        app:layout_constraintBottom_toBottomOf="@+id/imageButton_2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageButton_2"
+        app:layout_constraintTop_toTopOf="@+id/imageButton_2" />
+
+    <ImageButton
+        android:id="@+id/imageButton_4"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="#2fff00"
+        android:onClick="onColorClick"
+        android:contentDescription="imageButton_4"
+        app:layout_constraintBottom_toBottomOf="@+id/imageButton_5"
+        app:layout_constraintEnd_toStartOf="@+id/imageButton_5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageButton_5" />
+
+    <ImageButton
+        android:id="@+id/imageButton_5"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="#000eff"
+        android:onClick="onColorClick"
+        android:contentDescription="imageButton_5"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageButton_2"
+        app:layout_constraintVertical_bias="0.164" />
+
+    <ImageButton
+        android:id="@+id/imageButton_6"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="#ce00ff"
+        android:onClick="onColorClick"
+        android:contentDescription="imageButton_6"
+        app:layout_constraintBottom_toBottomOf="@+id/imageButton_5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageButton_5"
+        app:layout_constraintTop_toTopOf="@+id/imageButton_5" />
+
+    <Button
+        android:id="@+id/doneButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Done"
+        android:onClick="onDoneClick"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageButton_5"
+        app:layout_constraintVertical_bias="0.378" />
+</androidx.constraintlayout.widget.ConstraintLayout>
