@@ -19,4 +19,4 @@ problem += x5 + x6 >= 4,  "20-24"
 problem.solve()
 for var in problem.variables():
     print(var.name, '=', var.varValue)
-print(value(problem.objective))
+print("z =", value(problem.objective))
