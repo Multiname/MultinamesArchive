@@ -1,0 +1,45 @@
+	int
+compress_image
+crop_image
+resize_image
+rotate_image
+spread_image
+clip_audio
+fade_audio
+join_audio
+crop_video
+rotate_video
+
+	float
+add_watermark
+gain_audio
+speed_audio
+fade_video
+gain_video
+join_video
+speed_video
+
+	string
+clip_video
+
+	file
+add_watermark
+join_audio
+join_video
+
+	image_ext
+convert_image
+
+	audio_ext
+convert_audio
+
+	video_ext
+convert_video
+
+	flip
+flip_image
+flip_video
+
+	resampling
+resize_image
+rotate_image
